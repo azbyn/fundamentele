@@ -1,7 +1,6 @@
 #include <iostream>
 #include <algorithm>
 
-
 int main() {
     int n;
     std::cout << "Please enter a number: ";
