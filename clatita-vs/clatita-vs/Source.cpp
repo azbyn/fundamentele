@@ -28,9 +28,10 @@ struct Graphics {
 	};
 
 	void initColors() {
-		//std::cout <<"INIT COLS\n";
 		start_color();
 		auto textCol = COL_BLACK;
+
+        //some of these are 256 codes and only work for windows 10 (and most linux terminals)
 		//init_pair(short pair, short f, short b);
 		init_pair(PAIR_BG, COL_WHITE, COL_BLACK);
 		init_pair(PAIR_PANCAKE, textCol, /*COL_DARK_YELLOW*/172);
@@ -140,7 +141,7 @@ void swap(int& a, int& b) {
 //purely for visual purposes
 int getSpatulaIndex(const int* vec, int length) {
 	int biggestIndex = 0;
-	for (int j = 0; j < length; ++j) {
+	for (int j = 1; j < length; ++j) {
 		if (vec[j] >= vec[biggestIndex]) biggestIndex = j;
 	}
 	return biggestIndex;
