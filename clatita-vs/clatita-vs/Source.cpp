@@ -13,7 +13,6 @@ using azbyn::Point;
 #include "curses.h"
 
 #include <iostream>
-#include <algorithm>
 
 constexpr bool explicitMode = true;
 
@@ -134,11 +133,12 @@ struct Graphics {
 void waitForKey() { getch(); }
 
 void swap(int& a, int& b) {
-	std::swap(a, b);
+    int t = a;
+    a = b;
+    b = t;
 }
 
 //get the biggest pancake with an index bigger than index
-//purely for visual purposes
 int getSpatulaIndex(const int* vec, int length) {
 	int biggestIndex = 0;
 	for (int j = 1; j < length; ++j) {
@@ -163,7 +163,7 @@ int main() {
 	std::cout << "Tip: you can enter a negative number to generate " << randomSize << " random-sized pancakes\n";
 	std::cout << "Tip: pancake sizes must be between 1 and " << maxPancakeWidth << "\n";
 	do {
-		std::cout << "Please insert number of pancakes (< 50): ";
+		std::cout << "Please insert number of pancakes (< "<<maxStackLength <<"): ";
 		std::cin >> length;
 	} while (length > maxStackLen);
 

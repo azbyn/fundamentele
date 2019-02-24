@@ -1,6 +1,8 @@
 *.exe
 clatita
+monede
 Debug
+build
 .vs
 *.o
 *.out

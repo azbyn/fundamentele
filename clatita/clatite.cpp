@@ -13,7 +13,6 @@ using azbyn::Point;
 #include <curses.h>
 
 #include <iostream>
-#include <algorithm>
 
 constexpr bool explicitMode = true;
 
@@ -50,11 +49,6 @@ struct Graphics {
         //nodelay(stdscr, true);
         meta(stdscr, true);
         curs_set(0);
-        /*
-          if (COLS < Width || LINES < Height) {
-          throw std::runtime_error(
-          string_format("terminal too small %dx%d", COLS, LINES));
-          }*/
         if (has_colors())
             initColors();
     }
@@ -137,11 +131,12 @@ struct Graphics {
 void waitForKey() { getch(); }
 
 void swap(int& a, int& b) {
-    std::swap(a, b);
+    int t = a;
+    a = b;
+    b = t;
 }
 
 //get the biggest pancake with an index bigger than index
-//purely for visual purposes
 int getSpatulaIndex(const int* vec, int length) {
     int biggestIndex = 0;
     for (int j = 0; j < length; ++j) {
