@@ -1,0 +1,261 @@
+#+TITLE: Portofoliu Algoritmi și complexitate
+#+AUTHOR: Pavel Andrei
+#+LANGUAGE: ro
+#+LATEX_HEADER: \usepackage{geometry}\geometry{a4paper,left=30mm,right=20mm,top=20mm,bottom=30mm}
+#+LATEX_HEADER: \usepackage{titlesec}\titleformat*{\subsection}{}
+#+LATEX_HEADER: \usepackage{etoolbox}\AtBeginEnvironment{minted}{\singlespacing\fontsize{12}{14}\selectfont}
+#+LATEX_HEADER: \usepackage{mathtools}\usepackage{icomma}\usepackage{stackengine}\usepackage{amssymb}
+
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+OPTIONS: date:nil
+#+ATTR_LATEX: :options frame=single
+
+* Laborator 1
+** 15. O colecție de n monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.
+
+# coins[12] = fakeWeight  :tangle moneda.py
+#+BEGIN_SRC python -n :results output :exports code
+import random, math
+# The values aren't important, what matters is that fake < real
+realWeight = 40
+fakeWeight = 35
+
+length = int(input("Please enter length: "))
+
+coins = [realWeight] * length
+coins[random.randrange(length)] = fakeWeight
+
+bigPile = coins
+steps = 0
+
+while len(bigPile) > 1:
+    steps += 1
+    print("Step %d:" % steps)
+    #we split the big pile in 3 piles with the same size ±1
+    pileSize = len(bigPile) // 3 + (len(bigPile) % 3 == 2)
+    leftPile = bigPile[0:pileSize]
+    rightPile = bigPile[pileSize:pileSize*2]
+    leftoverPile = bigPile[pileSize*2:]
+    print("left", leftPile)
+    print("right", rightPile)
+    print("leftover", leftoverPile)
+    difference = 0
+    for i in range(pileSize):
+        difference += rightPile[i] - leftPile[i]
+
+    if difference > 0: bigPile = leftPile
+    elif difference < 0: bigPile = rightPile
+    else: bigPile = leftoverPile
+    print()
+
+print("Took", steps, "steps to find the fake coin, expected", 
+      math.ceil(math.log(length, 3)))
+#+END_SRC
+
+#+BEGIN_SRC sh :results output :exports results
+echo "$ python3 src.py"
+echo "Please enter length: 15"
+python3 moneda.py
+#+END_SRC
+
+** 16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?
+
+# :tangle clatite.py
+#+BEGIN_SRC python -n :results output :exports code 
+print("Please insert a space separated list of pancake diameters:\n(",
+     end="")
+strs = input().split(' ')
+# index 0 represents the topmost pancake
+pancakes = [int(num) for num in reversed(strs)]
+
+def draw(msg, vec, spatulaIndex = -1):
+    print(msg + "(", end="")
+    i = len(vec)
+    if spatulaIndex > 0: 
+        for i in range(i-1, spatulaIndex-1, -1): print(vec[i], end=" ")
+        print("|", end="")
+        
+    for i in range(i-1, -1, -1): print(vec[i], end=" ")
+    print()
+
+flips = 0
+def flip(vec, index):
+    global flips
+    flips += 1
+    draw("flip %2d: " % (flips), pancakes, index)
+    for i in range(0, index//2):
+        t = vec[i]
+        vec[i] = vec[index-i-1]
+        vec[index-i-1] = t
+
+for bottom in range(len(pancakes), 0, -1):
+    spatulaIndex = 0
+    for i in range(0, bottom):
+        if pancakes[i] >= pancakes[spatulaIndex]: spatulaIndex = i
+    spatulaIndex += 1
+    # if the biggest is at the bottom we do nothing
+    if spatulaIndex == bottom: continue
+    # if the biggest is already at the top we don't have to flip it
+    if spatulaIndex != 1: flip(pancakes, spatulaIndex)
+    
+    flip(pancakes, bottom)
+
+draw("", pancakes)
+print("Done in %d flips" % flips)
+#+END_SRC
+
+#+BEGIN_SRC sh :results output :exports results
+echo "$ python3 src.py"
+python3 clatite.py "5 9 4 3 7 2 8 1"
+echo -e "\n$ python3 src.py"
+python3 clatite.py "4 3 2 1"
+echo -e "\n$ python3 src.py"
+python3 clatite.py "3 3 1 4 3"
+
+#+END_SRC
+
+\pagebreak
+
+* Laborator 2
+
+** 10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.
+
+#+BEGIN_SRC cpp -n
+#include <iostream>
+
+int main() {
+    unsigned n = 1234;
+    //std::cin >> n;
+    unsigned res = 0;
+    int i = 0;
+    while (n != 0) {
+        res *= 10;
+        res += n % 10;
+        n /= 10;
+        ++i;
+    }
+    std::cout << res << " I: " << i << "\n";
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: 4321 I: 4
+
+# doing it like this gives nicer syntax highlighting
+#+begin_export latex
+\noindent
+I. Parțial corectitudinea
+\newline
+
+Considerăm serțiunile de intrare și ieșire:
+
+P_{in} = \left\{ n = \sum\limits_{j=0}^{k} c_{j}10^{j};\ 
+                c_{j} \in \overline{0,9} ,\ \forall j \in \overline{0,k};\ 
+                c_{k} \neq 0 \right\},
+
+P_{out} = \left\{ res = \sum\limits_{j=0}^{k} c_{k-j}10^{j} \right\}.
+
+\vspace{14pt}
+Alegem proprietatea:
+
+\textit{I} $=$ \left\{
+              n = \sum\limits_{j=0}^{k-i}c_{i+j}10^{j};
+              res = \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j}
+ \right\}.
+
+\vspace{14pt}
+La intrarea in buclă:
+
+i $=$ 0
+
+n $=$ \sum\limits_{j=0}^{k}c_{j}10^{j}
+
+Deci propoziția
+\textit{I} $=$ \left\{
+              n = \sum\limits_{j=0}^{k}c_{j}10^{j};
+              res = \sum\limits_{j=0}^{-1}c_{-1-j}10^{j} = 0
+      \right\} 
+$ este adevărată$.
+
+Arătăm că propoziția \textit{I} este invariantă.
+
+Presupunem \textit{I} adevărata la începutul iterației și \texttt{n != 0}; demonstrăm \textit{I} adevărata la sfârșitul iterației.
+
+n $=$ \sum\limits_{j=0}^{n-i}c_{i+j}10^{j};\ 
+res $=$ \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j}
+
+\begin{minted}[linenos,firstnumber=9,frame=single]{cpp}
+    res *= 10;
+\end{minted}
+
+res $=$ \left( \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j} \right) \cdot 10 
+= \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j+1} 
+= \sum\limits_{j=1}^{i}c_{i-j}10^{j}
+
+\begin{minted}[linenos,firstnumber=10,frame=single]{cpp}
+    res += n % 10;
+\end{minted}
+
+res $=$ \left( \sum\limits_{j=1}^{i}c_{i-j}10^{j} \right) + c_{i} 
+= \left( \sum\limits_{j=1}^{i}c_{i-j}10^{j} \right) + c_{i-0}10^{0} 
+= \sum\limits_{j=0}^{i}c_{i-j}10^{j} 
+
+\begin{minted}[linenos,firstnumber=11,frame=single]{cpp}
+    n /= 10;
+\end{minted}
+
+n $=$ \left[ \left( \sum\limits_{j=0}^{k-i}c_{i+j}10^{j} \right) / \ 10 \right]
+= \left[ \sum\limits_{j=0}^{k-i}c_{i+j}10^{j-1} \right]
+= \left[ \sum\limits_{j=1}^{k-i}c_{i+j}10^{j-1} \right] + \left[c_{i}10^{-1} \right]
+
+Cum 0 \le c_{i} \le 9 \implies 0 \le c_{i}10^{-1} \le 0.9 \implies  \left[c_{i}10^{-1} \right] = 0.
+
+Deci n = \left[ \sum\limits_{j=1}^{k-i}c_{i+j}10^{j-1} \right] = \sum\limits_{j=1}^{k-i}c_{i+j}10^{j-1} = \sum\limits_{j=0}^{k-i-1}c_{i+j+1}10^{j} 
+
+\begin{minted}[linenos,firstnumber=12,frame=single]{cpp}
+    ++i;
+\end{minted}
+
+Scriem \texttt{res} și \texttt{n} în funcție de noul \texttt{i}. Deci \texttt{i} devine \texttt{i-1}.
+
+res $=$ \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j}
+
+n $=$ \sum\limits_{j=0}^{k-(i-1)-1}c_{i-1+j+1}10^{j} = \sum\limits_{j=0}^{k-i}c_{i+j}10^{j} 
+
+Deci \textit{I} adevărata și la sfârșitul iterației.
+
+
+\vspace{14pt}
+La ieșirea din buclă:
+
+i $=$ k + 1
+
+n $=$ \sum\limits_{j=0}^{k-(k+1)}c_{k+1+j}10^{j}
+= \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0
+
+res $=$ \sum\limits_{j=0}^{k+1-1}c_{k+1-1-j}10^{j}
+= \sum\limits_{j=0}^{k}c_{k-j}10^{j}
+
+Deci P_{out} = \left\{ res = \sum\limits_{j=0}^{k} c_{k-j}10^{j} \right\} $ adevărată$.
+
+În concluzie algoritmului este parțial corect.
+
+\vspace{14pt}
+\noindent
+II. Total corectitudinea
+\newline
+
+Considerăm funcția $t: \mathbb{N} \to \mathbb{N}$, $t(i) = k + 1 - i$
+
+$t(i + 1) - t(i) = k + 1 - (i + 1) - (k + 1 - i) = -1 < 0$, deci $t$ monoton strict descrescătoare.
+
+$t(i) = 0$ \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0
+ \iff $condiția de ieșire din buclă$
+
+
+În concluzie algoritmului este total corect.
+
+#+end_export
+
