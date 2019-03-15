@@ -1,0 +1,169 @@
+% Created 2019-03-15 Fri 01:23
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{geometry}\geometry{a4paper,left=20mm,right=20mm,top=20mm,bottom=30mm}
+\usepackage{mathtools} \usepackage{tikz}
+\date{}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2)}, 
+ pdflang={English}}
+\begin{document}
+
+
+
+\textbf{Teorema} de structură a multimilor deschise din $\mathbb{R}$
+\vspace{7}
+
+Orice mulțime deschisă se poate scrie ca o reuniune de sfere deschise cel mult numărabilă.
+
+\vspace{7}
+\textbf{Demonstrație:}
+\vspace{7}
+
+Fie $(\mathbb{R}, |\cdot|)$, $M \in \tau_o $.
+
+Știm:
+
+$| \mathbb{Q} | = | \mathbb{Q}^n | =\aleph_0, \forall n \in \mathbb{N}$\ \ \ (1)
+
+$\forall x, y \in \mathbb{R},$ cu $x < y, \exists\ q \in \mathbb{Q}$ a.î. $x < q < y.$ (Densitatea lui $\mathbb{Q}$ în $\mathbb{R}$) \ \ \ (2)
+
+\vspace{7}
+
+Fie
+$\varphi : \mathbb{R} \times \mathbb{R} \to \mathbb{Q}$,
+
+$\varphi(x, y) = q, $ unde $x < q < y$ (Exista din (2))
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (Bine definit?)
+
+\vspace{7}
+
+Considerăm funcția $f : M \to \mathbb{Q} \times \mathbb{Q} $ definită astfel:
+
+Fie $\forall x \in M$.
+
+$\begin{rcases}
+M \in \tau_o \\
+x \in M
+\end{rcases}
+\implies \exists r \in (0, \infty)$ a.î. $S(x, r) \subseteq M$.
+
+\vspace{7}
+Fie
+
+$\varepsilon \in \left(0, \frac{r}{2}\right)$;
+
+$x' = \varphi\left(x - \varepsilon, x + \varepsilon\right)$;
+
+$r' = \varphi\left(\varepsilon, r-\varepsilon \right)$.
+
+$f(x) \overset{\underset{\mathrm{def}}{}}{=} (x', r')$.
+
+\usetikzlibrary{arrows}
+\begin{document}
+\begin{tikzpicture}
+\draw[latex-latex] (-7,0) -- (7,0) ; %edit here for the axis
+\foreach \x in {-6, -5, -2, -1, 0, 2, 3, 6} % edit here for the vertical lines
+\draw[shift={(\x,0)},color=black] (0pt,3pt) -- (0pt,-3pt);
+
+\draw[shift={(-1,0)},color=black, thick] (0pt,4pt) -- (0pt,-4pt);
+\draw[shift={(0,0)},color=black, very thick] (0pt,5pt) -- (0pt,-5pt);
+
+
+%\foreach \x in {-6, -5, -2, -1, 0, 2, 3, 6} % edit here for the vertical lines
+\draw[shift={(-6,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below] {$x-r$};
+\draw[shift={(-5,0)},color=black] (0pt,0pt) -- (0pt,3pt)  node[above] {$x'-r'$};
+\draw[shift={(-2,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below] {$x-\varepsilon$};
+\draw[shift={(-1,0)},color=black] (0pt,0pt) -- (0pt,3pt) node[above] {$x'$};
+\draw[shift={(0,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below] {$x$};
+\draw[shift={(2,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below] {$x+\varepsilon$};
+\draw[shift={(3,0)},color=black] (0pt,0pt) -- (0pt,3pt)  node[above] {$x'+r'$};
+\draw[shift={(6,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below] {$x-r$};
+
+
+%\draw[ultra thick, black] (-6,0) -- (6,0);
+\draw[(-), very thick, black] (-6,0) -- (6,0);
+\draw[-, ultra thick, black] (-6,0) -- (6,0);
+%\draw[thick, red] (-5,0) -- (3,0);
+\draw[(-), semithick, red] (-5,0) -- (3,0);
+\end{tikzpicture}
+
+\vspace{7}
+Arătăm că $S(x', r') \subseteq S(x, r) \subseteq M$.\ \ \ (*)
+
+Fie $y \in S(x', r') = (x'-r',x'+r')$.
+
+Demonstrăm $y \in S(x, r)$.
+\vspace{7}
+
+$\varepsilon < r'< r - \varepsilon < r \implies 
+    r' < r -\varepsilon \iff r' + \varepsilon < r$ \ \ \ (3)
+
+$x - \varepsilon < x' < x + \varepsilon$ \ \ \  (4)
+
+$y \in (x'-r',x'+r') \iff x'-r' < y < x' + r' \iff$
+
+$
+\iff
+\begin{cases}
+    y < x'+r' \xRightarrow{(4)} y < x+\varepsilon +r' \implies  y < x+ (\varepsilon +r') \xRightarrow{(3)}  y < x+r & (5)\\  
+    x'-r'< y \xRightarrow{(4)} x-\varepsilon-r' < y \implies x-(\varepsilon+r') < y  \xRightarrow{(3)} x-r < y & (6)
+  \end{cases}$
+
+Din (5) și (6) $\implies x-r < y < x+r \iff |y-x| < r \iff y \in S(x, r)$.
+
+Deci $S(x', r') \subseteq S(x, r)$.
+
+\vspace{7}
+Arătăm că $x \in S(x', r').$\ \ \ (**)
+
+$x' = \varphi\left(x - \varepsilon, x + \varepsilon\right) \implies$
+$x - \varepsilon < x' < x + \varepsilon \ \ \ \iff$
+
+
+$ -\varepsilon < x' - x < \varepsilon \iff |x'-x| < \varepsilon$
+$\implies d(x', x) < \varepsilon \stackrel{(3)}{<} r' \implies x \in S(x', r')$
+
+
+\vspace{14}
+Fie $F = \left\{ f(x) \ |\  x \in M \right\}$.
+
+
+Fie $N = \bigcup\limits_{p \in F} S(p)$.
+
+\vspace{7}
+$
+\begin{rcases}
+$F \subseteq \mathbb{Q} \times \mathbb{Q} \implies |F| \le | \mathbb{Q} \times \mathbb{Q} | = |\aleph_0|$\\
+$N = \bigcup\limits_{p \in F} S(p)$
+\end{rcases} \Rightarrow N$ este o reuniune cel mult numărabilă de sfere deschise.
+
+$\begin{rcases}
+\text{Din (*) } S(f(x)) \subseteq M, \ \forall x \in M \implies N \subseteq M;\\
+\text{Din (**) } x \in S(f(x)),\ \forall x \in M \implies \forall x \in M,\ x \in N \implies M \subseteq N.
+\end{rcases}
+\implies M = N.
+$
+
+În concluzie am scris $M$ ca o reuniune cel mult numărabilă de sfere deschise. 
+%\vspace{7}
+\end{document}

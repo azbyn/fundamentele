@@ -1,0 +1,53 @@
+#+LATEX_HEADER: \usepackage{geometry}\geometry{a4paper,left=20mm,right=20mm,top=20mm,bottom=30mm}
+#+LATEX_HEADER: \usepackage{mathtools,accents,graphicx,tipa}
+
+
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+OPTIONS: date:nil
+
+
+#+begin_export latex
+
+\makeatletter
+\DeclareFontFamily{U}{tipa}{}
+\DeclareFontShape{U}{tipa}{m}{n}{<->tipa10}{}
+\newcommand{\ark@char}{{\usefont{U}{tipa}{m}{n}\symbol{62}}}%
+
+\newcommand{\ark}[1]{\mathpalette\ark@ark{#1}}
+
+\newcommand{\ark@ark}[2]{%
+  \sbox0{$\m@th#1#2$}%
+  \vbox{
+    \hbox{\resizebox{\wd0}{\height}{\ark@char}}
+    \nointerlineskip
+    \box0
+  }%
+}
+\makeatother
+
+Demonstrați că $\overline{A \cup B} = \overline{A} \cup \overline{B}.$
+
+\vspace{7pt}
+
+Știm: $\forall A, B \in X$ \\
+(1) $\overline{cA} = c\mathring{A}$ \\
+(2) $c(A \cap B) = cA \cup cB$\\
+(3) $\mathring{\ark{A \cap B}} = \mathring{A} \cap \mathring{B}$\\
+
+Fie $Y, Z \subseteq X$.
+
+Fie $A = cY, Z = cB$.
+
+Demonstrăm că  $\overline{A \cup B} = \overline{A} \cup \overline{B}$.
+\vspace{7pt}
+
+$A \cup B = cY \cup cZ  \stackrel{(2)}{=} c(Y \cap Z) \implies\ \overline{ A \cup B } = \overline{ c(Y \cap Z) }$
+$ \stackrel{(1)}{=} c(\mathring{\ark{ Y \cap Z }}) \stackrel{(3)}{=} c(\mathring{Y} \cap  \mathring{Z})$
+$ \stackrel{(2)}{=} c\mathring{Y} \cup c\mathring{Z} = \\ = \overline{cY} \cup \overline{cZ} = \overline{A} \cup \overline{B}.$
+
+
+q.e.d.
+
+
+#+end_export
