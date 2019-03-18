@@ -11,13 +11,13 @@
 
 
 \textbf{Teorema} de structură a multimilor deschise din $\mathbb{R}$
-\vspace{7pt}
+\vspace{7}
 
 Orice mulțime deschisă se poate scrie ca o reuniune de sfere deschise cel mult numărabilă.
 
-\vspace{7pt}
+\vspace{7}
 \textbf{Demonstrație:}
-\vspace{7pt}
+\vspace{7}
 
 Fie $(\mathbb{R}, |\cdot|)$, $M \in \tau_o $.
 
@@ -27,28 +27,18 @@ $| \mathbb{Q} | = | \mathbb{Q}^n | =\aleph_0, \forall n \in \mathbb{N}$\ \ \ (1)
 
 $\forall x, y \in \mathbb{R},$ cu $x < y, \exists\ q \in \mathbb{Q}$ a.î. $x < q < y.$ (Densitatea lui $\mathbb{Q}$ în $\mathbb{R}$) \ \ \ (2)
 
-\vspace{7pt}
+\vspace{7}
 
+Fie
+$\varphi : \mathbb{R} \times \mathbb{R} \to \mathbb{Q}$,
 
-Fie $F = \left\{ (x', r') \in  \mathbb{Q} \times \mathbb{Q}\ \middle|\ \exists r \in (0, \infty),\ x \in \mathbb{R} \text{ a.î. }
-S(x', r') \subseteq S(x, r) \subseteq M \right\} \subseteq \mathbb{Q} \times \mathbb{Q}$.
+$\varphi(x, y) = q, $ unde $x < q < y$ (Exista din (2))
 
-Fie $N = \bigcup\limits_{p \in F} S(p)$.
+\vspace{7}
 
-\vspace{7pt}
-Arătăm că $N \subseteq M$ (*):
+Considerăm funcția $f : M \to \mathbb{Q} \times \mathbb{Q} $ definită astfel:
 
-Fie $(x', r') \in F$.
-
-$(x', r') \in F \implies \exists r \in (0, \infty),\ x \in \mathbb{R} \text{ a.î. } S(x', r') \subseteq S(x, r) \subseteq M \implies S(x', r') \subseteq M$.
-
-Cum $N = \bigcup\limits_{p \in F} S(p) \implies N \subseteq M$.
-
-
-\vspace{7pt}
-Arătăm că $M \subseteq N$ (**).
-
-Presupunem prin reducere la absurd că $\exists x \in M \text{ a.î. } x \notin N \iff  \forall (x', r') \in F,\ x \notin S(x', r').$
+Fie $\forall x \in M$.
 
 $\begin{rcases}
 M \in \tau_o \\
@@ -56,13 +46,16 @@ x \in M
 \end{rcases}
 \implies \exists r \in (0, \infty)$ a.î. $S(x, r) \subseteq M$.
 
-Fie:
+\vspace{7}
+Fie
 
-$\varepsilon \in \left(0,\ \frac{r}{2}\right)$;
+$\varepsilon \in \left(0, \frac{r}{2}\right)$;
 
-$x' \in \mathbb{Q}  \text{ a.î. } x - \varepsilon \le x' \le x + \varepsilon$ (există din (2));
+$x' = \varphi\left(x - \varepsilon, x + \varepsilon\right)$;
 
-$r' \in \mathbb{Q}  \text{ a.î. } \varepsilon \le r' \le r-\varepsilon$.
+$r' = \varphi\left(\varepsilon, r-\varepsilon \right)$.
+
+$f(x) \overset{\underset{\mathrm{def}}{}}{=} (x', r')$.
 
 \usetikzlibrary{arrows}
 \begin{document}
@@ -93,11 +86,12 @@ $r' \in \mathbb{Q}  \text{ a.î. } \varepsilon \le r' \le r-\varepsilon$.
 \draw[(-), semithick, red] (-5,0) -- (3,0);
 \end{tikzpicture}
 
-Arătăm că $S(x', r') \subseteq N$ sau, echivalent, $S(x', r') \subseteq S(x, r)$.
+\vspace{7}
+Arătăm că $S(x', r') \subseteq S(x, r) \subseteq M$.\ \ \ (*)
 
 Fie $y \in S(x', r') = (x'-r',x'+r')$.
 
-Demonstrăm că $y \in S(x, r)$.
+Demonstrăm $y \in S(x, r)$.
 \vspace{7}
 
 $\varepsilon < r'< r - \varepsilon < r \implies 
@@ -105,7 +99,7 @@ $\varepsilon < r'< r - \varepsilon < r \implies
 
 $x - \varepsilon < x' < x + \varepsilon$ \ \ \  (4)
 
-$y \in (x'-r', x'+r') \iff x'-r' < y < x' + r' \iff$
+$y \in (x'-r',x'+r') \iff x'-r' < y < x' + r' \iff$
 
 $
 \iff
@@ -114,35 +108,40 @@ $
     x'-r'< y \xRightarrow{(4)} x-\varepsilon-r' < y \implies x-(\varepsilon+r') < y  \xRightarrow{(3)} x-r < y & (6)
   \end{cases}$
 
-Din (5) și (6) $\implies x-r < y < x+r \iff |y-x| < r \iff y \in S(x, r) \iff S(x', r') \subseteq S(x, r)$.
+Din (5) și (6) $\implies x-r < y < x+r \iff |y-x| < r \iff y \in S(x, r)$.
 
-Deci $S(x', r') \subseteq N$.
+Deci $S(x', r') \subseteq S(x, r)$.
 
 \vspace{7}
-Arătăm că $x \in S(x', r').$
+Arătăm că $x \in S(x', r').$\ \ \ (**)
 
+$x' = \varphi\left(x - \varepsilon, x + \varepsilon\right) \implies$
 $x - \varepsilon < x' < x + \varepsilon \ \ \ \iff$
+
+
 $ -\varepsilon < x' - x < \varepsilon \iff |x'-x| < \varepsilon$
 $\implies d(x', x) < \varepsilon \stackrel{(3)}{<} r' \implies x \in S(x', r')$
 
 
+\vspace{14}
+Fie $F = \left\{ f(x) \ |\  x \in M \right\}$.
 
 
-Dar $S(x', r') \subseteq N$, deci $x \in N$. Contradicție. 
-
-Deci presupunerea făcută este falsă, adică $\forall x \in M,\ \exists (x', r') \in F \text{ a.î. } x \in S(x', r') \iff $
-
-$\iff x \in N \iff M \subseteq N$.
-
-Din (*) și (**) $\implies N = M$
+Fie $N = \bigcup\limits_{p \in F} S(p)$.
 
 \vspace{7}
 $
 \begin{rcases}
 $F \subseteq \mathbb{Q} \times \mathbb{Q} \implies |F| \le | \mathbb{Q} \times \mathbb{Q} | = \aleph_0$\\
-$N = \bigcup\limits_{(x, r) \in F} S(x, r)$
+$N = \bigcup\limits_{p \in F} S(p)$
 \end{rcases} \Rightarrow N$ este o reuniune cel mult numărabilă de sfere deschise.
 
+$\begin{rcases}
+\text{Din (*) } S(f(x)) \subseteq M, \ \forall x \in M \implies N \subseteq M;\\
+\text{Din (**) } x \in S(f(x)),\ \forall x \in M \implies \forall x \in M,\ x \in N \implies M \subseteq N.
+\end{rcases}
+\implies M = N.
+$
 
 În concluzie am scris $M$ ca o reuniune cel mult numărabilă de sfere deschise. 
 %\vspace{7}

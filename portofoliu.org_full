@@ -11,6 +11,7 @@
 #+OPTIONS: date:nil
 #+ATTR_LATEX: :options frame=single
 
+
 * Laborator 1
 ** 15. O colecție de $n$ monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.
 
@@ -257,4 +258,70 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 
 #+end_export
 
+\pagebreak
+
+* Laborator 3
+
+** 10. Considerăm o secvență $x = (x_{0},..., x_{n-1})$ de $n$ numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma $(x_{i}, x_{i+1},...,x_{j})$, cu $0 \le i \le j \le n - 1$, iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.
+
+#:tangle secventa.py
+#+BEGIN_SRC python -n :results output :exports code
+print("Please insert the sequence: ", end="")
+strs = input().split(' ')
+v = [int(num) for num in strs]
+n = len(v)
+# python way of defining a n-dimensional list initialized to 0
+sub_sums = [0 for i in range(0, n)]
+
+best = (0, 0)
+best_sum = 0
+for i in range(0, n):
+    sub_sums[i] = v[i]
+    best_end_index = i
+    # after this loop v[j] = (sum from k=i to j of v[k])
+    for j in range(i+1, n):
+        sub_sums[j] = sub_sums[j-1] + v[j]
+        if sub_sums[j] > sub_sums[best_end_index]:
+            best_end_index = j
+    if sub_sums[best_end_index] > best_sum:
+        best_sum = sub_sums[best_end_index]
+        best = (i, best_end_index)
+
+print("Best with a sum of", best_sum, "is: (x%d,...,x%d)" % best)
+#+END_SRC
+
+#+BEGIN_SRC sh :results output :exports results
+echo "$ python3 src.py"
+python3 secventa.py "1 2 3 4"
+echo "$ python3 src.py"
+python3 secventa.py "1 -2 3 4"
+echo "$ python3 src.py"
+python3 secventa.py "1 2 -3 4"
+#echo "$ python3 src.py"
+#python3 secventa.py "1 -2 3 4 -8 8 9 -2 12 9 1"
+
+#+END_SRC
+
+
+#+begin_export latex
+\noindent
+
+Considerăm operația de baza ca fiind compararea elementelor tabloului \texttt{v} (liniile 16 și 18).
+
+Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; T(n) := timpul de execuție total.
+
+$T_{16}(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=i+1}^{n-1}1 
+= \sum\limits_{i=0}^{n-1}\left((n-1)-i\right)
+= n(n-1) - \sum\limits_{i=0}^{n-1}i 
+= n(n-1) - \frac{n(n-1)}{2}
+= \frac{n(n-1)}{2}$
+
+
+$T_{18}(n) = \sum\limits_{i=0}^{n-1}1 = n$
+
+$T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
+
+#+end_export
+
+\pagebreak
 
