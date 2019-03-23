@@ -56,7 +56,7 @@ print("Took", steps, "steps to find the fake coin, expected",
 #+BEGIN_SRC sh :results output :exports results
 echo "$ python3 src.py"
 echo "Please enter length: 15"
-python3 moneda.py
+python3 src/moneda.py
 #+END_SRC
 
 ** 16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?
@@ -107,11 +107,11 @@ print("Done in %d flips" % flips)
 
 #+BEGIN_SRC sh :results output :exports results
 echo "$ python3 src.py"
-python3 clatite.py "5 9 4 3 7 2 8 1"
+python3 src/clatite.py "5 9 4 3 7 2 8 1"
 echo -e "\n$ python3 src.py"
-python3 clatite.py "4 3 2 1"
+python3 src/clatite.py "4 3 2 1"
 echo -e "\n$ python3 src.py"
-python3 clatite.py "3 3 1 4 3"
+python3 src/clatite.py "3 3 1 4 3"
 #+END_SRC
 
 \pagebreak
@@ -120,30 +120,27 @@ python3 clatite.py "3 3 1 4 3"
 
 ** 10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.
 
-#+BEGIN_SRC cpp -n
-#include <iostream>
+#+BEGIN_SRC python -n :results output :exports code
+n = int(input("Please insert n: "))
 
-int main() {
-    unsigned n;
-    std::cout << "Please insert n: ";
-    std::cin >> n;
+res = 0
+i = 0
 
-    unsigned res = 0;
-    int i = 0;
-    while (n != 0) {
-        res *= 10;
-        res += n % 10;
-        n /= 10;
-        ++i;
-    }
+while n != 0:
+    res *= 10
+    res += n % 10
+    n //= 10
+    i += 1
 
-    std::cout << res << " I: " << i << "\n";
-    return 0;
-}
+print("Result:", res)
 #+END_SRC
 
-#+RESULTS:
-: 4321 I: 4
+#+BEGIN_SRC sh :results output :exports results
+python3 src/reversed.py "1234"
+echo ""
+python3 src/reversed.py "2400"
+#python3 src/secventa.py "1 -2 3 4"
+#+END_SRC
 
 # doing it like this gives nicer syntax highlighting
 #+begin_export latex
@@ -188,24 +185,24 @@ Presupunem $I$ adevărata la începutul iterației și $n \ne 0$; demonstrăm $I
 $n = \sum\limits_{j=0}^{n-i}c_{i+j}10^{j};\ 
 \mathit{res} = \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j}
 $
-\begin{minted}[linenos,firstnumber=9,frame=single]{cpp}
-    res *= 10;
+\begin{minted}[linenos,firstnumber=7,frame=single]{python}
+    res *= 10
 \end{minted}
 
 $\mathit{res} = \left( \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j} \right) \cdot 10 
 = \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j+1} 
 = \sum\limits_{j=1}^{i}c_{i-j}10^{j}
 $
-\begin{minted}[linenos,firstnumber=10,frame=single]{cpp}
-    res += n % 10;
+\begin{minted}[linenos,firstnumber=8,frame=single]{python}
+    res += n % 10
 \end{minted}
 
 $\mathit{res} = \left( \sum\limits_{j=1}^{i}c_{i-j}10^{j} \right) + c_{i} 
 = \left( \sum\limits_{j=1}^{i}c_{i-j}10^{j} \right) + c_{i-0}10^{0} 
 = \sum\limits_{j=0}^{i}c_{i-j}10^{j}$
 
-\begin{minted}[linenos,firstnumber=11,frame=single]{cpp}
-    n /= 10;
+\begin{minted}[linenos,firstnumber=9,frame=single]{python}
+    n //= 10
 \end{minted}
 
 $n = \left[ \left( \sum\limits_{j=0}^{k-i}c_{i+j}10^{j} \right) / \ 10 \right]
@@ -217,8 +214,8 @@ Cum $0 \le c_{i} \le 9 \implies 0 \le c_{i}10^{-1} \le 0.9 \implies \left[c_{i}1
 
 Deci $n = \left[ \sum\limits_{j=1}^{k-i}c_{i+j}10^{j-1} \right] = \sum\limits_{j=1}^{k-i}c_{i+j}10^{j-1} = \sum\limits_{j=0}^{k-i-1}c_{i+j+1}10^{j}$. 
 
-\begin{minted}[linenos,firstnumber=12,frame=single]{cpp}
-    ++i;
+\begin{minted}[linenos,firstnumber=10,frame=single]{python}
+    i += 1
 \end{minted}
 
 Scriem $\mathit{res}$ și $n$ în funcție de noul $i$. Deci $i$ devine $i-1$.
@@ -293,13 +290,13 @@ print("Best with a sum of", best_sum, "is: (x%d,...,x%d)" % best)
 
 #+BEGIN_SRC sh :results output :exports results
 echo "$ python3 src.py"
-python3 secventa.py "1 2 3 4"
+python3 src/secventa.py "1 2 3 4"
 echo ""
 echo "$ python3 src.py"
-python3 secventa.py "1 -2 3 4"
+python3 src/secventa.py "1 -2 3 4"
 echo ""
 echo "$ python3 src.py"
-python3 secventa.py "1 2 -3 4"
+python3 src/secventa.py "1 2 -3 4"
 #echo "$ python3 src.py"
 #python3 secventa.py "1 -2 3 4 -8 8 9 -2 12 9 1"
 
@@ -349,7 +346,7 @@ print(f)
 
 #+BEGIN_SRC sh :results output :exports results
 echo "$ python3 src.py"
-python3 sum.py "1 2 3 0 -1 5"
+python3 src/sum.py "1 2 3 0 -1 5"
 #echo "$ python3 src.py"
 
 #+END_SRC
@@ -376,30 +373,11 @@ f(x)
 #+END_SRC
 
 #+BEGIN_SRC sh :results output :exports results
-python3 l4_9.py "1 2 3 0 -1 5" "9"
+python3 src/l4_9.py "1 2 3 0 -1 5" "9"
 echo ""
 
-python3 l4_9.py "1 2 3 0 5 -1" "7"
+python3 src/l4_9.py "1 2 3 0 5 -1" "7"
 #+END_SRC
-
-#+RESULTS:
-#+begin_example
-$ python3 src.py
-Please insert the sequence:  1 2 3 0 -1 5
-Please insert s:  9
-Not found
-
-$ python3 src.py
-Please insert the sequence:  1 2 3 0 5
-Please insert s:  7
-Found 2 + 5 = 7 
-
-$ python3 src.py
-Please insert the sequence:  1 2 3 0 5
-Please insert s: 5
-Found 2 + 3 = 5 
-
-#+end_example
 
 \pagebreak
 
@@ -440,13 +418,13 @@ print(v)
 #+RESULTS:
 
 #+BEGIN_SRC sh :results output :exports results
-python3 shaker_sort.py "6 5 3 1 8 7 2 4 0 9"
+python3 src/shaker_sort.py "6 5 3 1 8 7 2 4 0 9"
 echo ""
-python3 shaker_sort.py "4 1 0 2 7 3 9 8 5 6"
+python3 src/shaker_sort.py "4 1 0 2 7 3 9 8 5 6"
 echo ""
-python3 shaker_sort.py "9 4 3 0 5 6 1 8 7 0"
+python3 src/shaker_sort.py "9 4 3 0 5 6 1 8 7 0"
 echo ""
-python3 shaker_sort.py "40 3 43 95 9 2 4 0"
+python3 src/shaker_sort.py "40 3 43 95 9 2 4 0"
 
 
 #echo "$ python3 src.py"
@@ -492,11 +470,11 @@ print("output:", output)
 #+RESULTS:
 
 #+BEGIN_SRC sh :results output :exports results
-python3 counting_sort.py "0 1 2 2 1 0 2 1 2 4"
+python3 src/counting_sort.py "0 1 2 2 1 0 2 1 2 4"
 echo ""
 #python3 counting_sort.py "0 1 2 2 1 0 2 1 2"
 #echo ""
-python3 counting_sort.py "1 2 2 1 2 1 2 4"
+python3 src/counting_sort.py "1 2 2 1 2 1 2 4"
 #+END_SRC
 
 
@@ -553,9 +531,9 @@ print("output:", output)
 #+RESULTS:
 
 #+BEGIN_SRC sh :results output :exports results
-python3 radix_sort.py "3 2 4 23 427 459 56 90"
+python3 src/radix_sort.py "3 2 4 23 427 459 56 90"
 echo ""
-python3 radix_sort.py "89568 23 123 2 1 4 45 499"
+python3 src/radix_sort.py "89568 23 123 2 1 4 45 499"
 #+END_SRC
 
 #+begin_export latex

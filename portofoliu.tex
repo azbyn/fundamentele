@@ -1,4 +1,4 @@
-% Created 2019-03-23 Sat 20:37
+% Created 2019-03-23 Sat 20:58
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -34,9 +34,9 @@
 \maketitle
 
 \section*{Laborator 1}
-\label{sec:orgbe65cbd}
+\label{sec:org596624a}
 \subsection*{15. O colecție de \(n\) monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.}
-\label{sec:org40329d3}
+\label{sec:org6a98e53}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 import random, math
@@ -98,7 +98,7 @@ Took 3 steps to find the fake coin, expected 3
 \end{verbatim}
 
 \subsection*{16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?}
-\label{sec:orgd3efa6e}
+\label{sec:orgc601872}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert a space separated list of pancake diameters:\n(",
@@ -180,32 +180,36 @@ Done in 4 flips
 \pagebreak
 
 \section*{Laborator 2}
-\label{sec:org7cceb67}
+\label{sec:org33f8117}
 
 \subsection*{10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.}
-\label{sec:org7f7ac68}
+\label{sec:org9d76e78}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{cpp}
-#include <iostream>
+\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+n = int(input("Please insert n: "))
 
-int main() {
-    unsigned n;
-    std::cout << "Please insert n: ";
-    std::cin >> n;
+res = 0
+i = 0
 
-    unsigned res = 0;
-    int i = 0;
-    while (n != 0) {
-        res *= 10;
-        res += n % 10;
-        n /= 10;
-        ++i;
-    }
+while n != 0:
+    res *= 10
+    res += n % 10
+    n //= 10
+    i += 1
 
-    std::cout << res << " I: " << i << "\n";
-    return 0;
-}
+print("Result:", res)
 \end{minted}
+
+\begin{verbatim}
+$ python3 reversed.py
+Please insert n: 1234
+Result: 4321
+
+$ python3 reversed.py
+Please insert n: 2400
+Result: 42
+\end{verbatim}
+
 
 \noindent
 I. Parțial corectitudinea
@@ -248,24 +252,24 @@ Presupunem $I$ adevărata la începutul iterației și $n \ne 0$; demonstrăm $I
 $n = \sum\limits_{j=0}^{n-i}c_{i+j}10^{j};\ 
 \mathit{res} = \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j}
 $
-\begin{minted}[linenos,firstnumber=9,frame=single]{cpp}
-    res *= 10;
+\begin{minted}[linenos,firstnumber=7,frame=single]{python}
+    res *= 10
 \end{minted}
 
 $\mathit{res} = \left( \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j} \right) \cdot 10 
 = \sum\limits_{j=0}^{i-1}c_{i-1-j}10^{j+1} 
 = \sum\limits_{j=1}^{i}c_{i-j}10^{j}
 $
-\begin{minted}[linenos,firstnumber=10,frame=single]{cpp}
-    res += n % 10;
+\begin{minted}[linenos,firstnumber=8,frame=single]{python}
+    res += n % 10
 \end{minted}
 
 $\mathit{res} = \left( \sum\limits_{j=1}^{i}c_{i-j}10^{j} \right) + c_{i} 
 = \left( \sum\limits_{j=1}^{i}c_{i-j}10^{j} \right) + c_{i-0}10^{0} 
 = \sum\limits_{j=0}^{i}c_{i-j}10^{j}$
 
-\begin{minted}[linenos,firstnumber=11,frame=single]{cpp}
-    n /= 10;
+\begin{minted}[linenos,firstnumber=9,frame=single]{python}
+    n //= 10
 \end{minted}
 
 $n = \left[ \left( \sum\limits_{j=0}^{k-i}c_{i+j}10^{j} \right) / \ 10 \right]
@@ -277,8 +281,8 @@ Cum $0 \le c_{i} \le 9 \implies 0 \le c_{i}10^{-1} \le 0.9 \implies \left[c_{i}1
 
 Deci $n = \left[ \sum\limits_{j=1}^{k-i}c_{i+j}10^{j-1} \right] = \sum\limits_{j=1}^{k-i}c_{i+j}10^{j-1} = \sum\limits_{j=0}^{k-i-1}c_{i+j+1}10^{j}$. 
 
-\begin{minted}[linenos,firstnumber=12,frame=single]{cpp}
-    ++i;
+\begin{minted}[linenos,firstnumber=10,frame=single]{python}
+    i += 1
 \end{minted}
 
 Scriem $\mathit{res}$ și $n$ în funcție de noul $i$. Deci $i$ devine $i-1$.
@@ -321,10 +325,10 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 \pagebreak
 
 \section*{Laborator 3}
-\label{sec:org2adc84e}
+\label{sec:org04cee30}
 
 \subsection*{10. Considerăm o secvență \(x = (x_{0},..., x_{n-1})\) de \(n\) numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma \((x_{i}, x_{i+1},\ ...,\ x_{j})\), cu \(0 \le i \le j \le n - 1\), iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.}
-\label{sec:org33bb5b3}
+\label{sec:org891e0ae}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -385,12 +389,11 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 
 \pagebreak
 
-
 \section*{Laborator 4}
-\label{sec:org8a2581c}
+\label{sec:org0a2a1d7}
 
 \subsection*{8. Considerăm o secvența  \(x = (x_0, ..., x_{n-1})\) de \(n\) numere întregi. Generați tabloul \(f = (f_0, ..., f_{n-1})\), cu \(f_i = \sum\limits_{j=0}^{i}x_j\), printr-un algoritm de complexitate liniară.}
-\label{sec:org295acec}
+\label{sec:org14f31be}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -415,7 +418,7 @@ Please insert the sequence: 1 2 3 0 -1 5
 
 
 \subsection*{9. Considerăm un tablou de valori întregi \(x = (x_0, ..., x_{n-1})\) și o valoare dată, s. Să se verifice daca există cel puțin doi indici \(i\) și \(j\) (nu neapărat distincți) cu proprietatea că \(x_i = x_j = s\). Analizați complexitatea algoritmului propus.}
-\label{sec:org9aca076}
+\label{sec:org57a050d}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -451,10 +454,10 @@ Found 2 + 5 = 7
 \pagebreak
 
 \section*{Laborator 5}
-\label{sec:org41cec3c}
+\label{sec:orgad3c209}
 
 \subsection*{4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.}
-\label{sec:org9f3bb6e}
+\label{sec:orgd4753b0}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the array: ", end="")
@@ -504,7 +507,7 @@ Please insert the array: 40 3 43 95 9 2 4 0
 \end{verbatim}
 
 \subsection*{5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente din mulțimea \(\{0, 1, 2,...,m\}\). Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă \(m\) nu este semnificativ mai mare ca \(n\). Pașii algoritmul sunt:}
-\label{sec:org942d59d}
+\label{sec:org2116f81}
 \begin{enumerate}
 \item [(a)] se construiește tabloul $f[0..m]$ al frecvențelor de apariție a elementelor tabloului $x$ ($f_i$ reprezintă de câte ori apare valoarea $i$ în tabloul $x$, $i = 0,...,m$);
 
@@ -568,7 +571,7 @@ $T(n, m) = 3n + m - 1$.
 $T \in O(n+m)$.
 
 \subsection*{6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. \(\\\) Descrieți algoritmul radix sort. Care este complexitatea acestuia?}
-\label{sec:org4f490bc}
+\label{sec:org7215045}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the array: ", end="")
