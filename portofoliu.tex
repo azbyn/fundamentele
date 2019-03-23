@@ -1,4 +1,4 @@
-% Created 2019-03-18 Mon 17:34
+% Created 2019-03-23 Sat 20:37
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -34,9 +34,9 @@
 \maketitle
 
 \section*{Laborator 1}
-\label{sec:org6f7136e}
+\label{sec:orgbe65cbd}
 \subsection*{15. O colecție de \(n\) monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.}
-\label{sec:orgfed1a71}
+\label{sec:org40329d3}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 import random, math
@@ -98,14 +98,14 @@ Took 3 steps to find the fake coin, expected 3
 \end{verbatim}
 
 \subsection*{16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?}
-\label{sec:org34c3d29}
+\label{sec:orgd3efa6e}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert a space separated list of pancake diameters:\n(",
      end="")
 strs = input().split(' ')
 # index 0 represents the topmost pancake
-pancakes = [int(num) for num in reversed(strs)]
+pancakes = [int(num) for num in reversed(strs) if num != ""]
 
 def draw(msg, vec, spatulaIndex = -1):
     print(msg + "(", end="")
@@ -180,17 +180,19 @@ Done in 4 flips
 \pagebreak
 
 \section*{Laborator 2}
-\label{sec:orga452327}
+\label{sec:org7cceb67}
 
 \subsection*{10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.}
-\label{sec:org344c24e}
+\label{sec:org7f7ac68}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{cpp}
 #include <iostream>
 
 int main() {
-    unsigned n = 1234;
-    //std::cin >> n;
+    unsigned n;
+    std::cout << "Please insert n: ";
+    std::cin >> n;
+
     unsigned res = 0;
     int i = 0;
     while (n != 0) {
@@ -199,6 +201,7 @@ int main() {
         n /= 10;
         ++i;
     }
+
     std::cout << res << " I: " << i << "\n";
     return 0;
 }
@@ -318,15 +321,15 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 \pagebreak
 
 \section*{Laborator 3}
-\label{sec:org3e0c5af}
+\label{sec:org2adc84e}
 
 \subsection*{10. Considerăm o secvență \(x = (x_{0},..., x_{n-1})\) de \(n\) numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma \((x_{i}, x_{i+1},\ ...,\ x_{j})\), cu \(0 \le i \le j \le n - 1\), iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.}
-\label{sec:orge429b99}
+\label{sec:org33bb5b3}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
 strs = input().split(' ')
-v = [int(num) for num in strs]
+v = [int(num) for num in strs if num != ""]
 n = len(v)
 # python way of defining a n-dimensional list initialized to 0
 sub_sums = [0 for i in range(0, n)]
@@ -367,7 +370,7 @@ Best with a sum of 4 is: (x0,...,x3)
 
 Considerăm operația de baza ca fiind compararea elementelor tabloului \texttt{v} (liniile 16 și 18).
 
-Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; T(n) := timpul de execuție total.
+Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; $T(n) :=$ timpul de execuție total.
 
 $T_{16}(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=i+1}^{n-1}1 
 = \sum\limits_{i=0}^{n-1}\left((n-1)-i\right)
@@ -383,17 +386,16 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 \pagebreak
 
 
-
 \section*{Laborator 4}
-\label{sec:org81b30c0}
+\label{sec:org8a2581c}
 
 \subsection*{8. Considerăm o secvența  \(x = (x_0, ..., x_{n-1})\) de \(n\) numere întregi. Generați tabloul \(f = (f_0, ..., f_{n-1})\), cu \(f_i = \sum\limits_{j=0}^{i}x_j\), printr-un algoritm de complexitate liniară.}
-\label{sec:orgf1f9b36}
+\label{sec:org295acec}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
 strs = input().split(' ')
-x = [int(num) for num in strs]
+x = [int(num) for num in strs if num != ""]
 n = len(x)
 f = [0 for i in range(n)]
 
@@ -413,12 +415,12 @@ Please insert the sequence: 1 2 3 0 -1 5
 
 
 \subsection*{9. Considerăm un tablou de valori întregi \(x = (x_0, ..., x_{n-1})\) și o valoare dată, s. Să se verifice daca există cel puțin doi indici \(i\) și \(j\) (nu neapărat distincți) cu proprietatea că \(x_i = x_j = s\). Analizați complexitatea algoritmului propus.}
-\label{sec:org0228628}
+\label{sec:org9aca076}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
 strs = input().split(' ')
-x = [int(num) for num in strs]
+x = [int(num) for num in strs if str != ""]
 print("Please insert s: ", end="")
 s = int(input())
 
@@ -447,4 +449,182 @@ Found 2 + 5 = 7
 
 
 \pagebreak
+
+\section*{Laborator 5}
+\label{sec:org41cec3c}
+
+\subsection*{4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.}
+\label{sec:org9f3bb6e}
+
+\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+print("Please insert the array: ", end="")
+strs = input().split(' ')
+v = [int(num) for num in strs if num != ""]
+
+def impl(start, end, step):
+    sorted = True
+    for i in range(start, end, step):
+        if v[i] > v[i+1]:
+            t = v[i]
+            v[i] = v[i+1]
+            v[i+1] = t
+            sorted = False
+    return sorted
+
+begin = 0
+end = len(v) - 1
+
+while True:
+    if impl(begin, end, 1): break
+    if impl(end-1, begin-1, -1): break
+
+    end -= 1
+    begin += 1
+
+print(v)
+
+\end{minted}
+
+\begin{verbatim}
+$ python3 shaker_sort.py
+Please insert the array: 6 5 3 1 8 7 2 4 0 9
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+$ python3 shaker_sort.py
+Please insert the array: 4 1 0 2 7 3 9 8 5 6
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+$ python3 shaker_sort.py
+Please insert the array: 9 4 3 0 5 6 1 8 7 0
+[0, 0, 1, 3, 4, 5, 6, 7, 8, 9]
+
+$ python3 shaker_sort.py
+Please insert the array: 40 3 43 95 9 2 4 0
+[0, 2, 3, 4, 9, 40, 43, 95]
+\end{verbatim}
+
+\subsection*{5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente din mulțimea \(\{0, 1, 2,...,m\}\). Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă \(m\) nu este semnificativ mai mare ca \(n\). Pașii algoritmul sunt:}
+\label{sec:org942d59d}
+\begin{enumerate}
+\item [(a)] se construiește tabloul $f[0..m]$ al frecvențelor de apariție a elementelor tabloului $x$ ($f_i$ reprezintă de câte ori apare valoarea $i$ în tabloul $x$, $i = 0,...,m$);
+
+\item [(b)] se calculează tabloul frecvențelor cumulate $\mathit{fc}[0..m]$, $\mathit{fc}_i = \sum\limits_{j=0}^{i}f_j$,\ $i = 0,...,m$;
+\item [(c)] se folosește tabloul frecvențelor cumulate pentru a construi tabloul ordonat.
+\end{enumerate}
+
+Descrieți algoritmul de sortare prin numărare. Care este complexitatea acestuia?
+
+
+\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+print("Please insert the array: ", end="")
+x = [int(num) for num in (input().split()) if num != ""]
+n = len(x)
+m = max(x) + 1
+
+f = [0 for i in range(m)]
+output = [0 for i in range(n)]
+
+for i in x: f[i] += 1
+print("f:", f)
+
+for i in range(1, m): f[i] = f[i-1] + f[i]
+
+print("fc:", f)
+for i in range(n):
+    val = x[i]
+    f[val] -= 1
+    output[f[val]] = val
+
+print("output:", output)
+\end{minted}
+
+\begin{verbatim}
+$ python3 counting_sort.py
+Please insert the array: 0 1 2 2 1 0 2 1 2 4
+f: [2, 3, 4, 0, 1]
+fc: [2, 5, 9, 9, 10]
+output: [0, 0, 1, 1, 1, 2, 2, 2, 2, 4]
+
+$ python3 counting_sort.py
+Please insert the array: 1 2 2 1 2 1 2 4
+f: [0, 3, 4, 0, 1]
+fc: [0, 3, 7, 7, 8]
+output: [1, 1, 1, 2, 2, 2, 2, 4]
+\end{verbatim}
+
+
+Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
+
+Notăm $T_l := $ timpul total de execuție al liniei $l$; $T(n, m) :=$ timpul de execuție total.
+
+$T_{9} = n$;
+$T_{12} = m - 1$;
+$T_{17} = n$;
+$T_{18} = n$;
+
+$T(n, m) = 3n + m - 1$.
+
+\vspace{7pt}
+$T \in O(n+m)$.
+
+\subsection*{6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. \(\\\) Descrieți algoritmul radix sort. Care este complexitatea acestuia?}
+\label{sec:org4f490bc}
+
+\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+print("Please insert the array: ", end="")
+x = [int(num) for num in (input().split()) if num != ""]
+n = len(x)
+max_x = max(x)
+
+f = [0 for i in range(10)]
+output = [0 for i in range(n)]
+
+pow10 = 1
+while max_x > 0:
+    def getDigit(num): return (num // pow10) % 10
+
+    for i in range(10): f[i] = 0
+    for i in x: f[getDigit(i)] += 1
+
+    for i in range(1, 10): f[i] += f[i-1]
+
+    for i in range(n - 1, -1, -1):
+        index = getDigit(x[i])
+        f[index] -= 1
+        output[f[index]] = x[i]
+
+    #output becomes new input
+    for i in range(n): x[i] = output[i]
+
+    pow10 *= 10
+    max_x //= 10
+
+print("output:", output)
+\end{minted}
+
+\begin{verbatim}
+$ python3 radix_sort.py
+Please insert the array: 3 2 4 23 427 459 56 90
+output: [2, 3, 4, 23, 56, 90, 427, 459]
+
+$ python3 radix_sort.py
+Please insert the array: 89568 23 123 2 1 4 45 499
+output: [1, 2, 4, 23, 45, 123, 499, 89568]
+\end{verbatim}
+
+
+Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
+
+Notăm $k = \mathit{log10}(\mathit{max}(x)) + 1$; $T_l := $ timpul total de execuție al liniei $l$; $T(n, k) :=$ timpul de execuție total.
+
+$T_{13} = 10 k$;
+$T_{14} = k n$;
+$T_{16} = 9 k$;
+$T_{20} = k n$;
+$T_{21} = k n$;
+
+$T(n, k) = 3kn + 19k$.
+
+\vspace{7pt}
+$T \in O(kn)$.
 \end{document}

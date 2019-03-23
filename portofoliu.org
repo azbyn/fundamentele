@@ -67,7 +67,7 @@ print("Please insert a space separated list of pancake diameters:\n(",
      end="")
 strs = input().split(' ')
 # index 0 represents the topmost pancake
-pancakes = [int(num) for num in reversed(strs)]
+pancakes = [int(num) for num in reversed(strs) if num != ""]
 
 def draw(msg, vec, spatulaIndex = -1):
     print(msg + "(", end="")
@@ -124,8 +124,10 @@ python3 clatite.py "3 3 1 4 3"
 #include <iostream>
 
 int main() {
-    unsigned n = 1234;
-    //std::cin >> n;
+    unsigned n;
+    std::cout << "Please insert n: ";
+    std::cin >> n;
+
     unsigned res = 0;
     int i = 0;
     while (n != 0) {
@@ -134,6 +136,7 @@ int main() {
         n /= 10;
         ++i;
     }
+
     std::cout << res << " I: " << i << "\n";
     return 0;
 }
@@ -266,7 +269,7 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 #+BEGIN_SRC python -n :results output :exports code
 print("Please insert the sequence: ", end="")
 strs = input().split(' ')
-v = [int(num) for num in strs]
+v = [int(num) for num in strs if num != ""]
 n = len(v)
 # python way of defining a n-dimensional list initialized to 0
 sub_sums = [0 for i in range(0, n)]
@@ -308,7 +311,7 @@ python3 secventa.py "1 2 -3 4"
 
 Considerăm operația de baza ca fiind compararea elementelor tabloului \texttt{v} (liniile 16 și 18).
 
-Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; T(n) := timpul de execuție total.
+Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; $T(n) :=$ timpul de execuție total.
 
 $T_{16}(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=i+1}^{n-1}1 
 = \sum\limits_{i=0}^{n-1}\left((n-1)-i\right)
@@ -325,8 +328,6 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 
 \pagebreak
 
-
-
 * Laborator 4
 
 ** 8. Considerăm o secvența  $x = (x_0, ..., x_{n-1})$ de $n$ numere întregi. Generați tabloul $f = (f_0, ..., f_{n-1})$, cu $f_i = \sum\limits_{j=0}^{i}x_j$, printr-un algoritm de complexitate liniară.
@@ -334,7 +335,7 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 #+BEGIN_SRC python -n :results output :exports code
 print("Please insert the sequence: ", end="")
 strs = input().split(' ')
-x = [int(num) for num in strs]
+x = [int(num) for num in strs if num != ""]
 n = len(x)
 f = [0 for i in range(n)]
 
@@ -359,7 +360,7 @@ python3 sum.py "1 2 3 0 -1 5"
 #+BEGIN_SRC python -n :results output :exports code
 print("Please insert the sequence: ", end="")
 strs = input().split(' ')
-x = [int(num) for num in strs]
+x = [int(num) for num in strs if str != ""]
 print("Please insert s: ", end="")
 s = int(input())
 
@@ -401,3 +402,180 @@ Found 2 + 3 = 5
 #+end_example
 
 \pagebreak
+
+* Laborator 5
+
+** 4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.
+
+# :tangle shaker_sort.py
+#+BEGIN_SRC python -n :results output :exports code
+print("Please insert the array: ", end="")
+strs = input().split(' ')
+v = [int(num) for num in strs if num != ""]
+
+def impl(start, end, step):
+    sorted = True
+    for i in range(start, end, step):
+        if v[i] > v[i+1]:
+            t = v[i]
+            v[i] = v[i+1]
+            v[i+1] = t
+            sorted = False
+    return sorted
+
+begin = 0
+end = len(v) - 1
+
+while True:
+    if impl(begin, end, 1): break
+    if impl(end-1, begin-1, -1): break
+
+    end -= 1
+    begin += 1
+
+print(v)
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh :results output :exports results
+python3 shaker_sort.py "6 5 3 1 8 7 2 4 0 9"
+echo ""
+python3 shaker_sort.py "4 1 0 2 7 3 9 8 5 6"
+echo ""
+python3 shaker_sort.py "9 4 3 0 5 6 1 8 7 0"
+echo ""
+python3 shaker_sort.py "40 3 43 95 9 2 4 0"
+
+
+#echo "$ python3 src.py"
+
+#+END_SRC
+
+** 5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou $x$ de dimensiune $n$, cu elemente din mulțimea $\{0, 1, 2,...,m\}$. Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă $m$ nu este semnificativ mai mare ca $n$. Pașii algoritmul sunt:
+#+begin_export latex
+\begin{enumerate}
+\item [(a)] se construiește tabloul $f[0..m]$ al frecvențelor de apariție a elementelor tabloului $x$ ($f_i$ reprezintă de câte ori apare valoarea $i$ în tabloul $x$, $i = 0,...,m$);
+
+\item [(b)] se calculează tabloul frecvențelor cumulate $\mathit{fc}[0..m]$, $\mathit{fc}_i = \sum\limits_{j=0}^{i}f_j$,\ $i = 0,...,m$;
+\item [(c)] se folosește tabloul frecvențelor cumulate pentru a construi tabloul ordonat.
+\end{enumerate}
+
+Descrieți algoritmul de sortare prin numărare. Care este complexitatea acestuia?
+#+end_export
+
+
+#+BEGIN_SRC python -n :results output :exports code
+print("Please insert the array: ", end="")
+x = [int(num) for num in (input().split()) if num != ""]
+n = len(x)
+m = max(x) + 1
+
+f = [0 for i in range(m)]
+output = [0 for i in range(n)]
+
+for i in x: f[i] += 1
+print("f:", f)
+
+for i in range(1, m): f[i] = f[i-1] + f[i]
+
+print("fc:", f)
+for i in range(n):
+    val = x[i]
+    f[val] -= 1
+    output[f[val]] = val
+
+print("output:", output)
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh :results output :exports results
+python3 counting_sort.py "0 1 2 2 1 0 2 1 2 4"
+echo ""
+#python3 counting_sort.py "0 1 2 2 1 0 2 1 2"
+#echo ""
+python3 counting_sort.py "1 2 2 1 2 1 2 4"
+#+END_SRC
+
+
+#+begin_export latex
+Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
+
+Notăm $T_l := $ timpul total de execuție al liniei $l$; $T(n, m) :=$ timpul de execuție total.
+
+$T_{9} = n$;
+$T_{12} = m - 1$;
+$T_{17} = n$;
+$T_{18} = n$;
+
+$T(n, m) = 3n + m - 1$.
+
+\vspace{7pt}
+$T \in O(n+m)$.
+#+end_export
+
+** 6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou $x$ de dimensiune $n$, cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. $\\$ Descrieți algoritmul radix sort. Care este complexitatea acestuia?
+
+#+BEGIN_SRC python -n :results output :exports code
+print("Please insert the array: ", end="")
+x = [int(num) for num in (input().split()) if num != ""]
+n = len(x)
+max_x = max(x)
+
+f = [0 for i in range(10)]
+output = [0 for i in range(n)]
+
+pow10 = 1
+while max_x > 0:
+    def getDigit(num): return (num // pow10) % 10
+
+    for i in range(10): f[i] = 0
+    for i in x: f[getDigit(i)] += 1
+
+    for i in range(1, 10): f[i] += f[i-1]
+
+    for i in range(n - 1, -1, -1):
+        index = getDigit(x[i])
+        f[index] -= 1
+        output[f[index]] = x[i]
+
+    #output becomes new input
+    for i in range(n): x[i] = output[i]
+    
+    pow10 *= 10
+    max_x //= 10
+
+print("output:", output)
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh :results output :exports results
+python3 radix_sort.py "3 2 4 23 427 459 56 90"
+echo ""
+python3 radix_sort.py "89568 23 123 2 1 4 45 499"
+#+END_SRC
+
+#+begin_export latex
+Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
+
+Notăm $k = \mathit{log10}(\mathit{max}(x)) + 1$; $T_l := $ timpul total de execuție al liniei $l$; $T(n, k) :=$ timpul de execuție total.
+
+$T_{13} = 10 k$;
+$T_{14} = k n$;
+$T_{16} = 9 k$;
+$T_{20} = k n$;
+$T_{21} = k n$;
+
+$T(n, k) = 3kn + 19k$.
+
+\vspace{7pt}
+$T \in O(kn)$.
+
+#+end_export
+
+
+
+
