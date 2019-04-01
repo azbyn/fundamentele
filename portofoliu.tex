@@ -1,4 +1,4 @@
-% Created 2019-03-23 Sat 20:58
+% Created 2019-04-01 Mon 18:07
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -19,6 +19,7 @@
 \usepackage{titlesec}\titleformat*{\subsection}{}
 \usepackage{etoolbox}\AtBeginEnvironment{minted}{\singlespacing\fontsize{12}{14}\selectfont}
 \usepackage{mathtools}\usepackage{icomma}\usepackage{stackengine}\usepackage{amssymb}
+\usemintedstyle{vs}
 \author{Pavel Andrei}
 \date{}
 \title{Portofoliu Algoritmi și complexitate}
@@ -31,20 +32,51 @@
  pdflang={Romanian}}
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+    \begin{center}
+        \vspace*{6cm}
+ 
+ 
+        \Huge
+        \textbf{Portofoliu Algoritmi și complexitate}
+
+        \vspace{0.5cm}
+        \LARGE
+        Anul I, semestrul 2
+
+        \vspace{1.5cm}
+        \Large
+        {Pavel Andrei}\\
+        Grupa M116
+ 
+        \vfill
+ 
+        \vspace{0.8cm}
+ 
+ 
+        \Large
+        Facultatea de Matematică\\
+        Universitatea "Alexandru Ioan Cuza"\\
+        Iași\\
+        2018 - 2019
+ 
+    \end{center}
+\end{titlepage}
 
 \section*{Laborator 1}
-\label{sec:org596624a}
+\label{sec:org7ac6019}
 \subsection*{15. O colecție de \(n\) monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.}
-\label{sec:org6a98e53}
+\label{sec:orgbeda6e5}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 import random, math
+
 # The values aren't important, what matters is that fake < real
 realWeight = 40
 fakeWeight = 35
 
-length = int(input("Please enter length: "))
+print("Please enter length: ", end="")
+length = int(input())
 
 coins = [realWeight] * length
 coins[random.randrange(length)] = fakeWeight
@@ -55,14 +87,17 @@ steps = 0
 while len(bigPile) > 1:
     steps += 1
     print("Step %d:" % steps)
-    #we split the big pile in 3 piles with the same size ±1
+
+    # we split the big pile in 3 piles with the same size ±1
     pileSize = len(bigPile) // 3 + (len(bigPile) % 3 == 2)
     leftPile = bigPile[0:pileSize]
     rightPile = bigPile[pileSize:pileSize*2]
     leftoverPile = bigPile[pileSize*2:]
+
     print("left", leftPile)
     print("right", rightPile)
     print("leftover", leftoverPile)
+
     difference = 0
     for i in range(pileSize):
         difference += rightPile[i] - leftPile[i]
@@ -70,12 +105,13 @@ while len(bigPile) > 1:
     if difference > 0: bigPile = leftPile
     elif difference < 0: bigPile = rightPile
     else: bigPile = leftoverPile
+
     print()
 
 print("Took", steps, "steps to find the fake coin, expected", 
       math.ceil(math.log(length, 3)))
 \end{minted}
-
+\pagebreak
 \begin{verbatim}
 $ python3 src.py
 Please enter length: 15
@@ -98,7 +134,7 @@ Took 3 steps to find the fake coin, expected 3
 \end{verbatim}
 
 \subsection*{16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?}
-\label{sec:orgc601872}
+\label{sec:org37fc344}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert a space separated list of pancake diameters:\n(",
@@ -122,7 +158,7 @@ def flip(vec, index):
     global flips
     flips += 1
     draw("flip %2d: " % (flips), pancakes, index)
-    for i in range(0, index//2):
+    for i in range(0, index // 2):
         t = vec[i]
         vec[i] = vec[index-i-1]
         vec[index-i-1] = t
@@ -180,10 +216,10 @@ Done in 4 flips
 \pagebreak
 
 \section*{Laborator 2}
-\label{sec:org33f8117}
+\label{sec:orgc6b2e7f}
 
 \subsection*{10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.}
-\label{sec:org9d76e78}
+\label{sec:org524f906}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 n = int(input("Please insert n: "))
@@ -325,10 +361,10 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 \pagebreak
 
 \section*{Laborator 3}
-\label{sec:org04cee30}
+\label{sec:org33dfc6b}
 
 \subsection*{10. Considerăm o secvență \(x = (x_{0},..., x_{n-1})\) de \(n\) numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma \((x_{i}, x_{i+1},\ ...,\ x_{j})\), cu \(0 \le i \le j \le n - 1\), iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.}
-\label{sec:org891e0ae}
+\label{sec:org6ebc0fc}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -390,10 +426,10 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 \pagebreak
 
 \section*{Laborator 4}
-\label{sec:org0a2a1d7}
+\label{sec:org991edde}
 
 \subsection*{8. Considerăm o secvența  \(x = (x_0, ..., x_{n-1})\) de \(n\) numere întregi. Generați tabloul \(f = (f_0, ..., f_{n-1})\), cu \(f_i = \sum\limits_{j=0}^{i}x_j\), printr-un algoritm de complexitate liniară.}
-\label{sec:org14f31be}
+\label{sec:orga7971fa}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -418,7 +454,7 @@ Please insert the sequence: 1 2 3 0 -1 5
 
 
 \subsection*{9. Considerăm un tablou de valori întregi \(x = (x_0, ..., x_{n-1})\) și o valoare dată, s. Să se verifice daca există cel puțin doi indici \(i\) și \(j\) (nu neapărat distincți) cu proprietatea că \(x_i = x_j = s\). Analizați complexitatea algoritmului propus.}
-\label{sec:org57a050d}
+\label{sec:org9cbe531}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -454,10 +490,10 @@ Found 2 + 5 = 7
 \pagebreak
 
 \section*{Laborator 5}
-\label{sec:orgad3c209}
+\label{sec:org0f5a896}
 
 \subsection*{4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.}
-\label{sec:orgd4753b0}
+\label{sec:org04e564b}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the array: ", end="")
@@ -507,7 +543,7 @@ Please insert the array: 40 3 43 95 9 2 4 0
 \end{verbatim}
 
 \subsection*{5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente din mulțimea \(\{0, 1, 2,...,m\}\). Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă \(m\) nu este semnificativ mai mare ca \(n\). Pașii algoritmul sunt:}
-\label{sec:org2116f81}
+\label{sec:org17cc77a}
 \begin{enumerate}
 \item [(a)] se construiește tabloul $f[0..m]$ al frecvențelor de apariție a elementelor tabloului $x$ ($f_i$ reprezintă de câte ori apare valoarea $i$ în tabloul $x$, $i = 0,...,m$);
 
@@ -571,7 +607,7 @@ $T(n, m) = 3n + m - 1$.
 $T \in O(n+m)$.
 
 \subsection*{6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. \(\\\) Descrieți algoritmul radix sort. Care este complexitatea acestuia?}
-\label{sec:org7215045}
+\label{sec:org74f22ed}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the array: ", end="")
@@ -630,4 +666,134 @@ $T(n, k) = 3kn + 19k$.
 
 \vspace{7pt}
 $T \in O(kn)$.
+
+
+\section*{Laborator 6}
+\label{sec:org9e861e0}
+
+\subsection*{6. Se poate demonstra că plecând de la numărul 4, se poate obține orice număr natural diferit de zero, printr-o succesiune de operații de tipul:}
+\label{sec:orgf63a4fb}
+
+\begin{itemize}
+
+\item [-] se adaugă cifra 4 la sfârșitul numărului curent;
+\item [-] se adaugă cifra 0 la sfârșitul numărului curent;
+\item [-] numărul curent de împarte la 2.
+\end{enumerate}
+Propuneți un subalgoritm recursiv care să descrie cum se poate obține un număr natural $n \ne 0$, pornind de la numărul 4, aplicănd operațiile de mai sus.
+De exemplu, pentru $n = 435$, drumul parcurs pornind de la numărul 4 este:\\
+$4 \to 2 \to 24 \to 12 \to 6 \to 3 \to 34 \to 17 \to 174 \to 87 \to 870 \to 435$\\
+sau pentru $n = 5$,\\
+$4 \to 2 \to 1 \to 10 \to 5$\\
+\textit{Indicație.} Drumul până la numarul $n$ se poate determina prin construirea drumului invers de la $n$ la numărul 4, folosind operațiile inverse.
+
+\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+def from4(n):
+    assert(n > 0)
+
+    def impl(n, steps):
+        steps.append(n)
+        if n == 4: return steps
+        if n % 10 == 4 or n % 10 == 0: return impl(n // 10, steps) 
+        return impl(n * 2, steps)
+
+    steps = impl(n, [])
+    for num in reversed(steps[1:]):
+        print(num, "-> ", end="")
+    print(n)
+
+print("Please insert a number (> 0): ", end="")
+n = int(input())
+from4(n)
+\end{minted}
+
+\begin{verbatim}
+$ python3 src.py
+Please insert a number (> 0): 435
+4 -> 2 -> 24 -> 12 -> 6 -> 3 -> 34 -> 17 -> 174 -> 87 -> 870 -> 435
+
+$ python3 src.py
+Please insert a number (> 0): 5
+4 -> 2 -> 1 -> 10 -> 5
+
+$ python3 src.py
+Please insert a number (> 0): 231
+4 -> 2 -> 1 -> 14 -> 144 -> 72 -> 36 -> 18 -> 184 -> 92 -> 924 -> 462 -> 231
+
+$ python3 src.py
+Please insert a number (> 0): 178
+4 -> 44 -> 22 -> 224 -> 112 -> 56 -> 28 -> 284 -> 142 -> 1424 -> 712 -> 356 -> 178
+\end{verbatim}
+\pagebreak
+
+
+\subsection*{11. Considerăm o scară cu \(n \in \mathbb{N}^*\) trepte. Determinați numărul de moduri în care poate fi urcată scara efectuând pași de una, două sau trei trepte. Descrieți algoritmul corespunzător.}
+\label{sec:org2febcd5}
+
+Numarul de moduri în care poate fi urcată scara este dat de următoarea relație de recurență:
+
+$f : \mathbb{N}^* \to \mathbb{N},$
+
+$
+f(n) = 
+\begin{cases}
+0, & n = 0\\
+1, & n = 1\\
+2, & n = 2\\
+f(n-1)+f(n-2)+f(n-3), & n > 2
+\end{cases}
+$\\
+Observăm că $f(n-1)$ este al n-lea termen din sirul Tribonacci. Deci putem folosi următoarea formulă pentru $f(n)$:
+
+$
+f(n - 1) = \mathit{round} \left( 
+   \frac{3b} {b^2-2b+4}
+   \left(
+   \frac{a_++a_-+1}{3}
+   \right)^n
+  \right),
+\text{unde } a_{\pm} = \sqrt[3]{19 \pm 3 \sqrt{33}},\ b = \sqrt[3]{586+102\sqrt{3}}.
+$
+
+\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+from math import pow, sqrt
+
+t = (pow(19 - 3*sqrt(33), 1/3) + pow(19 + 3*sqrt(33), 1/3) + 1) / 3
+b = pow(586 + 102*sqrt(33), 1/3)
+left = (3*b) / (b*b - 2*b + 4)
+
+def f(n):
+    # this gives the correct answer from 1 to 53
+    if n < 54: return round(left * pow(t, n+1))
+    t1 = f(53)
+    t2 = f(52)
+    t3 = f(51)
+    n -= 53
+
+    while n > 0:
+        n -= 1
+        r = t1 + t2 +t3
+        t3 = t2
+        t2 = t1
+        t1 = r
+    return t1
+
+print("Please insert a number (> 0): ", end="")
+n = int(input())
+print(f(n))
+\end{minted}
+
+\begin{verbatim}
+$ python3 src.py
+Please insert a number (> 0): 4
+7
+
+$ python3 src.py
+Please insert a number (> 0): 5
+13
+
+$ python3 src.py
+Please insert a number (> 0): 55
+222332455004452
+\end{verbatim}
 \end{document}
