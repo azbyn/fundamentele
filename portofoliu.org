@@ -20,6 +20,7 @@
   (setq org-latex-title-command "")
 #+end_src
 
+
 # TODO add prof name (like in atestat)
 
 #+begin_export latex
@@ -169,7 +170,6 @@ python3 src/clatite.py "3 3 1 4 3"
 \pagebreak
 
 * Laborator 2
-
 ** 10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.
 
 #+BEGIN_SRC python -n :results output :exports code
@@ -312,7 +312,6 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 \pagebreak
 
 * Laborator 3
-
 ** 10. Considerăm o secvență $x = (x_{0},..., x_{n-1})$ de $n$ numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma $(x_{i}, x_{i+1},\ ...,\ x_{j})$, cu $0 \le i \le j \le n - 1$, iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.
 
 #+BEGIN_SRC python -n :results output :exports code
@@ -378,7 +377,6 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 \pagebreak
 
 * Laborator 4
-
 ** 8. Considerăm o secvența  $x = (x_0, ..., x_{n-1})$ de $n$ numere întregi. Generați tabloul $f = (f_0, ..., f_{n-1})$, cu $f_i = \sum\limits_{j=0}^{i}x_j$, printr-un algoritm de complexitate liniară.
 
 #+BEGIN_SRC python -n :results output :exports code
@@ -434,7 +432,6 @@ python3 src/l4_9.py "1 2 3 0 5 -1" "7"
 \pagebreak
 
 * Laborator 5
-
 ** 4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.
 
 # :tangle shaker_sort.py
@@ -591,7 +588,7 @@ python3 src/radix_sort.py "89568 23 123 2 1 4 45 499"
 #+begin_export latex
 Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
 
-Notăm $k = \mathit{log10}(\mathit{max}(x)) + 1$; $T_l := $ timpul total de execuție al liniei $l$; $T(n, k) :=$ timpul de execuție total.
+Notăm $k = [\mathit{log10}(\mathit{max}(x))] + 1$; $T_l := $ timpul total de execuție al liniei $l$; $T(n, k) :=$ timpul de execuție total.
 
 $T_{13} = 10 k$;
 $T_{14} = k n$;
@@ -606,9 +603,7 @@ $T \in O(kn)$.
 
 #+end_export
 
-
 * Laborator 6
-
 ** 6. Se poate demonstra că plecând de la numărul 4, se poate obține orice număr natural diferit de zero, printr-o succesiune de operații de tipul:
 #+begin_export latex
 
@@ -742,3 +737,112 @@ echo ""
 python3 src/stair.py "55"
 
 #+END_SRC
+* Laborator 7
+
+** 6. Un vector ordonat crescător are componentele în progresie aritmetică. Un singur element lipsește din progresie (sigur acesta nu este nici primul și nici ultimul). Folosind tehnica reducerii, identificați elementul lipsă.
+
+# :tangle from4.py
+#+BEGIN_SRC python -n :results output :exports code
+def find_missing(v):
+    size = len(v)
+
+    second = (v[0] + v[2]) // 2
+    if second != v[1]: return v[2] - v[1] + v[0]
+    ratio = v[1] - v[0]
+
+    def impl(v):
+        if len(v) == 1: return v[0] + ratio
+        middle = len(v) // 2
+        if v[0] + ratio * middle == v[middle]:
+            return impl(v[middle:])
+        return impl(v[:middle])
+
+    res = impl(v)
+    if res != v[-1] + ratio:
+        return res
+    return None
+
+print("Please insert the vector: ", end="")
+strs = input().split(' ')
+v = [int(str) for str in strs if str != ""]
+
+res = find_missing(v)
+if res == None: 
+    res = "Nothing"
+
+print(res, "is missing")
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh :results output :exports results
+python3 src/prog.py "1 2 3 4 5 6 7 9 10 11"
+echo ""
+python3 src/prog.py "10 8 6 2"
+echo ""
+python3 src/prog.py "1 2 3"
+echo ""
+python3 src/prog.py "3 2 1"
+echo ""
+#+END_SRC
+
+** 9. (\textit{Generarea permutărior folosind algoritmul lui Heap}) Utilizați următorul algoritm pentru a genera toate permutările de ordin $n$ ale mulțimii $\{1, 2, ...,n\}$, $n \in \mathbb{N}^*$: fiecare permutare este generată pornind de la precedenta, interschimbând o singură pereche de valori, celelalte $n - 2$ valori ramânând pe loc. Pornind cu un $i = 0$, pașii algoritmul se repetă până când $i$ devine egal cu $n$:
+
+#+begin_export latex
+\begin{itemize}
+\item se generează cele $(n - 1)!$ permutări ale primelor $n-1$ elemente, alăturând ultimului element fiecărei dintre acestea. Asfel se generează toate permutările cu $n$ pe ultima poziție.
+\item dacă $n$ este impar, se interschimbă primul și ultimul element; dacă $n$ este par, se interschimbă elementul de indice $i$ și ultimul element; se incrementează $i$ și se reiau pașii algoritmului;
+\item după fiecare iterație, algoritmul produce toate permutările care se termină cu elementul care tocmai a fost mutat pe ultima poziție.
+\end{enumerate}
+#+end_export
+
+# :tangle from4.py
+#+BEGIN_SRC python -n :results output :exports code
+def permutations(v):
+    def impl(v, n):
+        if n == 1: 
+            yield v
+            return
+        for i in range(n):
+            for p in impl(v, n-1):
+                yield p
+            if n % 2 == 1:
+                v[0], v[n-1] = v[n-1], v[0]
+            else:
+                v[i], v[n-1] = v[n-1], v[i]
+    return impl(v, len(v))
+
+print("Please insert n: ", end="")
+n = int(input())
+v = [i for i in range(1, n+1)]
+    
+i = 0
+for p in permutations(v):
+    print("(", end="")
+    for v in p[:-1]: print(v, end=" ")
+    print(p[-1], end="")
+    print(")", end=", ")
+    if i % 6 == 5: print()
+    i += 1
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4), (2 1 3 4), (3 1 2 4), (1 3 2 4), (2 3 1 4), (3 2 1 4), 
+: (4 2 3 1), (2 4 3 1), (3 4 2 1), (4 3 2 1), (2 3 4 1), (3 2 4 1), 
+: (4 1 3 2), (1 4 3 2), (3 4 1 2), (4 3 1 2), (1 3 4 2), (3 1 4 2), 
+: (4 1 2 3), (1 4 2 3), (2 4 1 3), (4 2 1 3), (1 2 4 3), (2 1 4 3), 
+: len = 24
+
+#+BEGIN_SRC sh :results output :exports results
+python3 src/perm.py 4
+echo ""
+#+END_SRC
+
+
+
+#+RESULTS:
+: $ python3 perm.py
+: 
+
+\pagebreak
+

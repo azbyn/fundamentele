@@ -1,4 +1,4 @@
-% Created 2019-04-01 Mon 18:07
+% Created 2019-04-06 Sat 17:28
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -64,9 +64,9 @@
 \end{titlepage}
 
 \section*{Laborator 1}
-\label{sec:org7ac6019}
+\label{sec:orge0948ed}
 \subsection*{15. O colecție de \(n\) monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.}
-\label{sec:orgbeda6e5}
+\label{sec:org79e66cc}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 import random, math
@@ -134,7 +134,7 @@ Took 3 steps to find the fake coin, expected 3
 \end{verbatim}
 
 \subsection*{16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?}
-\label{sec:org37fc344}
+\label{sec:orgcd46615}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert a space separated list of pancake diameters:\n(",
@@ -216,10 +216,9 @@ Done in 4 flips
 \pagebreak
 
 \section*{Laborator 2}
-\label{sec:orgc6b2e7f}
-
+\label{sec:orge7d082f}
 \subsection*{10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.}
-\label{sec:org524f906}
+\label{sec:org7e724ea}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 n = int(input("Please insert n: "))
@@ -361,10 +360,9 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 \pagebreak
 
 \section*{Laborator 3}
-\label{sec:org33dfc6b}
-
+\label{sec:org47f950e}
 \subsection*{10. Considerăm o secvență \(x = (x_{0},..., x_{n-1})\) de \(n\) numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma \((x_{i}, x_{i+1},\ ...,\ x_{j})\), cu \(0 \le i \le j \le n - 1\), iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.}
-\label{sec:org6ebc0fc}
+\label{sec:org97dcdc5}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -426,10 +424,9 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 \pagebreak
 
 \section*{Laborator 4}
-\label{sec:org991edde}
-
+\label{sec:orgcb5e51f}
 \subsection*{8. Considerăm o secvența  \(x = (x_0, ..., x_{n-1})\) de \(n\) numere întregi. Generați tabloul \(f = (f_0, ..., f_{n-1})\), cu \(f_i = \sum\limits_{j=0}^{i}x_j\), printr-un algoritm de complexitate liniară.}
-\label{sec:orga7971fa}
+\label{sec:org0e1b1c5}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -454,7 +451,7 @@ Please insert the sequence: 1 2 3 0 -1 5
 
 
 \subsection*{9. Considerăm un tablou de valori întregi \(x = (x_0, ..., x_{n-1})\) și o valoare dată, s. Să se verifice daca există cel puțin doi indici \(i\) și \(j\) (nu neapărat distincți) cu proprietatea că \(x_i = x_j = s\). Analizați complexitatea algoritmului propus.}
-\label{sec:org9cbe531}
+\label{sec:orgdc52b16}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -490,10 +487,9 @@ Found 2 + 5 = 7
 \pagebreak
 
 \section*{Laborator 5}
-\label{sec:org0f5a896}
-
+\label{sec:org1cff8a1}
 \subsection*{4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.}
-\label{sec:org04e564b}
+\label{sec:org7ffd970}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the array: ", end="")
@@ -543,7 +539,7 @@ Please insert the array: 40 3 43 95 9 2 4 0
 \end{verbatim}
 
 \subsection*{5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente din mulțimea \(\{0, 1, 2,...,m\}\). Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă \(m\) nu este semnificativ mai mare ca \(n\). Pașii algoritmul sunt:}
-\label{sec:org17cc77a}
+\label{sec:org5ef8c77}
 \begin{enumerate}
 \item [(a)] se construiește tabloul $f[0..m]$ al frecvențelor de apariție a elementelor tabloului $x$ ($f_i$ reprezintă de câte ori apare valoarea $i$ în tabloul $x$, $i = 0,...,m$);
 
@@ -607,7 +603,7 @@ $T(n, m) = 3n + m - 1$.
 $T \in O(n+m)$.
 
 \subsection*{6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. \(\\\) Descrieți algoritmul radix sort. Care este complexitatea acestuia?}
-\label{sec:org74f22ed}
+\label{sec:orgaa20ba2}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the array: ", end="")
@@ -654,7 +650,7 @@ output: [1, 2, 4, 23, 45, 123, 499, 89568]
 
 Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
 
-Notăm $k = \mathit{log10}(\mathit{max}(x)) + 1$; $T_l := $ timpul total de execuție al liniei $l$; $T(n, k) :=$ timpul de execuție total.
+Notăm $k = [\mathit{log10}(\mathit{max}(x))] + 1$; $T_l := $ timpul total de execuție al liniei $l$; $T(n, k) :=$ timpul de execuție total.
 
 $T_{13} = 10 k$;
 $T_{14} = k n$;
@@ -667,12 +663,10 @@ $T(n, k) = 3kn + 19k$.
 \vspace{7pt}
 $T \in O(kn)$.
 
-
 \section*{Laborator 6}
-\label{sec:org9e861e0}
-
+\label{sec:org341ac54}
 \subsection*{6. Se poate demonstra că plecând de la numărul 4, se poate obține orice număr natural diferit de zero, printr-o succesiune de operații de tipul:}
-\label{sec:orgf63a4fb}
+\label{sec:org5774d8f}
 
 \begin{itemize}
 
@@ -728,7 +722,7 @@ Please insert a number (> 0): 178
 
 
 \subsection*{11. Considerăm o scară cu \(n \in \mathbb{N}^*\) trepte. Determinați numărul de moduri în care poate fi urcată scara efectuând pași de una, două sau trei trepte. Descrieți algoritmul corespunzător.}
-\label{sec:org2febcd5}
+\label{sec:orgdc533e7}
 
 Numarul de moduri în care poate fi urcată scara este dat de următoarea relație de recurență:
 
@@ -796,4 +790,111 @@ $ python3 src.py
 Please insert a number (> 0): 55
 222332455004452
 \end{verbatim}
+
+\section*{Laborator 7}
+\label{sec:org2b7d276}
+
+\subsection*{6. Un vector ordonat crescător are componentele în progresie aritmetică. Un singur element lipsește din progresie (sigur acesta nu este nici primul și nici ultimul). Folosind tehnica reducerii, identificați elementul lipsă.}
+\label{sec:orgc31deed}
+
+\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+def find_missing(v):
+    size = len(v)
+
+    second = (v[0] + v[2]) // 2
+    if second != v[1]: return v[2] - v[1] + v[0]
+    ratio = v[1] - v[0]
+
+    def impl(v):
+        if len(v) == 1: return v[0] + ratio
+        middle = len(v) // 2
+        if v[0] + ratio * middle == v[middle]:
+            return impl(v[middle:])
+        return impl(v[:middle])
+
+    res = impl(v)
+    if res != v[-1] + ratio:
+        return res
+    return None
+
+print("Please insert the vector: ", end="")
+strs = input().split(' ')
+v = [int(str) for str in strs if str != ""]
+
+res = find_missing(v)
+if res == None: 
+    res = "Nothing"
+
+print(res, "is missing")
+\end{minted}
+
+\begin{verbatim}
+$ python3 src.py
+Please insert the vector: 1 2 3 4 5 6 7 9 10 11
+8 is missing
+
+$ python3 src.py
+Please insert the vector: 10 8 6 2
+4 is missing
+
+$ python3 src.py
+Please insert the vector: 1 2 3
+Nothing is missing
+
+$ python3 src.py
+Please insert the vector: 3 2 1
+Nothing is missing
+
+\end{verbatim}
+
+\subsection*{9. (\textit{Generarea permutărior folosind algoritmul lui Heap}) Utilizați următorul algoritm pentru a genera toate permutările de ordin \(n\) ale mulțimii \(\{1, 2, ...,n\}\), \(n \in \mathbb{N}^*\): fiecare permutare este generată pornind de la precedenta, interschimbând o singură pereche de valori, celelalte \(n - 2\) valori ramânând pe loc. Pornind cu un \(i = 0\), pașii algoritmul se repetă până când \(i\) devine egal cu \(n\):}
+\label{sec:org2c4a467}
+
+\begin{itemize}
+\item se generează cele $(n - 1)!$ permutări ale primelor $n-1$ elemente, alăturând ultimului element fiecărei dintre acestea. Asfel se generează toate permutările cu $n$ pe ultima poziție.
+\item dacă $n$ este impar, se interschimbă primul și ultimul element; dacă $n$ este par, se interschimbă elementul de indice $i$ și ultimul element; se incrementează $i$ și se reiau pașii algoritmului;
+\item după fiecare iterație, algoritmul produce toate permutările care se termină cu elementul care tocmai a fost mutat pe ultima poziție.
+\end{enumerate}
+
+\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+def permutations(v):
+    def impl(v, n):
+        if n == 1: 
+            yield v
+            return
+        for i in range(n):
+            for p in impl(v, n-1):
+                yield p
+            if n % 2 == 1:
+                v[0], v[n-1] = v[n-1], v[0]
+            else:
+                v[i], v[n-1] = v[n-1], v[i]
+    return impl(v, len(v))
+
+print("Please insert n: ", end="")
+n = int(input())
+v = [i for i in range(1, n+1)]
+
+i = 0
+for p in permutations(v):
+    print("(", end="")
+    for v in p[:-1]: print(v, end=" ")
+    print(p[-1], end="")
+    print(")", end=", ")
+    if i % 6 == 5: print()
+    i += 1
+\end{minted}
+
+\begin{verbatim}
+$ python3 perm.py
+Please insert n: 4
+(1 2 3 4), (2 1 3 4), (3 1 2 4), (1 3 2 4), (2 3 1 4), (3 2 1 4), 
+(4 2 3 1), (2 4 3 1), (3 4 2 1), (4 3 2 1), (2 3 4 1), (3 2 4 1), 
+(4 1 3 2), (1 4 3 2), (3 4 1 2), (4 3 1 2), (1 3 4 2), (3 1 4 2), 
+(4 1 2 3), (1 4 2 3), (2 4 1 3), (4 2 1 3), (1 2 4 3), (2 1 4 3), 
+
+\end{verbatim}
+
+
+\pagebreak
 \end{document}
