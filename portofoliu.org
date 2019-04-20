@@ -20,7 +20,6 @@
   (setq org-latex-title-command "")
 #+end_src
 
-
 # TODO add prof name (like in atestat)
 
 #+begin_export latex
@@ -401,7 +400,6 @@ python3 src/sum.py "1 2 3 0 -1 5"
 
 #+END_SRC
 
-
 ** 9. Considerăm un tablou de valori întregi $x = (x_0, ..., x_{n-1})$ și o valoare dată, s. Să se verifice daca există cel puțin doi indici $i$ și $j$ (nu neapărat distincți) cu proprietatea că $x_i = x_j = s$. Analizați complexitatea algoritmului propus.
 
 #+BEGIN_SRC python -n :results output :exports code
@@ -668,7 +666,6 @@ Please insert a number (> 0): 89
 #+end_example
 \pagebreak
 
-
 ** 11. Considerăm o scară cu $n \in \mathbb{N}^*$ trepte. Determinați numărul de moduri în care poate fi urcată scara efectuând pași de una, două sau trei trepte. Descrieți algoritmul corespunzător.
 
 #+begin_export latex
@@ -738,7 +735,6 @@ python3 src/stair.py "55"
 
 #+END_SRC
 * Laborator 7
-
 ** 6. Un vector ordonat crescător are componentele în progresie aritmetică. Un singur element lipsește din progresie (sigur acesta nu este nici primul și nici ultimul). Folosind tehnica reducerii, identificați elementul lipsă.
 
 # :tangle from4.py
@@ -846,3 +842,325 @@ echo ""
 
 \pagebreak
 
+* Laborator 8
+** 5. Propuneți un algoritm de complexitate $O(n)$ care transformă (pe loc) un tablou cu valori întregi astfel încât toate valorile negative să fie înaintea celor pozitive (partiționare cu pivot $= 0$).
+
+#+BEGIN_SRC python -n :results output :exports code
+def partition(v):
+    size = len(v)
+    i = -1
+    j = size
+
+    while True:
+        i += 1
+        while i < size and v[i] <= 0:
+            i += 1
+        j -= 1 
+        while j >= 0 and v[j] >= 0: 
+            j -= 1
+        
+        if i < j:
+            v[i], v[j] = v[j], v[i]
+        else:
+            return
+
+
+print("Please insert the vector: ", end="")
+strs = input().split(' ')
+v = [int(str) for str in strs if str != ""]
+
+partition(v)
+print(v) 
+#+END_SRC
+
+#+BEGIN_SRC sh :results output :exports results
+python3 src/partition.py "1 2 3 4 -1 -2 -3 4 -6 -8 1"
+echo ""
+python3 src/partition.py "1 2 -3 4 -1 -2 0 1"
+echo ""
+python3 src/partition.py "1 2 3"
+echo ""
+
+#+END_SRC
+
+\pagebreak
+
+** 6. (\textit{Aproximarea numerică a unei integrale folosind formula trapezului}) Considerăm o funcție reală $f$ continuă pe intervalul $[a,b]$. (...) valoarea integralei definite a lui $f$ între limitele $[a,b]$ se aproximează prin aria trapezului cu vârfurile $(a, 0), (b, 0), (a, f(a)), (b, f(b))$. Deci
+
+#+begin_export latex
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand\ddint{\displaystyle\int}
+$$\[
+\ddint_a^b f(x)\,\mathrm{d}x = 
+\begin{cases}
+\displaystyle\frac{b-a}{2}(f(a) + f(b)), & b - a < \varepsilon \\
+\ddint_a^c f(x)\,\mathrm{d}x + \ddint_c^b f(x)\,\mathrm{d}x,\ \ c = \ddfrac{a+b}{2},& b-a \ge \varepsilon
+\end{cases}
+\]$$
+#+end_export
+
+# :tangle from4.py
+#+BEGIN_SRC python -n :results output :exports code
+def exp(x, iterations=20):
+    factorial = 1
+    pow = 1
+    res = 1.0
+    for i in range(1, iterations):
+        factorial *= i
+        pow *= x
+        res += pow/factorial
+    return res
+
+def cos(x, iterations=20):
+    factorial = 1
+    pow = 1
+    res = 1.0
+    for i in range(1, iterations, 2):
+        factorial *= i * (1+i)
+        pow *= - x * x
+        res += pow/factorial
+    return res
+
+
+def integrate(f, a, b, eps=1e-4):
+    delta = b - a
+    if delta >= eps: 
+        c = (a+b)/2
+        return integrate(f, a, c, eps) + integrate(f, c, b, eps)
+    return delta * (f(a) + f(b)) / 2
+
+from math import pi
+print("e^x:", integrate(exp, 0, 1))# should be e - 1
+print("x^2:", integrate(lambda x: x*x, -1, 1))# should be 2/3
+print("cos:", integrate(cos, -pi/2, pi/2))# should be 2
+#+END_SRC
+
+#+RESULTS:
+: e^x: 1.7182818289924702
+: x^2: 0.6666666679084301
+: cos: 1.9999999984680359
+
+#+BEGIN_SRC sh :results output :exports results
+python3 src/integrals.py 4
+echo ""
+#+END_SRC
+
+
+
+#+RESULTS:
+: $ python3 integrals.py
+: e^x 1.7182818289924702
+: x^2 0.6666666679084301
+: cos 1.9999999984680359
+: 
+
+\pagebreak
+
+* Laborator 9
+
+$9$. a) Avem la dispoziție 6 culori: alb, negru, galben, verde, roșu și albastru. Afișați toate modalitățile de realizare a unui drapel tricolor folosind aceste trei culori astfel încât cele 3 culori ale drapelului să fie distincte și culoarea din mijloc este ori galben, ori verde.\\ 
+b) Avem la dispoziție, în plus, șase steme de aceleași șase culori. Fiecare steag poate să aibă sau nu o stemă, dar dacă are, atunci aceasta trebuie să aibă o culoare diferită de cele trei culori deja existente în steag. Afișați toate modalitățile de realizare a steagului.
+
+# :tangle from4.py
+#+BEGIN_SRC python -n :results output :exports code
+#galben, verde, negru, alb, rosu, albastru, algbastru, -
+colors = ['g','v','n','a','r', 'b', '-']
+index = 0
+
+flag = [-1,0,0,0]
+k = 0
+maxK = 3
+print("Long mode (y/N):", end="")
+if input()[0].lower() == 'y': maxK = 3
+
+while k >= 0:
+    maxVal = 6
+    if k == 1: maxVal = 3
+    elif k == 3: maxVal = 7
+    if flag[k] < maxVal-1:
+        flag[k] += 1
+        ok = True
+        for i in range(0, k):
+            if flag[k] == flag[i]: 
+                ok = False
+                break
+        if not ok: continue
+
+        if k == maxK: 
+            for f in flag[:maxK]: print(colors[f], end="")
+            print(colors[flag[maxK]], end=" ")
+            if index % 20 == 19: print()
+            index += 1
+        else:
+           k += 1
+           flag[k] = -1
+    else:
+        k -= 1
+        
+        
+#+END_SRC
+#+BEGIN_SRC sh :results output :exports results
+python3 src/flag.py
+
+#+END_SRC
+
+** 11. Determinați toate submulțimile mulțimii $A = \{a_1, a_2, ..., a_n\}, n \in \mathbb{N}^*$, cu proprietatea că suma elementelor unei submulțimi este $s$.
+
+#+BEGIN_SRC python -n :results output :exports code
+print("Please insert the set: ", end="")
+strs = input().split(' ')
+A = [int(num) for num in strs if num != ""]
+print("Please insert s: ", end="")
+s = int(input())
+
+size = len(A)
+x = [-1 for i in range(size+1)]
+k = 0
+while k >= 0:
+    if x[k] < size-1:
+        x[k] += 1        
+        sum = A[x[k]]
+
+        def valid():
+            global sum
+            for i in range(0, k):
+                if x[k] == x[i]: 
+                    return False
+                sum += A[x[i]]
+            return True
+
+        if not valid() or sum > s: continue
+      
+        if sum == s:
+            print("{", end="")
+            for i in x[:k]: print(A[i], end=", ")
+            print(A[x[k]], end="}, ")
+
+        if k != size:
+            x[k+1] = x[k]-1
+            k += 1
+    else:
+        k -= 1
+print()
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh :results output :exports results
+python3 src/subsets.py "1 2 3 4 5" "5"
+echo ""
+python3 src/subsets.py "0 1 2 3 4 5" "5"
+echo ""
+python3 src/subsets.py "1 2 3 4" "44"
+echo ""
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Please insert the set: 0 1 2 3 4 5
+Please insert s: 5
+k []
+k [0]
+k [0]
+k [0, 1]
+k [0, 1]
+k [0, 1, 2]
+k [0, 1, 2]
+k [0, 1, 2]
+k [0, 1, 2]
+k [0, 1]
+k [0, 1, 3]
+k [0, 1, 3]
+k [0, 1, 3]
+k [0, 1]
+{0, 1, 4}, k [0, 1, 4]
+k [0, 1, 4]
+k [0, 1]
+k [0]
+k [0, 2]
+k [0, 2]
+{0, 2, 3}, k [0, 2, 3]
+k [0, 2, 3]
+k [0, 2, 3]
+k [0, 2]
+k [0, 2]
+k [0]
+k [0, 3]
+k [0, 3]
+k [0, 3]
+k [0]
+k [0, 4]
+k [0, 4]
+k [0]
+{0, 5}, k [0, 5]
+k []
+k [1]
+k [1]
+k [1, 2]
+k [1, 2]
+k [1, 2]
+k [1, 2]
+k [1]
+k [1, 3]
+k [1, 3]
+k [1, 3]
+k [1]
+{1, 4}, k [1, 4]
+k [1, 4]
+k [1]
+k []
+k [2]
+k [2]
+{2, 3}, k [2, 3]
+k [2, 3]
+k [2, 3]
+k [2]
+k [2]
+k []
+k [3]
+k [3]
+k [3]
+k []
+k [4]
+k [4]
+k []
+{5}, k [5]
+
+
+Please insert the set: 1 2 3 4
+Please insert s: 44
+k []
+k [0]
+k [0]
+k [0, 1]
+k [0, 1]
+k [0, 1, 2]
+k [0, 1, 2]
+k [0, 1, 2, 3]
+k [0, 1]
+k [0, 1, 3]
+k [0]
+k [0, 2]
+k [0, 2]
+k [0, 2, 3]
+k [0]
+k [0, 3]
+k []
+k [1]
+k [1]
+k [1, 2]
+k [1, 2]
+k [1, 2, 3]
+k [1]
+k [1, 3]
+k []
+k [2]
+k [2]
+k [2, 3]
+k []
+k [3]
+
+
+#+end_example
+\pagebreak
