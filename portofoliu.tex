@@ -1,4 +1,4 @@
-% Created 2019-04-20 Sat 16:48
+% Created 2019-05-09 Thu 20:16
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -64,9 +64,9 @@
 \end{titlepage}
 
 \section*{Laborator 1}
-\label{sec:org84deab1}
+\label{sec:org395a688}
 \subsection*{15. O colecție de \(n\) monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.}
-\label{sec:orgf6af434}
+\label{sec:org960424f}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 import random, math
@@ -134,7 +134,7 @@ Took 3 steps to find the fake coin, expected 3
 \end{verbatim}
 
 \subsection*{16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?}
-\label{sec:orgd2e4b2f}
+\label{sec:org61e8d80}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert a space separated list of pancake diameters:\n(",
@@ -216,9 +216,9 @@ Done in 4 flips
 \pagebreak
 
 \section*{Laborator 2}
-\label{sec:orgbed30ee}
+\label{sec:org8bed598}
 \subsection*{10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.}
-\label{sec:orga771839}
+\label{sec:org9dc726e}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 n = int(input("Please insert n: "))
@@ -250,7 +250,7 @@ Result: 42
 I. Parțial corectitudinea
 \newline
 
-Considerăm serțiunile de intrare și ieșire:
+Considerăm aserțiunile de intrare și ieșire:
 
 $P_{in} = \left\{ n = \sum\limits_{j=0}^{k} c_{j}10^{j};\ 
                 c_{j} \in \overline{0,9} ,\ \forall j \in \overline{0,k};\ 
@@ -341,7 +341,7 @@ $n = \sum\limits_{j=0}^{k-(k+1)}c_{k+1+j}10^{j}
 $\mathit{res} = \sum\limits_{j=0}^{k+1-1}c_{k+1-1-j}10^{j}
 = \sum\limits_{j=0}^{k}c_{k-j}10^{j}$
 
-Deci $P_{out} = \left\{ res = \sum\limits_{j=0}^{k} c_{k-j}10^{j} \right\} $ adevărată.
+Deci $P_{out} = \left\{ \mathit{res} = \sum\limits_{j=0}^{k} c_{k-j}10^{j} \right\} $ adevărată.
 
 În concluzie algoritmului este parțial corect.
 
@@ -350,7 +350,8 @@ Deci $P_{out} = \left\{ res = \sum\limits_{j=0}^{k} c_{k-j}10^{j} \right\} $ ade
 II. Total corectitudinea
 \newline
 
-Considerăm funcția $t: \mathbb{N} \to \mathbb{N}$, $t(i) = k + 1 - i$
+Considerăm funcția $t: \mathbb{N} \to \mathbb{N}$, $t(i) = k + 1 - i$;
+
 $t(i + 1) - t(i) = k + 1 - (i + 1) - (k + 1 - i) = -1 < 0$, deci $t$ monoton strict descrescătoare.
 
 $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$ condiția de ieșire din buclă.
@@ -360,9 +361,9 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 \pagebreak
 
 \section*{Laborator 3}
-\label{sec:orgbefc644}
+\label{sec:org1e5c53a}
 \subsection*{10. Considerăm o secvență \(x = (x_{0},..., x_{n-1})\) de \(n\) numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma \((x_{i}, x_{i+1},\ ...,\ x_{j})\), cu \(0 \le i \le j \le n - 1\), iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.}
-\label{sec:org9dac81e}
+\label{sec:org3d48753}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -424,9 +425,9 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 \pagebreak
 
 \section*{Laborator 4}
-\label{sec:org2596891}
+\label{sec:org65057be}
 \subsection*{8. Considerăm o secvența  \(x = (x_0, ..., x_{n-1})\) de \(n\) numere întregi. Generați tabloul \(f = (f_0, ..., f_{n-1})\), cu \(f_i = \sum\limits_{j=0}^{i}x_j\), printr-un algoritm de complexitate liniară.}
-\label{sec:orgdd73f96}
+\label{sec:orgdae988c}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -450,7 +451,7 @@ Please insert the sequence: 1 2 3 0 -1 5
 \end{verbatim}
 
 \subsection*{9. Considerăm un tablou de valori întregi \(x = (x_0, ..., x_{n-1})\) și o valoare dată, s. Să se verifice daca există cel puțin doi indici \(i\) și \(j\) (nu neapărat distincți) cu proprietatea că \(x_i = x_j = s\). Analizați complexitatea algoritmului propus.}
-\label{sec:org91aa0bf}
+\label{sec:org2cd18d3}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the sequence: ", end="")
@@ -470,6 +471,9 @@ def f(x):
 f(x)
 \end{minted}
 
+TODO TEST ME
+\$ T(n) \(\in\) \(\Theta\)(n\textsuperscript{2})\$
+
 \begin{verbatim}
 $ python3 src.py
 Please insert the sequence: 1 2 3 0 -1 5
@@ -486,9 +490,9 @@ Found 2 + 5 = 7
 \pagebreak
 
 \section*{Laborator 5}
-\label{sec:org4fa291c}
+\label{sec:org389859a}
 \subsection*{4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.}
-\label{sec:org6655e0e}
+\label{sec:org0e1c175}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the array: ", end="")
@@ -538,7 +542,7 @@ Please insert the array: 40 3 43 95 9 2 4 0
 \end{verbatim}
 
 \subsection*{5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente din mulțimea \(\{0, 1, 2,...,m\}\). Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă \(m\) nu este semnificativ mai mare ca \(n\). Pașii algoritmul sunt:}
-\label{sec:org0ead104}
+\label{sec:orgc33b862}
 \begin{enumerate}
 \item [(a)] se construiește tabloul $f[0..m]$ al frecvențelor de apariție a elementelor tabloului $x$ ($f_i$ reprezintă de câte ori apare valoarea $i$ în tabloul $x$, $i = 0,...,m$);
 
@@ -602,7 +606,7 @@ $T(n, m) = 3n + m - 1$.
 $T \in O(n+m)$.
 
 \subsection*{6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. \(\\\) Descrieți algoritmul radix sort. Care este complexitatea acestuia?}
-\label{sec:org5499e7a}
+\label{sec:org2449b43}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the array: ", end="")
@@ -663,9 +667,9 @@ $T(n, k) = 3kn + 19k$.
 $T \in O(kn)$.
 
 \section*{Laborator 6}
-\label{sec:org3ec893e}
+\label{sec:org3e062d4}
 \subsection*{6. Se poate demonstra că plecând de la numărul 4, se poate obține orice număr natural diferit de zero, printr-o succesiune de operații de tipul:}
-\label{sec:org5a3fc04}
+\label{sec:org5b9fb7a}
 
 \begin{itemize}
 
@@ -720,7 +724,7 @@ Please insert a number (> 0): 178
 \pagebreak
 
 \subsection*{11. Considerăm o scară cu \(n \in \mathbb{N}^*\) trepte. Determinați numărul de moduri în care poate fi urcată scara efectuând pași de una, două sau trei trepte. Descrieți algoritmul corespunzător.}
-\label{sec:orgd79218c}
+\label{sec:orgf7557e3}
 
 Numarul de moduri în care poate fi urcată scara este dat de următoarea relație de recurență:
 
@@ -790,9 +794,9 @@ Please insert a number (> 0): 55
 \end{verbatim}
 
 \section*{Laborator 7}
-\label{sec:org19b8ede}
+\label{sec:org616d201}
 \subsection*{6. Un vector ordonat crescător are componentele în progresie aritmetică. Un singur element lipsește din progresie (sigur acesta nu este nici primul și nici ultimul). Folosind tehnica reducerii, identificați elementul lipsă.}
-\label{sec:org2089294}
+\label{sec:orgc5af58f}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 def find_missing(v):
@@ -845,7 +849,7 @@ Nothing is missing
 \end{verbatim}
 
 \subsection*{9. (\textit{Generarea permutărior folosind algoritmul lui Heap}) Utilizați următorul algoritm pentru a genera toate permutările de ordin \(n\) ale mulțimii \(\{1, 2, ...,n\}\), \(n \in \mathbb{N}^*\): fiecare permutare este generată pornind de la precedenta, interschimbând o singură pereche de valori, celelalte \(n - 2\) valori ramânând pe loc. Pornind cu un \(i = 0\), pașii algoritmul se repetă până când \(i\) devine egal cu \(n\):}
-\label{sec:org194568f}
+\label{sec:orgfcc7803}
 
 \begin{itemize}
 \item se generează cele $(n - 1)!$ permutări ale primelor $n-1$ elemente, alăturând ultimului element fiecărei dintre acestea. Asfel se generează toate permutările cu $n$ pe ultima poziție.
@@ -896,9 +900,9 @@ Please insert n: 4
 \pagebreak
 
 \section*{Laborator 8}
-\label{sec:org0f5586e}
+\label{sec:org76445c2}
 \subsection*{5. Propuneți un algoritm de complexitate \(O(n)\) care transformă (pe loc) un tablou cu valori întregi astfel încât toate valorile negative să fie înaintea celor pozitive (partiționare cu pivot \(= 0\)).}
-\label{sec:orge51ed6d}
+\label{sec:org18f9784}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 def partition(v):
@@ -946,7 +950,7 @@ Please insert the vector: 1 2 3
 \pagebreak
 
 \subsection*{6. (\textit{Aproximarea numerică a unei integrale folosind formula trapezului}) Considerăm o funcție reală \(f\) continuă pe intervalul \([a,b]\). (\ldots{}) valoarea integralei definite a lui \(f\) între limitele \([a,b]\) se aproximează prin aria trapezului cu vârfurile \((a, 0), (b, 0), (a, f(a)), (b, f(b))\). Deci}
-\label{sec:orgea8724e}
+\label{sec:org0682e13}
 
 \newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
 \newcommand\ddint{\displaystyle\int}
@@ -1005,7 +1009,7 @@ cos: 1.9999999984680359
 \pagebreak
 
 \section*{Laborator 9}
-\label{sec:org6f85904}
+\label{sec:orge21007d}
 
 \(9\). a) Avem la dispoziție 6 culori: alb, negru, galben, verde, roșu și albastru. Afișați toate modalitățile de realizare a unui drapel tricolor folosind aceste trei culori astfel încât cele 3 culori ale drapelului să fie distincte și culoarea din mijloc este ori galben, ori verde.\\
 b) Avem la dispoziție, în plus, șase steme de aceleași șase culori. Fiecare steag poate să aibă sau nu o stemă, dar dacă are, atunci aceasta trebuie să aibă o culoare diferită de cele trei culori deja existente în steag. Afișați toate modalitățile de realizare a steagului.
@@ -1056,7 +1060,7 @@ rvg rvn rva rvb rng rnv rna rnb bgv bgn bga bgr bvg bvn bva bvr bng bnv bna bnr
 \end{verbatim}
 
 \subsection*{11. Determinați toate submulțimile mulțimii \(A = \{a_1, a_2, ..., a_n\}, n \in \mathbb{N}^*\), cu proprietatea că suma elementelor unei submulțimi este \(s\).}
-\label{sec:org95b3fe3}
+\label{sec:org3c3f06c}
 
 \begin{minted}[linenos,firstnumber=1,frame=single]{python}
 print("Please insert the set: ", end="")

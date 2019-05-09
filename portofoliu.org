@@ -199,7 +199,7 @@ python3 src/reversed.py "2400"
 I. Parțial corectitudinea
 \newline
 
-Considerăm serțiunile de intrare și ieșire:
+Considerăm aserțiunile de intrare și ieșire:
 
 $P_{in} = \left\{ n = \sum\limits_{j=0}^{k} c_{j}10^{j};\ 
                 c_{j} \in \overline{0,9} ,\ \forall j \in \overline{0,k};\ 
@@ -290,7 +290,7 @@ $n = \sum\limits_{j=0}^{k-(k+1)}c_{k+1+j}10^{j}
 $\mathit{res} = \sum\limits_{j=0}^{k+1-1}c_{k+1-1-j}10^{j}
 = \sum\limits_{j=0}^{k}c_{k-j}10^{j}$
 
-Deci $P_{out} = \left\{ res = \sum\limits_{j=0}^{k} c_{k-j}10^{j} \right\} $ adevărată.
+Deci $P_{out} = \left\{ \mathit{res} = \sum\limits_{j=0}^{k} c_{k-j}10^{j} \right\} $ adevărată.
 
 În concluzie algoritmului este parțial corect.
 
@@ -299,7 +299,8 @@ Deci $P_{out} = \left\{ res = \sum\limits_{j=0}^{k} c_{k-j}10^{j} \right\} $ ade
 II. Total corectitudinea
 \newline
 
-Considerăm funcția $t: \mathbb{N} \to \mathbb{N}$, $t(i) = k + 1 - i$
+Considerăm funcția $t: \mathbb{N} \to \mathbb{N}$, $t(i) = k + 1 - i$;
+
 $t(i + 1) - t(i) = k + 1 - (i + 1) - (k + 1 - i) = -1 < 0$, deci $t$ monoton strict descrescătoare.
 
 $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$ condiția de ieșire din buclă.
@@ -419,6 +420,9 @@ def f(x):
     return False
 f(x)
 #+END_SRC
+
+TODO TEST ME
+$ T(n) \in \Theta(n^2)$
 
 #+BEGIN_SRC sh :results output :exports results
 python3 src/l4_9.py "1 2 3 0 -1 5" "9"
