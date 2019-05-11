@@ -6,7 +6,7 @@
 #+LATEX_HEADER: \usepackage{titlesec}\titleformat*{\subsection}{}
 #+LATEX_HEADER: \usepackage{etoolbox}\AtBeginEnvironment{minted}{\singlespacing\fontsize{12}{14}\selectfont}
 #+LATEX_HEADER: \usepackage{mathtools}\usepackage{icomma}\usepackage{stackengine}\usepackage{amssymb}
-# +LATEX_HEADER: \usemintedstyle{vs}
+#+LATEX_HEADER: \usemintedstyle{vs}
 
 # pastie vs xcode emacs borland
 
@@ -33,7 +33,7 @@
         \LARGE
         Anul I, semestrul 2
 
-        \vspace{3cm}
+        \vspace{2cm}
         \Large
         {Numele tău aici}\\
         \vspace{5cm}
@@ -45,11 +45,17 @@
  
     \end{center}
         \Large
-        1. Dacă vreți probleme rezolvate mai grele intrati \href{https://github.com/azbyn/fundamentele/blob/master/portofoliu.pdf}{aici};\\
-        2. Dacă nu înțelegeți ceva întrebați-mă;\\
-        3. Vă invit sa mai adăugați și problemele voastre (da, știu);\\
-        4. Dacă găsiți ceva greșit spuneți-mi;\\
-        5. Nu scrieți comentariile, sunt mai mult pentru amuzamentul meu.
+        - Dacă vreți probleme rezolvate mai grele intrati \href{https://github.com/azbyn/fundamentele/blob/master/portofoliu.pdf}{aici};\\
+        - Dacă nu înțelegeți ceva întrebați-mă;\\
+        - Vă invit sa mai scrieți și problemele voastre (da, știu);\\
+        - Dacă găsiți ceva greșit spuneți-mi;\\
+        - Nu scrieți comentariile, sunt mai mult pentru amuzamentul meu;\\
+        - Voi mai actualiza acest pdf cand mai primim fișe de laboratoare.\\ Deci intrați din nou \href{https://github.com/azbyn/fundamentele/blob/master/portofoliu_simple.pdf}{aici} după duminica viitoare (19 mai).
+    
+    \begin{center}
+        \vfill
+        z sercem, Pąblo.
+    \end{center}
  
 \end{titlepage}
 #+end_export
@@ -61,16 +67,37 @@
 
 #+BEGIN_SRC cpp -n :results output :exports code
 #include <iostream>
-#include <math.h>
-using namespace std; // urgh
-int main() {
-    double eps;
+#include <cmath>
 
-    double x0;
-    double x1 = 0;
+// 'using namespace std;' nu e cea mai bună practică, 
+// în special pentru proiecte mai mari.
+// De exemplu, daca definim o functia asta:
+//double riemann_zeta(double n) {
+//   std::cout << "majie";
+//   return 0;
+//}
+// și în main avem asta:
+//cout << riemann_zeta(-1) << end;
+// Când rulăm programul, pe ecran se afiseaza "majie0", are sens nu?
+// Asta se intampla daca compilăm cu versiuni mai vechi de c++17
+// (o data cam la 3 ani mai apare o versiune de c++).
+// Dar daca compilăm cu c++17 (sau mai recent), pe ecran apare
+// "-0.0833333". De ce?
+// Păi din c++17 în "cmath" mai este defină și funcția "riemann_zeta", 
+// care sigur nu e definită ca funcția noastră (deși tot 'majie' e și
+// acolo).
+// Iar daca nu știați asta și încercați ceva de genul ăsta, rămaneți
+// fară păr în cap (sau fără tastatură) până aflați de ce nu va merge
+// programul cum trebuie.
+// Dar pentru ce facem noi la info, să zicem că e ok să scriem asta:
+using namespace std;
+
+int main() {
+    double eps, x0 = 0, x1 = 0;
     double delta = 10000;
-    int n = 1;
     cin << eps;
+
+    int n = 1;
     while (delta > eps) {
         x0 = x1;
         x1 = pow(1 + 1.0 / n, n);
@@ -83,6 +110,9 @@ int main() {
 }
 
 #+END_SRC
+
+#+RESULTS:
+
 \pagebreak
 
 * Laborator 2
@@ -97,7 +127,7 @@ int main() {
     cin << n;
     int i = 0;
     while (n > 0) {
-        // se putea și cu s += n%10; și n /= 10;
+        // se putea și cu 's += n%10; n /= 10;'
         s = s + n % 10;
         n = n / 10;
         i++;
@@ -287,11 +317,9 @@ int main() {
     return 0;
 }
 #+END_SRC
-
-Cazul cel mai favoriabil (m1 >= x[i]) $\forall i \in \{2, ...n-1\}$. T(n) = n-2 (se execută doar linia ż).
-
-Cazul cel mai defavorabil (m1 < x[i]) $\forall i \in \{2, ...n-1\}$ : T(n) = 2n-4 (se execută linia ż și ż').
-
+\noindent
+Cazul cel mai favoriabil (m1 >= x[i]) $\forall i \in \{2, ...n-1\}$. T(n) = n-2 (se execută doar linia ż). \\
+Cazul cel mai defavorabil (m1 < x[i]) $\forall i \in \{2, ...n-1\}$ : T(n) = 2n-4 (se execută linia ż și ż'). \\
 Mereu $T(n) \in \Theta(n)$.
 
 \pagebreak
@@ -384,7 +412,7 @@ int main() {
 ** 2. Fibonacci
 #+BEGIN_SRC cpp -n :results output :exports code
 #include <iostream>
-#include <math.h>
+#include <cmath>
 using namespace std;
 
 double putere(double x, int n) {
@@ -395,7 +423,8 @@ double putere(double x, int n) {
     return r;
 }
 int fib(int n) {
-    // daca vreti sa mearga si fib(0) (momentan da stack oveflow),
+    // daca vreti sa mearga și fib(0) 
+    // (momentan pt pow(x, 0), se blocheaza până dă stack oveflow),
     // scrieti si linia asta:
     //if (n==0) return 0;
 
@@ -411,7 +440,6 @@ int main() {
     cout << fib(n) << endl;
     return 0;
 }
-
 #+END_SRC
 
 \pagebreak
@@ -447,10 +475,10 @@ double integrate(double a, double b, double eps) {
 }
 int main() {
      double a, b, eps;
-     //cin >> a >> b >> eps;
-     // cu varianta mai faina merge si ceva de genu asta:
+     cin >> a >> b >> eps;
+     // cu varianta mai faină merge și ceva de genu ăsta:
      // cout << integrate(sin, a, b) << endl;
-     // doar ca n-ar trebui sa stim d-astea
+     // doar că n-ar trebui să stim d-astea
 
      cout << integrate(a, b, eps) << endl;
 
@@ -510,7 +538,7 @@ void btr(int k) {
             // valid() == true e redundant
             // 'valid()' deja e bool si 'valid() == true' e tot bool
             // si nu face absolut nimic in plus
-            // if (valid()) e mai normal
+            // if (valid()) e mai de bun simț
             if (valid() == true)
                 afiseaza();
         }
@@ -525,3 +553,137 @@ int main() {
     return 0;
 }
 #+END_SRC
+
+\pagebreak
+* Laborator 10-11
+** 5. Gidul turistic și drumețiile sale
+#+BEGIN_SRC cpp -n :results output :exports code :libs -pthread
+#include <iostream>
+using namespace std;
+
+struct Drumetie {
+    int nr, s;
+};
+
+// am putea pune codul de aici in 'planificare', dar banuiesc ca
+// asa ați face majoritatea. (ceea ce nu e așa de rău)
+void sortare(Drumetie v[], int m) {
+    // aici putem sa le sortam după ziua de incepere, pt ca ziua
+    // de final e mereu 's+n'
+    for (int i = 0; i < m; i++) {
+        for (int j = i+1; j < m; j++) {
+            if (v[j].s < v[i].s) {
+                Drumetie t = v[i];
+                v[i] = v[j];
+                v[j] = t;
+            }
+        }
+    }
+}
+
+// funcția retuneaza indicele ultimului spectacol, ceea ce e destul
+// de idiot. (am putea returna k+1, adica lungimea)
+int planificare(Drumetie a[], int m, int b[], int n) {
+    sortare(a, m);
+    b[0] = a[0].nr;
+    // in loc sa memoram acest u, am putea memora
+    // v[u].s+2
+    int u = 0;
+    int k = 0;
+    for (int i = 1; i < m; i++) {
+         if (a[i].s >= a[u].s+n) {
+            k += 1;// sau 'k++', ori și mai bine '++k'
+            b[k] = a[i].nr;
+            u = i;
+         }
+    }
+    return k;
+}
+
+int main() {
+    Drumetie v[100];
+    int m, n;
+    int b[100];
+
+    // ar fi indicat sa adaugati si ceva cum ar fi
+    //'cout << "introduce-ti m:";....'
+    cin >> m >> n;
+    for (int i = 0; i < m; i++) {
+        int s;
+        cin >> s;// sau 'cin >> v[i].s;'
+        v[i].s =s;
+        v[i].nr = i+1;
+    }
+    int k = planificare(v, m, b, 2);
+
+    // daca returnam k+1, mergem până la k, ca oamenii normali
+    for (int i = 0; i < k+1; i++)
+        cout << b[i] << " ";
+    //int k = planificare();
+    return 0;
+}
+
+#+END_SRC
+
+** 9. interclasarea sirurilor (nu scrieti)
+#+BEGIN_SRC cpp -n :results output :exports code :libs -pthread
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <thread>
+
+// ieseau liniile din pagina
+using namespace std;
+using namespace std::chrono;
+
+// cel mai bun algoritm de sortare
+// nu se poate mai bine de 0 comparatii
+vector<unsigned> sleep_sort(const vector<vector<unsigned>>& x) {
+    // sleep_sort nu merge pt numere negative
+    // asa ca nu exista numere negative ;)
+    vector<unsigned> res;
+    std::vector<std::thread> threads;
+
+    for (auto& vec : x) {
+        for (auto& val : vec) {
+             threads.emplace_back([val, &res]() {
+                 std::this_thread::sleep_for(milliseconds(val));
+                 res.push_back(val);
+                 });
+        }
+    }
+    for (auto& t : threads)
+         t.join();
+    return res;
+}
+
+using Clock = high_resolution_clock;
+int main() {
+    std::vector<std::vector<unsigned>> x = {
+         { 1, 2, 3, 4, 6, 8, 10, 213, 100000 },
+         { 4, 7, 8, 12, 32 , 41, 57, }, 
+         { 1, 6, 7, 9, 14, 51},
+    };
+    auto t1 = Clock::now();
+    auto res = sleep_sort(x);
+    auto t2 = Clock::now();
+    // ne asteptam ca timpul de executie sa fie cea mai mare valoare 
+    // din x adica doar 100000 ms (1 min 40 sec), in cazul nostru
+    // ceea ce e perfect rezonabil in vedere ca avem 0 comparatii
+    std::cout << "Timp de executie: " 
+              << duration_cast<milliseconds>(t2 - t1).count()
+              << " ms\n";
+
+    for (auto& a : res)
+         std::cout << a << ", ";
+    std::cout << "\n";
+    std::cout << "nr de comparații = 0\n";
+
+    return 0;
+}
+#+END_SRC
+
+O rezolvare mai serioasă ar fi concatenarea subșirurilor și sortarea cu radix sort (sau alt algoritm care nu compară elementele între ele). Asta face rezolvarea noastră mai bună decât rezolvarea vrută de autoarea problemei (metoda greedy), care trebuie sa compare cel puțin două elemente între ele.
+
+\vfill
+Și pentru a răspunde la posibila întrebare a Ionelei: da, m-am distrat.

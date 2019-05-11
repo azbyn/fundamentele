@@ -1,4 +1,4 @@
-% Created 2019-05-09 Thu 20:16
+% Created 2019-05-11 Sat 19:02
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -34,7 +34,7 @@
 
 \begin{titlepage}
     \begin{center}
-        \vspace*{6cm}
+        \vspace*{7cm}
  
  
         \Huge
@@ -44,11 +44,28 @@
         \LARGE
         Anul I, semestrul 2
 
-        \vspace{1.5cm}
-        \Large
-        {Pavel Andrei}\\
-        Grupa M116
- 
+        \vspace{3cm}
+    \end{center}
+%
+\begin{minipage}[t]{0.7\textwidth}
+    \raggedright
+    \onehalfspacing
+    \large
+    \textit{Student}:\\[.5\baselineskip]
+    Grupa M116\\
+    PAVEL Andrei
+\end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+    % \raggedleft
+    \onehalfspacing
+    \large
+    \textit{Profesor}:\\[.5\baselineskip]
+    Lect. Dr. \\
+    Marius APETRII
+
+\end{minipage}%
+
+    \begin{center}
         \vfill
  
         \vspace{0.8cm}
@@ -64,11 +81,11 @@
 \end{titlepage}
 
 \section*{Laborator 1}
-\label{sec:org395a688}
+\label{sec:org23880cf}
 \subsection*{15. O colecție de \(n\) monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.}
-\label{sec:org960424f}
+\label{sec:org638f636}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 import random, math
 
 # The values aren't important, what matters is that fake < real
@@ -134,9 +151,9 @@ Took 3 steps to find the fake coin, expected 3
 \end{verbatim}
 
 \subsection*{16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?}
-\label{sec:org61e8d80}
+\label{sec:org1e582fe}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 print("Please insert a space separated list of pancake diameters:\n(",
      end="")
 strs = input().split(' ')
@@ -216,11 +233,10 @@ Done in 4 flips
 \pagebreak
 
 \section*{Laborator 2}
-\label{sec:org8bed598}
+\label{sec:org7f62b00}
 \subsection*{10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.}
-\label{sec:org9dc726e}
-
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\label{sec:orga650f52}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 n = int(input("Please insert n: "))
 
 res = 0
@@ -244,7 +260,6 @@ $ python3 reversed.py
 Please insert n: 2400
 Result: 42
 \end{verbatim}
-
 
 \noindent
 I. Parțial corectitudinea
@@ -361,11 +376,11 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 \pagebreak
 
 \section*{Laborator 3}
-\label{sec:org1e5c53a}
+\label{sec:orgae2f2b8}
 \subsection*{10. Considerăm o secvență \(x = (x_{0},..., x_{n-1})\) de \(n\) numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma \((x_{i}, x_{i+1},\ ...,\ x_{j})\), cu \(0 \le i \le j \le n - 1\), iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.}
-\label{sec:org3d48753}
+\label{sec:org6ecb3b1}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 print("Please insert the sequence: ", end="")
 strs = input().split(' ')
 v = [int(num) for num in strs if num != ""]
@@ -387,36 +402,35 @@ for i in range(0, n):
         best_sum = sub_sums[best_end_index]
         best = (i, best_end_index)
 
-print("Best with a sum of", best_sum, "is: (x%d,...,x%d)" % best)
+print("Best with a sum of", best_sum, "is: (x%d,..., x%d)" % best)
 \end{minted}
 
 \begin{verbatim}
 $ python3 src.py
 Please insert the sequence: 1 2 3 4
-Best with a sum of 10 is: (x0,...,x3)
+Best with a sum of 10 is: (x0,..., x3)
 
 $ python3 src.py
 Please insert the sequence: 1 -2 3 4
-Best with a sum of 7 is: (x2,...,x3)
+Best with a sum of 7 is: (x2,..., x3)
 
 $ python3 src.py
 Please insert the sequence: 1 2 -3 4
-Best with a sum of 4 is: (x0,...,x3)
+Best with a sum of 4 is: (x0,..., x3)
 \end{verbatim}
-
-
-\noindent
 
 Considerăm operația de baza ca fiind compararea elementelor tabloului \texttt{v} (liniile 16 și 18).
 
-Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; $T(n) :=$ timpul de execuție total.
+Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; 
+
+$T(n) :=$ timpul de execuție total.
+\newline
 
 $T_{16}(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=i+1}^{n-1}1 
 = \sum\limits_{i=0}^{n-1}\left((n-1)-i\right)
 = n(n-1) - \sum\limits_{i=0}^{n-1}i 
 = n(n-1) - \frac{n(n-1)}{2}
 = \frac{n(n-1)}{2}$
-
 
 $T_{18}(n) = \sum\limits_{i=0}^{n-1}1 = n$
 
@@ -425,13 +439,12 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 \pagebreak
 
 \section*{Laborator 4}
-\label{sec:org65057be}
-\subsection*{8. Considerăm o secvența  \(x = (x_0, ..., x_{n-1})\) de \(n\) numere întregi. Generați tabloul \(f = (f_0, ..., f_{n-1})\), cu \(f_i = \sum\limits_{j=0}^{i}x_j\), printr-un algoritm de complexitate liniară.}
-\label{sec:orgdae988c}
+\label{sec:orgb64e7b0}
+\subsection*{8. Considerăm o secvența \(x = (x_0, ..., x_{n-1})\) de \(n\) numere întregi. Generați tabloul \(f = (f_0, ..., f_{n-1})\), cu \(f_i = \sum\limits_{j=0}^{i}x_j\), printr-un algoritm de complexitate liniară.}
+\label{sec:org85bf7a0}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
-print("Please insert the sequence: ", end="")
-strs = input().split(' ')
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+strs = input("Please insert the sequence: ").split(' ')
 x = [int(num) for num in strs if num != ""]
 n = len(x)
 f = [0 for i in range(n)]
@@ -451,29 +464,26 @@ Please insert the sequence: 1 2 3 0 -1 5
 \end{verbatim}
 
 \subsection*{9. Considerăm un tablou de valori întregi \(x = (x_0, ..., x_{n-1})\) și o valoare dată, s. Să se verifice daca există cel puțin doi indici \(i\) și \(j\) (nu neapărat distincți) cu proprietatea că \(x_i = x_j = s\). Analizați complexitatea algoritmului propus.}
-\label{sec:org2cd18d3}
+\label{sec:orgbe538f7}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
-print("Please insert the sequence: ", end="")
-strs = input().split(' ')
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+strs = input("Please insert the sequence: ").split(' ')
 x = [int(num) for num in strs if str != ""]
-print("Please insert s: ", end="")
-s = int(input())
+s = int(input("Please insert s: "))
 
 def f(x):
     for i in range(0, len(x)):
         for j in range(i, len(x)):
             if x[i] + x[j] == s:
-                print ("Found %d + %d = %d " % (x[i] , x[j], s))
+                print("Found %d + %d = %d " % (x[i] , x[j], s))
                 return True
     print("Not found")
     return False
+
 f(x)
 \end{minted}
-
-TODO TEST ME
-\$ T(n) \(\in\) \(\Theta\)(n\textsuperscript{2})\$
-
+Considerăm operația de bază ca fiind compararea sumei elementelor cu \texttt{s} (linia 10);
+$T(n) \in O(n^2)$.
 \begin{verbatim}
 $ python3 src.py
 Please insert the sequence: 1 2 3 0 -1 5
@@ -486,15 +496,13 @@ Please insert s: 7
 Found 2 + 5 = 7 
 \end{verbatim}
 
-
 \pagebreak
-
 \section*{Laborator 5}
-\label{sec:org389859a}
+\label{sec:org032c0cf}
 \subsection*{4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.}
-\label{sec:org0e1c175}
+\label{sec:org40eb63b}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 print("Please insert the array: ", end="")
 strs = input().split(' ')
 v = [int(num) for num in strs if num != ""]
@@ -542,7 +550,7 @@ Please insert the array: 40 3 43 95 9 2 4 0
 \end{verbatim}
 
 \subsection*{5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente din mulțimea \(\{0, 1, 2,...,m\}\). Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă \(m\) nu este semnificativ mai mare ca \(n\). Pașii algoritmul sunt:}
-\label{sec:orgc33b862}
+\label{sec:org2e6df21}
 \begin{enumerate}
 \item [(a)] se construiește tabloul $f[0..m]$ al frecvențelor de apariție a elementelor tabloului $x$ ($f_i$ reprezintă de câte ori apare valoarea $i$ în tabloul $x$, $i = 0,...,m$);
 
@@ -553,7 +561,7 @@ Please insert the array: 40 3 43 95 9 2 4 0
 Descrieți algoritmul de sortare prin numărare. Care este complexitatea acestuia?
 
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 print("Please insert the array: ", end="")
 x = [int(num) for num in (input().split()) if num != ""]
 n = len(x)
@@ -590,7 +598,6 @@ fc: [0, 3, 7, 7, 8]
 output: [1, 1, 1, 2, 2, 2, 2, 4]
 \end{verbatim}
 
-
 Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
 
 Notăm $T_l := $ timpul total de execuție al liniei $l$; $T(n, m) :=$ timpul de execuție total.
@@ -606,14 +613,13 @@ $T(n, m) = 3n + m - 1$.
 $T \in O(n+m)$.
 
 \subsection*{6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. \(\\\) Descrieți algoritmul radix sort. Care este complexitatea acestuia?}
-\label{sec:org2449b43}
+\label{sec:org9d37ec6}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
-print("Please insert the array: ", end="")
-x = [int(num) for num in (input().split()) if num != ""]
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+strs = input("Please insert the array: ").split()
+x = [int(num) for num in strs if num != ""]
 n = len(x)
 max_x = max(x)
-
 f = [0 for i in range(10)]
 output = [0 for i in range(n)]
 
@@ -623,7 +629,6 @@ while max_x > 0:
 
     for i in range(10): f[i] = 0
     for i in x: f[getDigit(i)] += 1
-
     for i in range(1, 10): f[i] += f[i-1]
 
     for i in range(n - 1, -1, -1):
@@ -650,11 +655,15 @@ Please insert the array: 89568 23 123 2 1 4 45 499
 output: [1, 2, 4, 23, 45, 123, 499, 89568]
 \end{verbatim}
 
-
 Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
 
-Notăm $k = [\mathit{log10}(\mathit{max}(x))] + 1$; $T_l := $ timpul total de execuție al liniei $l$; $T(n, k) :=$ timpul de execuție total.
+Notăm $k = [\log_{10}(\max(x))] + 1$;
 
+$T_l := $ timpul total de execuție al liniei $l$;
+
+$T(n, k) :=$ timpul de execuție total.
+
+\vspace{7pt}
 $T_{13} = 10 k$;
 $T_{14} = k n$;
 $T_{16} = 9 k$;
@@ -667,9 +676,9 @@ $T(n, k) = 3kn + 19k$.
 $T \in O(kn)$.
 
 \section*{Laborator 6}
-\label{sec:org3e062d4}
+\label{sec:orgdedd097}
 \subsection*{6. Se poate demonstra că plecând de la numărul 4, se poate obține orice număr natural diferit de zero, printr-o succesiune de operații de tipul:}
-\label{sec:org5b9fb7a}
+\label{sec:orgfd39e53}
 
 \begin{itemize}
 
@@ -684,7 +693,7 @@ sau pentru $n = 5$,\\
 $4 \to 2 \to 1 \to 10 \to 5$\\
 \textit{Indicație.} Drumul până la numarul $n$ se poate determina prin construirea drumului invers de la $n$ la numărul 4, folosind operațiile inverse.
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 def from4(n):
     assert(n > 0)
 
@@ -724,9 +733,10 @@ Please insert a number (> 0): 178
 \pagebreak
 
 \subsection*{11. Considerăm o scară cu \(n \in \mathbb{N}^*\) trepte. Determinați numărul de moduri în care poate fi urcată scara efectuând pași de una, două sau trei trepte. Descrieți algoritmul corespunzător.}
-\label{sec:orgf7557e3}
+\label{sec:org7d13327}
 
-Numarul de moduri în care poate fi urcată scara este dat de următoarea relație de recurență:
+
+\hspace{\parindent}Numarul de moduri în care poate fi urcată scara este dat de următoarea relație de recurență:
 
 $f : \mathbb{N}^* \to \mathbb{N},$
 
@@ -738,20 +748,20 @@ f(n) =
 2, & n = 2\\
 f(n-1)+f(n-2)+f(n-3), & n > 2
 \end{cases}
-$\\
-Observăm că $f(n-1)$ este al n-lea termen din sirul Tribonacci. Deci putem folosi următoarea formulă pentru $f(n)$:
-
 $
-f(n - 1) = \mathit{round} \left( 
+
+Observăm că $f(n-1)$ este al n-lea termen din sirul Tribonacci. Deci putem folosi următoarea formulă pentru $f(n)$:
+\[
+f(n - 1) = \mathrm{round} \left( 
    \frac{3b} {b^2-2b+4}
    \left(
    \frac{a_++a_-+1}{3}
    \right)^n
   \right),
 \text{unde } a_{\pm} = \sqrt[3]{19 \pm 3 \sqrt{33}},\ b = \sqrt[3]{586+102\sqrt{3}}.
-$
+\]
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 from math import pow, sqrt
 
 t = (pow(19 - 3*sqrt(33), 1/3) + pow(19 + 3*sqrt(33), 1/3) + 1) / 3
@@ -774,31 +784,31 @@ def f(n):
         t1 = r
     return t1
 
-print("Please insert a number (> 0): ", end="")
-n = int(input())
+n = int(input("Please insert a number (>= 0): "))
 print(f(n))
 \end{minted}
 
 \begin{verbatim}
 $ python3 src.py
-Please insert a number (> 0): 4
+Please insert a number (>= 0): 4
 7
 
 $ python3 src.py
-Please insert a number (> 0): 5
+Please insert a number (>= 0): 5
 13
 
 $ python3 src.py
-Please insert a number (> 0): 55
+Please insert a number (>= 0): 55
 222332455004452
 \end{verbatim}
 
+\pagebreak
 \section*{Laborator 7}
-\label{sec:org616d201}
+\label{sec:org976380e}
 \subsection*{6. Un vector ordonat crescător are componentele în progresie aritmetică. Un singur element lipsește din progresie (sigur acesta nu este nici primul și nici ultimul). Folosind tehnica reducerii, identificați elementul lipsă.}
-\label{sec:orgc5af58f}
+\label{sec:org83ad089}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 def find_missing(v):
     size = len(v)
 
@@ -845,11 +855,10 @@ Nothing is missing
 $ python3 src.py
 Please insert the vector: 3 2 1
 Nothing is missing
-
 \end{verbatim}
 
 \subsection*{9. (\textit{Generarea permutărior folosind algoritmul lui Heap}) Utilizați următorul algoritm pentru a genera toate permutările de ordin \(n\) ale mulțimii \(\{1, 2, ...,n\}\), \(n \in \mathbb{N}^*\): fiecare permutare este generată pornind de la precedenta, interschimbând o singură pereche de valori, celelalte \(n - 2\) valori ramânând pe loc. Pornind cu un \(i = 0\), pașii algoritmul se repetă până când \(i\) devine egal cu \(n\):}
-\label{sec:orgfcc7803}
+\label{sec:org44722c2}
 
 \begin{itemize}
 \item se generează cele $(n - 1)!$ permutări ale primelor $n-1$ elemente, alăturând ultimului element fiecărei dintre acestea. Asfel se generează toate permutările cu $n$ pe ultima poziție.
@@ -857,7 +866,7 @@ Nothing is missing
 \item după fiecare iterație, algoritmul produce toate permutările care se termină cu elementul care tocmai a fost mutat pe ultima poziție.
 \end{enumerate}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 def permutations(v):
     def impl(v, n):
         if n == 1: 
@@ -893,18 +902,16 @@ Please insert n: 4
 (4 2 3 1), (2 4 3 1), (3 4 2 1), (4 3 2 1), (2 3 4 1), (3 2 4 1), 
 (4 1 3 2), (1 4 3 2), (3 4 1 2), (4 3 1 2), (1 3 4 2), (3 1 4 2), 
 (4 1 2 3), (1 4 2 3), (2 4 1 3), (4 2 1 3), (1 2 4 3), (2 1 4 3), 
-
 \end{verbatim}
-
 
 \pagebreak
 
 \section*{Laborator 8}
-\label{sec:org76445c2}
+\label{sec:orgef101a5}
 \subsection*{5. Propuneți un algoritm de complexitate \(O(n)\) care transformă (pe loc) un tablou cu valori întregi astfel încât toate valorile negative să fie înaintea celor pozitive (partiționare cu pivot \(= 0\)).}
-\label{sec:org18f9784}
+\label{sec:org672edce}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 def partition(v):
     size = len(v)
     i = -1
@@ -944,25 +951,22 @@ Please insert the vector: 1 2 -3 4 -1 -2 0 1
 $ python3 src.py
 Please insert the vector: 1 2 3
 [1, 2, 3]
-
 \end{verbatim}
 
 \pagebreak
 
-\subsection*{6. (\textit{Aproximarea numerică a unei integrale folosind formula trapezului}) Considerăm o funcție reală \(f\) continuă pe intervalul \([a,b]\). (\ldots{}) valoarea integralei definite a lui \(f\) între limitele \([a,b]\) se aproximează prin aria trapezului cu vârfurile \((a, 0), (b, 0), (a, f(a)), (b, f(b))\). Deci}
-\label{sec:org0682e13}
+\subsection*{6. (\textit{Aproximarea numerică a unei integrale folosind formula trapezului}) Considerăm o funcție reală \(f\) continuă pe intervalul \([a,b]\). (\ldots{}) valoarea integralei definite a lui \(f\) între limitele \([a,b]\) se aproximează prin aria trapezului cu vârfurile \((a, 0), (b, 0), (a, f(a)), (b, f(b))\). Deci:}
+\label{sec:org02b68a8}
 
-\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
-\newcommand\ddint{\displaystyle\int}
-$$\[
-\ddint_a^b f(x)\,\mathrm{d}x = 
-\begin{cases}
-\displaystyle\frac{b-a}{2}(f(a) + f(b)), & b - a < \varepsilon \\
-\ddint_a^c f(x)\,\mathrm{d}x + \ddint_c^b f(x)\,\mathrm{d}x,\ \ c = \ddfrac{a+b}{2},& b-a \ge \varepsilon
+\[
+\int_a^b f(x)\,\mathrm{d}x = 
+\begin{dcases}
+\frac{b-a}{2}(f(a) + f(b)), & b - a < \varepsilon \\
+\int_a^c f(x)\,\mathrm{d}x + \int_c^b f(x)\,\mathrm{d}x,\ \ c = \frac{a+b}{2},& b-a \ge \varepsilon
 \end{cases}
-\]$$
+\]
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 def exp(x, iterations=20):
     factorial = 1
     pow = 1
@@ -983,7 +987,6 @@ def cos(x, iterations=20):
         res += pow/factorial
     return res
 
-
 def integrate(f, a, b, eps=1e-4):
     delta = b - a
     if delta >= eps: 
@@ -992,8 +995,10 @@ def integrate(f, a, b, eps=1e-4):
     return delta * (f(a) + f(b)) / 2
 
 from math import pi
+
 print("e^x:", integrate(exp, 0, 1))# should be e - 1
 print("x^2:", integrate(lambda x: x*x, -1, 1))# should be 2/3
+print("x^.5:", integrate(lambda x: x**0.5, 0, 1))# should be 2/3
 print("cos:", integrate(cos, -pi/2, pi/2))# should be 2
 \end{minted}
 
@@ -1001,27 +1006,26 @@ print("cos:", integrate(cos, -pi/2, pi/2))# should be 2
 $ python3 integrals.py
 e^x: 1.7182818289924702
 x^2: 0.6666666679084301
+x^.5: 0.6666665676940103
 cos: 1.9999999984680359
-
 \end{verbatim}
-
 
 \pagebreak
 
 \section*{Laborator 9}
-\label{sec:orge21007d}
+\label{sec:orgdbbfadf}
 
 \(9\). a) Avem la dispoziție 6 culori: alb, negru, galben, verde, roșu și albastru. Afișați toate modalitățile de realizare a unui drapel tricolor folosind aceste trei culori astfel încât cele 3 culori ale drapelului să fie distincte și culoarea din mijloc este ori galben, ori verde.\\
 b) Avem la dispoziție, în plus, șase steme de aceleași șase culori. Fiecare steag poate să aibă sau nu o stemă, dar dacă are, atunci aceasta trebuie să aibă o culoare diferită de cele trei culori deja existente în steag. Afișați toate modalitățile de realizare a steagului.
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
 #galben, verde, negru, alb, rosu, albastru, algbastru, -
 colors = ['g','v','n','a','r', 'b', '-']
 index = 0
 
 flag = [-1,0,0,0]
 k = 0
-maxK = 3
+maxK = 4
 print("Long mode (y/N):", end="")
 if input()[0].lower() == 'y': maxK = 3
 
@@ -1060,18 +1064,17 @@ rvg rvn rva rvb rng rnv rna rnb bgv bgn bga bgr bvg bvn bva bvr bng bnv bna bnr
 \end{verbatim}
 
 \subsection*{11. Determinați toate submulțimile mulțimii \(A = \{a_1, a_2, ..., a_n\}, n \in \mathbb{N}^*\), cu proprietatea că suma elementelor unei submulțimi este \(s\).}
-\label{sec:org3c3f06c}
+\label{sec:org2254625}
 
-\begin{minted}[linenos,firstnumber=1,frame=single]{python}
-print("Please insert the set: ", end="")
-strs = input().split(' ')
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+strs = input("Please insert the set: ").split(' ')
 A = [int(num) for num in strs if num != ""]
-print("Please insert s: ", end="")
-s = int(input())
+s = int(input("Please insert s: "))
 
 size = len(A)
 x = [-1 for i in range(size+1)]
 k = 0
+empty = True
 while k >= 0:
     if x[k] < size-1:
         x[k] += 1        
@@ -1088,6 +1091,7 @@ while k >= 0:
         if not valid() or sum > s: continue
 
         if sum == s:
+            empty = False
             print("{", end="")
             for i in x[:k]: print(A[i], end=", ")
             print(A[x[k]], end="}, ")
@@ -1097,7 +1101,8 @@ while k >= 0:
             k += 1
     else:
         k -= 1
-print()
+
+print("No subset can do that." if empty else "")
 \end{minted}
 
 \begin{verbatim}
@@ -1111,8 +1116,160 @@ Please insert s: 5
 
 Please insert the set: 1 2 3 4
 Please insert s: 44
-
-
+No subset can do that.
 \end{verbatim}
+
 \pagebreak
+
+\section*{Laborator 10-11}
+\label{sec:org49432b2}
+\subsection*{6. Se citește o secvența de \(n\) numere întregi. Afișați cea mai lungă subsecvență \((x_1, x_2,..., x_m)\), \(m \le n\), care se poate construi din numerele citite, astfel încât \(x_1 \le x_2 \ge x_3 \le x_4 \ge ... \le x_{m-1} \ge x_m\).}
+\label{sec:org138afdd}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+def get_sequence_len(s):
+    i = 1
+    for i in range(1, len(s)):
+        if i % 2 == 1:
+            if s[i-1] > s[i]: return i
+        else:
+            if s[i-1] < s[i]: return i
+    return i + 1
+
+print("Please insert the set: ", end="")
+strs = input().split(' ')
+s = [int(str) for str in strs if str != ""]
+max_i = 0
+max_l = 1
+i = 0
+n = len(s)
+while i < n:
+    l = get_sequence_len(s[i:])
+    if l > max_l:
+        max_l = l
+        max_i = i
+    i += l
+
+print("m:", s[max_i:max_i+max_l])
+
+\end{minted}
+\begin{verbatim}
+$ python3 src.py
+Please insert the set: 1 2 3 4 5 6
+m: [1, 2]
+
+$ python3 src.py
+Please insert the set: 1 0 1 0 1 3 0 2 0 3 0 4 5
+m: [0, 2, 0, 3, 0, 4]
+
+$ python3 src.py
+Please insert the set: 1 2 1 3 2 4 3 5
+m: [1, 2, 1, 3, 2, 4, 3, 5]
+
+$ python3 src.py
+Please insert the set: 1 0 1 1 1 0 1 0 1
+m: [0, 1, 1, 1, 0, 1, 0, 1]
+\end{verbatim}
+
+\pagebreak
+\subsection*{8. Se consideră \(n\) intervale \([a_i,b_i]\), \(a_i, b_i \in \mathbb{Z}\), \(i \in \overline{1,n}\)}
+\label{sec:orge9a51b0}
+\begin{enumerate}
+\item[a)] Calculați suma lungimilor tuturor intervalelor (intervale care se suprapun se vor lua în considerare o singură dată).
+\item[b)] Determinați reuniunea acestora.
+\item[c)] Un interval poate fi eliminat dacă este inclus în alt interval din șir. Afișați numărul maxim de intervale care pot fi eliminate.
+\item[d)] Să se determine o mulțime $X$ cu un număr minim de elemente așa încât pentru orice interval din șir să existe un element $x \in X$ care să aparțină intervalului.
+\end{enumerate}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+class Interval:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+    def intersection(A, B):# $A \cap B$
+          # assume A is on the left
+          if A.a > B.b: return B.intersection(A)
+          if A.b < B.a: return None
+          return Interval(B.a, A.b)
+    def in_(A, B): # $A \subseteq B$
+        return A.a >= B.a and A.b <= B.b
+    def __eq__(A, B): #$A = B$
+        return A.a == B.a and A.b == B.b
+    def length(self): return self.b - self.a
+    def dup(self): return Interval(self.a, self.b)
+
+class SuperInterval:
+    def __init__(self, interval):
+        self.intervals = [interval.dup()]
+
+    # returns True if it can be eliminated
+    def add_reunion(self, A):
+        # we could sort the intervals after b, but this is already
+        # a lot of code
+        for i in range(len(self.intervals)):
+            itv = self.intervals[i]
+            intr = A.intersection(itv)
+            if intr is None: continue
+            if A.in_(itv): return True
+            if itv.in_(A):
+                itv.a = A.a
+                itv.b = A.b
+                return True
+            if A.a < itv.a: itv.a = A.a
+            if A.b > itv.b: itv.b = A.b
+            itv = self.intervals.pop(i)
+            return self.add_reunion(itv)
+        self.intervals.append(A.dup())
+        return False
+    # $\mathit{self} \cap A$ if not $\varnothing$, $\mathit{self} \cup A$ otherwise
+    def add_intersection(self, A):
+        for itv in self.intervals:
+            intr = A.intersection(itv)
+            if intr is None: continue
+            itv.a = intr.a
+            itv.b = intr.b
+            return
+        self.intervals.append(A.dup())
+    def length(self):
+        l = 0
+        for i in self.intervals: l += i.length()
+        return l
+    def __str__(self):
+        s = ""
+        for i in self.intervals: s += "[%d, %d] " % (i.a, i.b)
+        return s
+
+strs = input("Please insert intervals (of format [a,b]): ").split(' ')
+from parse import parse
+intervals = []
+for s in strs:
+    res = parse("[{},{}]", s)
+    intervals.append(Interval(int(res[0]), int(res[1])))
+
+si = SuperInterval(intervals[0])
+si2 = SuperInterval(intervals[0])
+count = 0
+for i in intervals[1:]:
+    if si.add_reunion(i): count += 1
+    si2.add_intersection(i)
+X = [i.a for i in si2.intervals]
+print("a)", si.length())
+print("b)", si)
+print("c)", count)
+print("d) X = {", ("%s" % X)[1:-1], "}")
+\end{minted}
+
+\begin{verbatim}
+$ python3 intervals.py
+Please insert intervals (of format [a,b]): [1,2] [1,3] [2,3] [4,5] [5,6] [3,4] [7,9]
+a) 7
+b) [1, 6] [7, 9] 
+c) 2
+d) X = { 1, 4, 7 }
+
+$ python3 intervals.py
+Please insert intervals (of format [a,b]): [1,3] [3,4] [4,6]
+a) 5
+b) [1, 6] 
+c) 0
+d) X = { 1 }
+\end{verbatim}
 \end{document}

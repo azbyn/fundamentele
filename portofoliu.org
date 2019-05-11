@@ -20,12 +20,10 @@
   (setq org-latex-title-command "")
 #+end_src
 
-# TODO add prof name (like in atestat)
-
 #+begin_export latex
 \begin{titlepage}
     \begin{center}
-        \vspace*{6cm}
+        \vspace*{7cm}
  
  
         \Huge
@@ -35,11 +33,28 @@
         \LARGE
         Anul I, semestrul 2
 
-        \vspace{1.5cm}
-        \Large
-        {Pavel Andrei}\\
-        Grupa M116
- 
+        \vspace{3cm}
+    \end{center}
+%
+\begin{minipage}[t]{0.7\textwidth}
+    \raggedright
+    \onehalfspacing
+    \large
+    \textit{Student}:\\[.5\baselineskip]
+    Grupa M116\\
+    PAVEL Andrei
+\end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+    % \raggedleft
+    \onehalfspacing
+    \large
+    \textit{Profesor}:\\[.5\baselineskip]
+    Lect. Dr. \\
+    Marius APETRII
+
+\end{minipage}%
+
+    \begin{center}
         \vfill
  
         \vspace{0.8cm}
@@ -105,11 +120,31 @@ print("Took", steps, "steps to find the fake coin, expected",
 \pagebreak
 #+RESULTS:
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 echo "$ python3 src.py"
 echo "Please enter length: 15"
 python3 src/moneda.py
 #+END_SRC
+\begin{verbatim}
+$ python3 src.py
+Please enter length: 15
+Step 1:
+left [40, 40, 40, 40, 40]
+right [40, 40, 40, 40, 40]
+leftover [40, 40, 35, 40, 40]
+
+Step 2:
+left [40, 40]
+right [35, 40]
+leftover [40]
+
+Step 3:
+left [35]
+right [40]
+leftover []
+
+Took 3 steps to find the fake coin, expected 3
+\end{verbatim}
 
 ** 16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?
 
@@ -157,7 +192,7 @@ draw("", pancakes)
 print("Done in %d flips" % flips)
 #+END_SRC
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 echo "$ python3 src.py"
 python3 src/clatite.py "5 9 4 3 7 2 8 1"
 echo -e "\n$ python3 src.py"
@@ -166,11 +201,44 @@ echo -e "\n$ python3 src.py"
 python3 src/clatite.py "3 3 1 4 3"
 #+END_SRC
 
+\begin{verbatim}
+$ python3 src.py
+Please insert a space separated list of pancake diameters:
+(5 9 4 3 7 2 8 1
+flip  1: (5 |9 4 3 7 2 8 1 
+flip  2: (|5 1 8 2 7 3 4 9 
+flip  3: (9 4 3 7 2 |8 1 5 
+flip  4: (9 |4 3 7 2 5 1 8 
+flip  5: (9 8 1 5 2 |7 3 4 
+flip  6: (9 8 |1 5 2 4 3 7 
+flip  7: (9 8 7 3 4 2 |5 1 
+flip  8: (9 8 7 |3 4 2 1 5 
+flip  9: (9 8 7 5 1 2 |4 3 
+flip 10: (9 8 7 5 |1 2 3 4 
+(9 8 7 5 4 3 2 1 
+Done in 10 flips
+
+$ python3 src.py
+Please insert a space separated list of pancake diameters:
+(4 3 2 1
+(4 3 2 1 
+Done in 0 flips
+
+$ python3 src.py
+Please insert a space separated list of pancake diameters:
+(3 3 1 4 3
+flip  1: (3 3 1 |4 3 
+flip  2: (|3 3 1 3 4 
+flip  3: (4 3 1 |3 3 
+flip  4: (4 3 |1 3 3 
+(4 3 3 3 1 
+Done in 4 flips
+\end{verbatim}
+
 \pagebreak
 
 * Laborator 2
 ** 10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.
-
 #+BEGIN_SRC python -n :results output :exports code
 n = int(input("Please insert n: "))
 
@@ -186,12 +254,21 @@ while n != 0:
 print("Result:", res)
 #+END_SRC
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/reversed.py "1234"
 echo ""
 python3 src/reversed.py "2400"
-#python3 src/secventa.py "1 -2 3 4"
 #+END_SRC
+
+\begin{verbatim}
+$ python3 reversed.py
+Please insert n: 1234
+Result: 4321
+
+$ python3 reversed.py
+Please insert n: 2400
+Result: 42
+\end{verbatim}
 
 # doing it like this gives nicer syntax highlighting
 #+begin_export latex
@@ -336,10 +413,10 @@ for i in range(0, n):
         best_sum = sub_sums[best_end_index]
         best = (i, best_end_index)
 
-print("Best with a sum of", best_sum, "is: (x%d,...,x%d)" % best)
+print("Best with a sum of", best_sum, "is: (x%d,..., x%d)" % best)
 #+END_SRC
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 echo "$ python3 src.py"
 python3 src/secventa.py "1 2 3 4"
 echo ""
@@ -348,25 +425,35 @@ python3 src/secventa.py "1 -2 3 4"
 echo ""
 echo "$ python3 src.py"
 python3 src/secventa.py "1 2 -3 4"
-#echo "$ python3 src.py"
-#python3 secventa.py "1 -2 3 4 -8 8 9 -2 12 9 1"
-
 #+END_SRC
 
+\begin{verbatim}
+$ python3 src.py
+Please insert the sequence: 1 2 3 4
+Best with a sum of 10 is: (x0,..., x3)
+
+$ python3 src.py
+Please insert the sequence: 1 -2 3 4
+Best with a sum of 7 is: (x2,..., x3)
+
+$ python3 src.py
+Please insert the sequence: 1 2 -3 4
+Best with a sum of 4 is: (x0,..., x3)
+\end{verbatim}
 
 #+begin_export latex
-\noindent
-
 Considerăm operația de baza ca fiind compararea elementelor tabloului \texttt{v} (liniile 16 și 18).
 
-Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; $T(n) :=$ timpul de execuție total.
+Notăm $T_l(n) := $ timpul total de execuție al liniei $l$; 
+
+$T(n) :=$ timpul de execuție total.
+\newline
 
 $T_{16}(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=i+1}^{n-1}1 
 = \sum\limits_{i=0}^{n-1}\left((n-1)-i\right)
 = n(n-1) - \sum\limits_{i=0}^{n-1}i 
 = n(n-1) - \frac{n(n-1)}{2}
 = \frac{n(n-1)}{2}$
-
 
 $T_{18}(n) = \sum\limits_{i=0}^{n-1}1 = n$
 
@@ -377,11 +464,10 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 \pagebreak
 
 * Laborator 4
-** 8. Considerăm o secvența  $x = (x_0, ..., x_{n-1})$ de $n$ numere întregi. Generați tabloul $f = (f_0, ..., f_{n-1})$, cu $f_i = \sum\limits_{j=0}^{i}x_j$, printr-un algoritm de complexitate liniară.
+** 8. Considerăm o secvența $x = (x_0, ..., x_{n-1})$ de $n$ numere întregi. Generați tabloul $f = (f_0, ..., f_{n-1})$, cu $f_i = \sum\limits_{j=0}^{i}x_j$, printr-un algoritm de complexitate liniară.
 
 #+BEGIN_SRC python -n :results output :exports code
-print("Please insert the sequence: ", end="")
-strs = input().split(' ')
+strs = input("Please insert the sequence: ").split(' ')
 x = [int(num) for num in strs if num != ""]
 n = len(x)
 f = [0 for i in range(n)]
@@ -394,45 +480,59 @@ print(f)
 
 #+END_SRC
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 echo "$ python3 src.py"
 python3 src/sum.py "1 2 3 0 -1 5"
-#echo "$ python3 src.py"
-
 #+END_SRC
+
+\begin{verbatim}
+$ python3 src.py
+Please insert the sequence: 1 2 3 0 -1 5
+[1, 3, 6, 6, 5, 10]
+\end{verbatim}
 
 ** 9. Considerăm un tablou de valori întregi $x = (x_0, ..., x_{n-1})$ și o valoare dată, s. Să se verifice daca există cel puțin doi indici $i$ și $j$ (nu neapărat distincți) cu proprietatea că $x_i = x_j = s$. Analizați complexitatea algoritmului propus.
 
 #+BEGIN_SRC python -n :results output :exports code
-print("Please insert the sequence: ", end="")
-strs = input().split(' ')
+strs = input("Please insert the sequence: ").split(' ')
 x = [int(num) for num in strs if str != ""]
-print("Please insert s: ", end="")
-s = int(input())
+s = int(input("Please insert s: "))
 
 def f(x):
     for i in range(0, len(x)):
         for j in range(i, len(x)):
             if x[i] + x[j] == s:
-                print ("Found %d + %d = %d " % (x[i] , x[j], s))
+                print("Found %d + %d = %d " % (x[i] , x[j], s))
                 return True
     print("Not found")
     return False
+
 f(x)
 #+END_SRC
-
-TODO TEST ME
-$ T(n) \in \Theta(n^2)$
-
-#+BEGIN_SRC sh :results output :exports results
+#+begin_export latex
+Considerăm operația de bază ca fiind compararea sumei elementelor cu \texttt{s} (linia 10);
+$T(n) \in O(n^2)$.
+#+end_export
+#+BEGIN_SRC sh :results output :exports none
 python3 src/l4_9.py "1 2 3 0 -1 5" "9"
 echo ""
 
 python3 src/l4_9.py "1 2 3 0 5 -1" "7"
 #+END_SRC
 
-\pagebreak
+\begin{verbatim}
+$ python3 src.py
+Please insert the sequence: 1 2 3 0 -1 5
+Please insert s: 9
+Not found
 
+$ python3 src.py
+Please insert the sequence: 1 2 3 0 5 -1
+Please insert s: 7
+Found 2 + 5 = 7 
+\end{verbatim}
+
+\pagebreak
 * Laborator 5
 ** 4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.
 
@@ -468,7 +568,7 @@ print(v)
 
 #+RESULTS:
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/shaker_sort.py "6 5 3 1 8 7 2 4 0 9"
 echo ""
 python3 src/shaker_sort.py "4 1 0 2 7 3 9 8 5 6"
@@ -476,11 +576,24 @@ echo ""
 python3 src/shaker_sort.py "9 4 3 0 5 6 1 8 7 0"
 echo ""
 python3 src/shaker_sort.py "40 3 43 95 9 2 4 0"
-
-
-#echo "$ python3 src.py"
-
 #+END_SRC
+\begin{verbatim}
+$ python3 shaker_sort.py
+Please insert the array: 6 5 3 1 8 7 2 4 0 9
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+$ python3 shaker_sort.py
+Please insert the array: 4 1 0 2 7 3 9 8 5 6
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+$ python3 shaker_sort.py
+Please insert the array: 9 4 3 0 5 6 1 8 7 0
+[0, 0, 1, 3, 4, 5, 6, 7, 8, 9]
+
+$ python3 shaker_sort.py
+Please insert the array: 40 3 43 95 9 2 4 0
+[0, 2, 3, 4, 9, 40, 43, 95]
+\end{verbatim}
 
 ** 5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou $x$ de dimensiune $n$, cu elemente din mulțimea $\{0, 1, 2,...,m\}$. Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă $m$ nu este semnificativ mai mare ca $n$. Pașii algoritmul sunt:
 #+begin_export latex
@@ -520,7 +633,7 @@ print("output:", output)
 
 #+RESULTS:
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/counting_sort.py "0 1 2 2 1 0 2 1 2 4"
 echo ""
 #python3 counting_sort.py "0 1 2 2 1 0 2 1 2"
@@ -528,6 +641,19 @@ echo ""
 python3 src/counting_sort.py "1 2 2 1 2 1 2 4"
 #+END_SRC
 
+\begin{verbatim}
+$ python3 counting_sort.py
+Please insert the array: 0 1 2 2 1 0 2 1 2 4
+f: [2, 3, 4, 0, 1]
+fc: [2, 5, 9, 9, 10]
+output: [0, 0, 1, 1, 1, 2, 2, 2, 2, 4]
+
+$ python3 counting_sort.py
+Please insert the array: 1 2 2 1 2 1 2 4
+f: [0, 3, 4, 0, 1]
+fc: [0, 3, 7, 7, 8]
+output: [1, 1, 1, 2, 2, 2, 2, 4]
+\end{verbatim}
 
 #+begin_export latex
 Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
@@ -548,11 +674,10 @@ $T \in O(n+m)$.
 ** 6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou $x$ de dimensiune $n$, cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. $\\$ Descrieți algoritmul radix sort. Care este complexitatea acestuia?
 
 #+BEGIN_SRC python -n :results output :exports code
-print("Please insert the array: ", end="")
-x = [int(num) for num in (input().split()) if num != ""]
+strs = input("Please insert the array: ").split()
+x = [int(num) for num in strs if num != ""]
 n = len(x)
 max_x = max(x)
-
 f = [0 for i in range(10)]
 output = [0 for i in range(n)]
 
@@ -562,7 +687,6 @@ while max_x > 0:
 
     for i in range(10): f[i] = 0
     for i in x: f[getDigit(i)] += 1
-
     for i in range(1, 10): f[i] += f[i-1]
 
     for i in range(n - 1, -1, -1):
@@ -581,17 +705,32 @@ print("output:", output)
 
 #+RESULTS:
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/radix_sort.py "3 2 4 23 427 459 56 90"
 echo ""
 python3 src/radix_sort.py "89568 23 123 2 1 4 45 499"
 #+END_SRC
 
+\begin{verbatim}
+$ python3 radix_sort.py
+Please insert the array: 3 2 4 23 427 459 56 90
+output: [2, 3, 4, 23, 56, 90, 427, 459]
+
+$ python3 radix_sort.py
+Please insert the array: 89568 23 123 2 1 4 45 499
+output: [1, 2, 4, 23, 45, 123, 499, 89568]
+\end{verbatim}
+
 #+begin_export latex
 Considerăm atribuirile în vectori ca fiind operațiile de bază (ignorăm inițializările).
 
-Notăm $k = [\mathit{log10}(\mathit{max}(x))] + 1$; $T_l := $ timpul total de execuție al liniei $l$; $T(n, k) :=$ timpul de execuție total.
+Notăm $k = [\log_{10}(\max(x))] + 1$;
 
+$T_l := $ timpul total de execuție al liniei $l$;
+
+$T(n, k) :=$ timpul de execuție total.
+
+\vspace{7pt}
 $T_{13} = 10 k$;
 $T_{14} = k n$;
 $T_{16} = 9 k$;
@@ -644,7 +783,7 @@ n = int(input())
 from4(n)
 #+END_SRC
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/from4.py "435"
 echo ""
 python3 src/from4.py "5"
@@ -654,26 +793,30 @@ echo ""
 python3 src/from4.py "178"
 #+END_SRC
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 $ python3 src.py
 Please insert a number (> 0): 435
 4 -> 2 -> 24 -> 12 -> 6 -> 3 -> 34 -> 17 -> 174 -> 87 -> 870 -> 435
+
+$ python3 src.py
+Please insert a number (> 0): 5
+4 -> 2 -> 1 -> 10 -> 5
 
 $ python3 src.py
 Please insert a number (> 0): 231
 4 -> 2 -> 1 -> 14 -> 144 -> 72 -> 36 -> 18 -> 184 -> 92 -> 924 -> 462 -> 231
 
 $ python3 src.py
-Please insert a number (> 0): 89
-4 -> 44 -> 22 -> 224 -> 112 -> 56 -> 28 -> 284 -> 142 -> 1424 -> 712 -> 356 -> 178 -> 89
-#+end_example
+Please insert a number (> 0): 178
+4 -> 44 -> 22 -> 224 -> 112 -> 56 -> 28 -> 284 -> 142 -> 1424 -> 712 -> 356 -> 178
+\end{verbatim}
 \pagebreak
 
 ** 11. Considerăm o scară cu $n \in \mathbb{N}^*$ trepte. Determinați numărul de moduri în care poate fi urcată scara efectuând pași de una, două sau trei trepte. Descrieți algoritmul corespunzător.
 
 #+begin_export latex
-Numarul de moduri în care poate fi urcată scara este dat de următoarea relație de recurență:
+
+\hspace{\parindent}Numarul de moduri în care poate fi urcată scara este dat de următoarea relație de recurență:
 
 $f : \mathbb{N}^* \to \mathbb{N},$
 
@@ -685,18 +828,18 @@ f(n) =
 2, & n = 2\\
 f(n-1)+f(n-2)+f(n-3), & n > 2
 \end{cases}
-$\\
-Observăm că $f(n-1)$ este al n-lea termen din sirul Tribonacci. Deci putem folosi următoarea formulă pentru $f(n)$:
-
 $
-f(n - 1) = \mathit{round} \left( 
+
+Observăm că $f(n-1)$ este al n-lea termen din sirul Tribonacci. Deci putem folosi următoarea formulă pentru $f(n)$:
+\[
+f(n - 1) = \mathrm{round} \left( 
    \frac{3b} {b^2-2b+4}
    \left(
    \frac{a_++a_-+1}{3}
    \right)^n
   \right),
 \text{unde } a_{\pm} = \sqrt[3]{19 \pm 3 \sqrt{33}},\ b = \sqrt[3]{586+102\sqrt{3}}.
-$
+\]
 
 #+end_export
 # :tangle from4.py
@@ -723,21 +866,35 @@ def f(n):
         t1 = r
     return t1
 
-print("Please insert a number (> 0): ", end="")
-n = int(input())
+n = int(input("Please insert a number (>= 0): "))
 print(f(n))
 #+END_SRC
 
 #+RESULTS:
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/stair.py "4"
 echo ""
 python3 src/stair.py "5"
 echo ""
 python3 src/stair.py "55"
-
 #+END_SRC
+
+\begin{verbatim}
+$ python3 src.py
+Please insert a number (>= 0): 4
+7
+
+$ python3 src.py
+Please insert a number (>= 0): 5
+13
+
+$ python3 src.py
+Please insert a number (>= 0): 55
+222332455004452
+\end{verbatim}
+
+\pagebreak
 * Laborator 7
 ** 6. Un vector ordonat crescător are componentele în progresie aritmetică. Un singur element lipsește din progresie (sigur acesta nu este nici primul și nici ultimul). Folosind tehnica reducerii, identificați elementul lipsă.
 
@@ -775,7 +932,7 @@ print(res, "is missing")
 
 #+RESULTS:
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/prog.py "1 2 3 4 5 6 7 9 10 11"
 echo ""
 python3 src/prog.py "10 8 6 2"
@@ -785,6 +942,24 @@ echo ""
 python3 src/prog.py "3 2 1"
 echo ""
 #+END_SRC
+
+\begin{verbatim}
+$ python3 src.py
+Please insert the vector: 1 2 3 4 5 6 7 9 10 11
+8 is missing
+
+$ python3 src.py
+Please insert the vector: 10 8 6 2
+4 is missing
+
+$ python3 src.py
+Please insert the vector: 1 2 3
+Nothing is missing
+
+$ python3 src.py
+Please insert the vector: 3 2 1
+Nothing is missing
+\end{verbatim}
 
 ** 9. (\textit{Generarea permutărior folosind algoritmul lui Heap}) Utilizați următorul algoritm pentru a genera toate permutările de ordin $n$ ale mulțimii $\{1, 2, ...,n\}$, $n \in \mathbb{N}^*$: fiecare permutare este generată pornind de la precedenta, interschimbând o singură pereche de valori, celelalte $n - 2$ valori ramânând pe loc. Pornind cu un $i = 0$, pașii algoritmul se repetă până când $i$ devine egal cu $n$:
 
@@ -826,23 +1001,18 @@ for p in permutations(v):
     i += 1
 #+END_SRC
 
-#+RESULTS:
-: (1 2 3 4), (2 1 3 4), (3 1 2 4), (1 3 2 4), (2 3 1 4), (3 2 1 4), 
-: (4 2 3 1), (2 4 3 1), (3 4 2 1), (4 3 2 1), (2 3 4 1), (3 2 4 1), 
-: (4 1 3 2), (1 4 3 2), (3 4 1 2), (4 3 1 2), (1 3 4 2), (3 1 4 2), 
-: (4 1 2 3), (1 4 2 3), (2 4 1 3), (4 2 1 3), (1 2 4 3), (2 1 4 3), 
-: len = 24
-
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/perm.py 4
-echo ""
 #+END_SRC
 
-
-
-#+RESULTS:
-: $ python3 perm.py
-: 
+\begin{verbatim}
+$ python3 perm.py
+Please insert n: 4
+(1 2 3 4), (2 1 3 4), (3 1 2 4), (1 3 2 4), (2 3 1 4), (3 2 1 4), 
+(4 2 3 1), (2 4 3 1), (3 4 2 1), (4 3 2 1), (2 3 4 1), (3 2 4 1), 
+(4 1 3 2), (1 4 3 2), (3 4 1 2), (4 3 1 2), (1 3 4 2), (3 1 4 2), 
+(4 1 2 3), (1 4 2 3), (2 4 1 3), (4 2 1 3), (1 2 4 3), (2 1 4 3), 
+\end{verbatim}
 
 \pagebreak
 
@@ -877,30 +1047,40 @@ partition(v)
 print(v) 
 #+END_SRC
 
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/partition.py "1 2 3 4 -1 -2 -3 4 -6 -8 1"
 echo ""
 python3 src/partition.py "1 2 -3 4 -1 -2 0 1"
 echo ""
 python3 src/partition.py "1 2 3"
-echo ""
-
 #+END_SRC
+
+\begin{verbatim}
+$ python3 src.py
+Please insert the vector: 1 2 3 4 -1 -2 -3 4 -6 -8 1
+[-8, -6, -3, -2, -1, 4, 3, 4, 2, 1, 1]
+
+$ python3 src.py
+Please insert the vector: 1 2 -3 4 -1 -2 0 1
+[-2, -1, -3, 4, 2, 1, 0, 1]
+
+$ python3 src.py
+Please insert the vector: 1 2 3
+[1, 2, 3]
+\end{verbatim}
 
 \pagebreak
 
-** 6. (\textit{Aproximarea numerică a unei integrale folosind formula trapezului}) Considerăm o funcție reală $f$ continuă pe intervalul $[a,b]$. (...) valoarea integralei definite a lui $f$ între limitele $[a,b]$ se aproximează prin aria trapezului cu vârfurile $(a, 0), (b, 0), (a, f(a)), (b, f(b))$. Deci
+** 6. (\textit{Aproximarea numerică a unei integrale folosind formula trapezului}) Considerăm o funcție reală $f$ continuă pe intervalul $[a,b]$. (...) valoarea integralei definite a lui $f$ între limitele $[a,b]$ se aproximează prin aria trapezului cu vârfurile $(a, 0), (b, 0), (a, f(a)), (b, f(b))$. Deci:
 
 #+begin_export latex
-\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
-\newcommand\ddint{\displaystyle\int}
-$$\[
-\ddint_a^b f(x)\,\mathrm{d}x = 
-\begin{cases}
-\displaystyle\frac{b-a}{2}(f(a) + f(b)), & b - a < \varepsilon \\
-\ddint_a^c f(x)\,\mathrm{d}x + \ddint_c^b f(x)\,\mathrm{d}x,\ \ c = \ddfrac{a+b}{2},& b-a \ge \varepsilon
+\[
+\int_a^b f(x)\,\mathrm{d}x = 
+\begin{dcases}
+\frac{b-a}{2}(f(a) + f(b)), & b - a < \varepsilon \\
+\int_a^c f(x)\,\mathrm{d}x + \int_c^b f(x)\,\mathrm{d}x,\ \ c = \frac{a+b}{2},& b-a \ge \varepsilon
 \end{cases}
-\]$$
+\]
 #+end_export
 
 # :tangle from4.py
@@ -925,7 +1105,6 @@ def cos(x, iterations=20):
         res += pow/factorial
     return res
 
-
 def integrate(f, a, b, eps=1e-4):
     delta = b - a
     if delta >= eps: 
@@ -934,29 +1113,24 @@ def integrate(f, a, b, eps=1e-4):
     return delta * (f(a) + f(b)) / 2
 
 from math import pi
+
 print("e^x:", integrate(exp, 0, 1))# should be e - 1
 print("x^2:", integrate(lambda x: x*x, -1, 1))# should be 2/3
+print("x^.5:", integrate(lambda x: x**0.5, 0, 1))# should be 2/3
 print("cos:", integrate(cos, -pi/2, pi/2))# should be 2
 #+END_SRC
 
-#+RESULTS:
-: e^x: 1.7182818289924702
-: x^2: 0.6666666679084301
-: cos: 1.9999999984680359
-
-#+BEGIN_SRC sh :results output :exports results
-python3 src/integrals.py 4
-echo ""
+#+BEGIN_SRC sh :results output :exports none
+python3 src/integrals.py
 #+END_SRC
 
-
-
-#+RESULTS:
-: $ python3 integrals.py
-: e^x 1.7182818289924702
-: x^2 0.6666666679084301
-: cos 1.9999999984680359
-: 
+\begin{verbatim}
+$ python3 integrals.py
+e^x: 1.7182818289924702
+x^2: 0.6666666679084301
+x^.5: 0.6666665676940103
+cos: 1.9999999984680359
+\end{verbatim}
 
 \pagebreak
 
@@ -973,7 +1147,7 @@ index = 0
 
 flag = [-1,0,0,0]
 k = 0
-maxK = 3
+maxK = 4
 print("Long mode (y/N):", end="")
 if input()[0].lower() == 'y': maxK = 3
 
@@ -1003,23 +1177,29 @@ while k >= 0:
         
         
 #+END_SRC
-#+BEGIN_SRC sh :results output :exports results
+#+BEGIN_SRC sh :results output :exports none
 python3 src/flag.py
-
 #+END_SRC
+
+\begin{verbatim}
+$ python3 flags.py
+Long mode (y/N): n
+gvn gva gvr gvb gnv gna gnr gnb vgn vga vgr vgb vng vna vnr vnb ngv nga ngr ngb 
+nvg nva nvr nvb agv agn agr agb avg avn avr avb ang anv anr anb rgv rgn rga rgb 
+rvg rvn rva rvb rng rnv rna rnb bgv bgn bga bgr bvg bvn bva bvr bng bnv bna bnr 
+\end{verbatim}
 
 ** 11. Determinați toate submulțimile mulțimii $A = \{a_1, a_2, ..., a_n\}, n \in \mathbb{N}^*$, cu proprietatea că suma elementelor unei submulțimi este $s$.
 
 #+BEGIN_SRC python -n :results output :exports code
-print("Please insert the set: ", end="")
-strs = input().split(' ')
+strs = input("Please insert the set: ").split(' ')
 A = [int(num) for num in strs if num != ""]
-print("Please insert s: ", end="")
-s = int(input())
+s = int(input("Please insert s: "))
 
 size = len(A)
 x = [-1 for i in range(size+1)]
 k = 0
+empty = True
 while k >= 0:
     if x[k] < size-1:
         x[k] += 1        
@@ -1036,6 +1216,7 @@ while k >= 0:
         if not valid() or sum > s: continue
       
         if sum == s:
+            empty = False
             print("{", end="")
             for i in x[:k]: print(A[i], end=", ")
             print(A[x[k]], end="}, ")
@@ -1045,126 +1226,190 @@ while k >= 0:
             k += 1
     else:
         k -= 1
-print()
+
+print("No subset can do that." if empty else "")
 #+END_SRC
 
-#+RESULTS:
+\begin{verbatim}
+Please insert the set: 1 2 3 4 5
+Please insert s: 5
+{1, 4}, {2, 3}, {5}, 
 
-#+BEGIN_SRC sh :results output :exports results
-python3 src/subsets.py "1 2 3 4 5" "5"
-echo ""
-python3 src/subsets.py "0 1 2 3 4 5" "5"
-echo ""
-python3 src/subsets.py "1 2 3 4" "44"
-echo ""
-
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
 Please insert the set: 0 1 2 3 4 5
 Please insert s: 5
-k []
-k [0]
-k [0]
-k [0, 1]
-k [0, 1]
-k [0, 1, 2]
-k [0, 1, 2]
-k [0, 1, 2]
-k [0, 1, 2]
-k [0, 1]
-k [0, 1, 3]
-k [0, 1, 3]
-k [0, 1, 3]
-k [0, 1]
-{0, 1, 4}, k [0, 1, 4]
-k [0, 1, 4]
-k [0, 1]
-k [0]
-k [0, 2]
-k [0, 2]
-{0, 2, 3}, k [0, 2, 3]
-k [0, 2, 3]
-k [0, 2, 3]
-k [0, 2]
-k [0, 2]
-k [0]
-k [0, 3]
-k [0, 3]
-k [0, 3]
-k [0]
-k [0, 4]
-k [0, 4]
-k [0]
-{0, 5}, k [0, 5]
-k []
-k [1]
-k [1]
-k [1, 2]
-k [1, 2]
-k [1, 2]
-k [1, 2]
-k [1]
-k [1, 3]
-k [1, 3]
-k [1, 3]
-k [1]
-{1, 4}, k [1, 4]
-k [1, 4]
-k [1]
-k []
-k [2]
-k [2]
-{2, 3}, k [2, 3]
-k [2, 3]
-k [2, 3]
-k [2]
-k [2]
-k []
-k [3]
-k [3]
-k [3]
-k []
-k [4]
-k [4]
-k []
-{5}, k [5]
-
+{0, 1, 4}, {0, 2, 3}, {0, 5}, {1, 4}, {2, 3}, {5}, 
 
 Please insert the set: 1 2 3 4
 Please insert s: 44
-k []
-k [0]
-k [0]
-k [0, 1]
-k [0, 1]
-k [0, 1, 2]
-k [0, 1, 2]
-k [0, 1, 2, 3]
-k [0, 1]
-k [0, 1, 3]
-k [0]
-k [0, 2]
-k [0, 2]
-k [0, 2, 3]
-k [0]
-k [0, 3]
-k []
-k [1]
-k [1]
-k [1, 2]
-k [1, 2]
-k [1, 2, 3]
-k [1]
-k [1, 3]
-k []
-k [2]
-k [2]
-k [2, 3]
-k []
-k [3]
+No subset can do that.
+\end{verbatim}
 
-
-#+end_example
 \pagebreak
+
+* Laborator 10-11
+** 6. Se citește o secvența de $n$ numere întregi. Afișați cea mai lungă subsecvență $(x_1, x_2,..., x_m)$, $m \le n$, care se poate construi din numerele citite, astfel încât $x_1 \le x_2 \ge x_3 \le x_4 \ge ... \le x_{m-1} \ge x_m$.
+#+BEGIN_SRC python -n :results output :exports code
+def get_sequence_len(s):
+    i = 1
+    for i in range(1, len(s)):
+        if i % 2 == 1:
+            if s[i-1] > s[i]: return i
+        else:
+            if s[i-1] < s[i]: return i
+    return i + 1
+
+print("Please insert the set: ", end="")
+strs = input().split(' ')
+s = [int(str) for str in strs if str != ""]
+max_i = 0
+max_l = 1
+i = 0
+n = len(s)
+while i < n:
+    l = get_sequence_len(s[i:])
+    if l > max_l:
+        max_l = l
+        max_i = i
+    i += l
+
+print("m:", s[max_i:max_i+max_l])
+
+#+END_SRC
+#+BEGIN_SRC sh :results output :exports none
+python3 src/l10_6.py "1 2 3 4 5 6"
+echo ""
+python3 src/l10_6.py "1 0 1 0 1 3 0 2 0 3 0 4 5"
+echo ""
+python3 src/l10_6.py "1 2 1 3 2 4 3 5"
+echo ""
+python3 src/l10_6.py "1 0 1 1 1 0 1 0 1"
+#+END_SRC
+
+\begin{verbatim}
+$ python3 src.py
+Please insert the set: 1 2 3 4 5 6
+m: [1, 2]
+
+$ python3 src.py
+Please insert the set: 1 0 1 0 1 3 0 2 0 3 0 4 5
+m: [0, 2, 0, 3, 0, 4]
+
+$ python3 src.py
+Please insert the set: 1 2 1 3 2 4 3 5
+m: [1, 2, 1, 3, 2, 4, 3, 5]
+
+$ python3 src.py
+Please insert the set: 1 0 1 1 1 0 1 0 1
+m: [0, 1, 1, 1, 0, 1, 0, 1]
+\end{verbatim}
+
+\pagebreak
+** 8. Se consideră $n$ intervale $[a_i,b_i]$, $a_i, b_i \in \mathbb{Z}$, $i \in \overline{1,n}$
+#+begin_export latex
+\begin{enumerate}
+\item[a)] Calculați suma lungimilor tuturor intervalelor (intervale care se suprapun se vor lua în considerare o singură dată).
+\item[b)] Determinați reuniunea acestora.
+\item[c)] Un interval poate fi eliminat dacă este inclus în alt interval din șir. Afișați numărul maxim de intervale care pot fi eliminate.
+\item[d)] Să se determine o mulțime $X$ cu un număr minim de elemente așa încât pentru orice interval din șir să existe un element $x \in X$ care să aparțină intervalului.
+\end{enumerate}
+#+end_export
+#+BEGIN_SRC python -n :results output :exports code 
+class Interval:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+    def intersection(A, B):# $A \cap B$
+          # assume A is on the left
+          if A.a > B.b: return B.intersection(A)
+          if A.b < B.a: return None
+          return Interval(B.a, A.b)
+    def in_(A, B): # $A \subseteq B$
+        return A.a >= B.a and A.b <= B.b
+    def __eq__(A, B): #$A = B$
+        return A.a == B.a and A.b == B.b
+    def length(self): return self.b - self.a
+    def dup(self): return Interval(self.a, self.b)
+
+class SuperInterval:
+    def __init__(self, interval):
+        self.intervals = [interval.dup()]
+
+    # returns True if it can be eliminated
+    def add_reunion(self, A):
+        # we could sort the intervals after b, but this is already
+        # a lot of code
+        for i in range(len(self.intervals)):
+            itv = self.intervals[i]
+            intr = A.intersection(itv)
+            if intr is None: continue
+            if A.in_(itv): return True
+            if itv.in_(A):
+                itv.a = A.a
+                itv.b = A.b
+                return True
+            if A.a < itv.a: itv.a = A.a
+            if A.b > itv.b: itv.b = A.b
+            itv = self.intervals.pop(i)
+            return self.add_reunion(itv)
+        self.intervals.append(A.dup())
+        return False
+    # $\mathit{self} \cap A$ if not $\varnothing$, $\mathit{self} \cup A$ otherwise
+    def add_intersection(self, A):
+        for itv in self.intervals:
+            intr = A.intersection(itv)
+            if intr is None: continue
+            itv.a = intr.a
+            itv.b = intr.b
+            return
+        self.intervals.append(A.dup())
+    def length(self):
+        l = 0
+        for i in self.intervals: l += i.length()
+        return l
+    def __str__(self):
+        s = ""
+        for i in self.intervals: s += "[%d, %d] " % (i.a, i.b)
+        return s
+
+strs = input("Please insert intervals (of format [a,b]): ").split(' ')
+from parse import parse
+intervals = []
+for s in strs:
+    res = parse("[{},{}]", s)
+    intervals.append(Interval(int(res[0]), int(res[1])))
+
+si = SuperInterval(intervals[0])
+si2 = SuperInterval(intervals[0])
+count = 0
+for i in intervals[1:]:
+    if si.add_reunion(i): count += 1
+    si2.add_intersection(i)
+X = [i.a for i in si2.intervals]
+print("a)", si.length())
+print("b)", si)
+print("c)", count)
+print("d) X = {", ("%s" % X)[1:-1], "}")
+#+END_SRC 
+
+#+BEGIN_SRC sh :results output :exports none
+python3 src/intervals.py "[1,2] [1,3] [2,3] [4,5] [5,6] [3,4] [7,9]"
+echo ""
+python3 src/intervals.py "[1,3] [3,4] [4,6]"
+
+#+END_SRC
+
+\begin{verbatim}
+$ python3 intervals.py
+Please insert intervals (of format [a,b]): [1,2] [1,3] [2,3] [4,5] [5,6] [3,4] [7,9]
+a) 7
+b) [1, 6] [7, 9] 
+c) 2
+d) X = { 1, 4, 7 }
+
+$ python3 intervals.py
+Please insert intervals (of format [a,b]): [1,3] [3,4] [4,6]
+a) 5
+b) [1, 6] 
+c) 0
+d) X = { 1 }
+\end{verbatim}
