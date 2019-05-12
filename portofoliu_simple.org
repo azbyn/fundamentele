@@ -56,7 +56,7 @@
         - Nu garantez că problemele puse de alții sunt corecte (să citiți și cerințele);\\
         - Dacă găsiți ceva greșit spuneți-mi;\\
         - Nu scrieți comentariile, sunt mai mult pentru amuzamentul meu;\\
-        - Voi mai actualiza acest pdf cand mai primim fișe de laboratoare.\\ Deci intrați din nou \href{https://github.com/azbyn/fundamentele/blob/master/portofoliu_simple.pdf}{aici} după duminica viitoare (19 mai).
+        - Voi mai actualiza acest pdf cand mai primim fișe de laboratoare sau cand mai primesc exercitii rezolvate de la cineva. Deci intrați din nou pe acelasi link (\href{https://github.com/azbyn/fundamentele/blob/master/portofoliu_simple.pdf}{aici}).
     
     \begin{center}
         \vfill
@@ -548,7 +548,7 @@ int main() {
             m2 = m1;
             m1 = x[i];
         }
-        else if (m2 > x[i]) { // linia ż'
+        else if (m2 > x[i]) { // linia $\lambda$
               m2 = x[i];
         }
     }
@@ -559,8 +559,8 @@ int main() {
 }
 #+END_SRC
 \noindent
-Cazul cel mai favoriabil (m1 >= x[i]) $\forall i \in \{2, ...n-1\}$. T(n) = n-2 (se execută doar linia ż). \\
-Cazul cel mai defavorabil (m1 < x[i]) $\forall i \in \{2, ...n-1\}$ : T(n) = 2n-4 (se execută linia ż și ż'). \\
+Cazul cel mai favoriabil (m1 >= x[i]) $\forall i \in \{2, ...n-1\}$: T(n) = n-2 (se execută doar linia ż). \\
+Cazul cel mai defavorabil (m1 < x[i]) $\forall i \in \{2, ...n-1\}$: T(n) = 2n-4 (se execută linia ż și $\lambda$). \\
 Mereu $T(n) \in \Theta(n)$.
 
 \pagebreak
