@@ -1,4 +1,4 @@
-% Created 2019-05-11 Sat 22:19
+% Created 2019-05-12 Sun 13:02
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -47,18 +47,24 @@
         \vspace{2cm}
         \Large
         {Numele tău aici}\\
-        \vspace{5cm}
+        \vspace{2cm}
  
         %\vfill
  
-        \vspace{0.8cm}
- 
- 
     \end{center}
+    \Large
+        Contribuitori:\\
+        - Sabina \\
+        - Carla \\
+        
+
+        \vspace{2cm}
         \Large
+        \noindent
         - Dacă vreți probleme rezolvate mai grele intrati \href{https://github.com/azbyn/fundamentele/blob/master/portofoliu.pdf}{aici};\\
         - Dacă nu înțelegeți ceva întrebați-mă;\\
         - Vă invit sa mai scrieți și problemele voastre (da, știu);\\
+        - Nu garantez că problemele puse de alții sunt corecte (să citiți și cerințele);\\
         - Dacă găsiți ceva greșit spuneți-mi;\\
         - Nu scrieți comentariile, sunt mai mult pentru amuzamentul meu;\\
         - Voi mai actualiza acest pdf cand mai primim fișe de laboratoare.\\ Deci intrați din nou \href{https://github.com/azbyn/fundamentele/blob/master/portofoliu_simple.pdf}{aici} după duminica viitoare (19 mai).
@@ -70,10 +76,11 @@
  
 \end{titlepage}
 
+
 \section*{Laborator 1}
-\label{sec:orga838843}
+\label{sec:orgfd967d1}
 \subsection*{8. Aproximați cu precizia \(\varepsilon\) limita la \(+ \infty\) a șirului \((s_n)_{n\in \mathbb{N}^*}\), definit prin}
-\label{sec:org71df7d4}
+\label{sec:orgb183e32}
 \[#x_n = \left(1+\frac{1}{n}\right)^n, n \ge 1.\]
 
 
@@ -123,12 +130,260 @@ int main() {
 
 \end{minted}
 
+\subsection*{1. (Carla) BMI}
+\label{sec:org7cfba4f}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include <iostream>
+using namespace std;
+
+int main() {
+    unsigned kg, m;
+    float ma = 0;
+    cin >> kg >> m;
+    ma=kg/m^2;
+    if (ma<18.5)
+        cout << "risc minim pentru sanatate" << endl;
+    else if (ma>=18.5 && ma<25)
+        cout << "risc minim/scazut pentru sanatate" << endl;
+    else if (ma>=25 && ma<30)
+        cout << "risc scazut/moderat pentru sanatate" << endl;
+    else if (ma>=30 && ma<35)
+        cout << "risc moderat/ridicat pentru sanatate" << endl;
+    else cout << "risc ridicat pentru sanatate" << endl;
+    return 0;
+}
+\end{minted}
+\subsection*{2. (Carla) functia}
+\label{sec:orgedcbad4}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    float x, f=0;
+    cin >> x;
+    if (x>=-5 && x<=5)
+        f=sqrt(abs(x))+6;
+    else f=5*x*x+7;
+    cout << f << endl;
+    return 0;
+}
+\end{minted}
+\subsection*{3. (Carla) alta functie}
+\label{sec:orga499097}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+int functie(int x, int y, int a, int b) {
+    int c=0;
+    if (abs(x)<=8 && abs(y)<=8)
+        c=a*b*sqrt(x*x+y*y)*sin(x*x+y*y);
+    return c;
+}
+\end{minted}
+
+\subsection*{4. (Carla) cifra destinului (uau)}
+\label{sec:org0fb5e02}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int nastere(int zi, int luna, int an) {
+    int x = 0;
+    while (zi) {
+        x=x+zi%10;
+        zi=zi/10;
+    }
+    while (luna) {
+        x=x+luna%10;
+        luna=luna/10;
+    }
+    while (an) {
+        x=x+an%10;
+        an=an/10;
+    }
+    return x;
+}
+
+int destin(int x) {
+    unsigned s=0;
+    if (x<10) return x;
+    else while (x) {
+        s=s+x%10;
+        x=x/10;
+    }
+    return s;
+}
+int main() {
+    int a,b,c;
+    cin >> a >> b >> c;
+    int x=nastere(a,b,c);
+    cout << destin(x) << endl;
+    return 0;
+}
+\end{minted}
+\subsection*{5. (Carla) ăla cu multe subpuncte}
+\label{sec:org0a7dc28}
+\subsection*{a)}
+\label{sec:org9b8b5aa}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main () {
+    float a, b, c, d, x1, x2;
+    cin >> a >> b >> c; // coeficientii
+    d=b*b-4*a*c; //delta
+    x1=(-b-sqrt(d))/2*a; //prima solutie
+    x2=(-b+sqrt(d))/2*a; // a doua solutie
+    cout << x1 << ' ' << x2 << endl;
+    return 0;
+}
+\end{minted}
+\subsection*{b)}
+\label{sec:org963a05b}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    float x, n, max=-100000, min=100000;
+    cin >> n; //numarul de elemente
+    while (n) {
+        cin >> x;// element cu element
+        if (max<x)
+            max=x;
+        if (min>x)
+            min=x;
+        n--;
+    }
+    cout << max << ' ' << min << endl;
+    return 0;
+}
+\end{minted}
+\subsection*{k)}
+\label{sec:orgf4b04a6}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include <iostream>
+using namespace std;
+
+int main() {
+    unsigned n,d;
+    cin>>n;
+    for(d=2;d<=n/2;d++)
+        if(n%d==0)
+            cout<<d<<" ";
+    cout << endl;
+    return 0;
+}
+\end{minted}
+\subsection*{6. (Carla) nr perfect}
+\label{sec:org249cc7e}
+
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include <iostream>
+
+using namespace std;
+
+
+// Pąblo: poate fi bool, avem și d-ăștea in c++ 
+int perfect(int n) {
+    int d;
+    int s = 1;
+    if (n<=2) return 0;
+    else {
+        for (d=2; d*d<=n; d++)
+            if (n%d==0) {
+                s=s+d;
+                if (n/d!=d)
+                    s=s+(n/d);
+            }
+        if (n==s)
+            return 1;
+    }
+    return 0;
+}
+int main() {
+    int n;
+    cin >> n;
+    if (perfect(n))
+        cout << n << " este perfect" << endl;
+    else cout << n << " nu este perfect" << endl;
+
+    return 0;
+}
+\end{minted}
+\subsection*{10. (Carla) Operatii cu multimi}
+\label{sec:orgb110111}
+\subsection*{Apartenenta}
+\label{sec:orgd9b6d33}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n, ok=0, c;
+    cin >> n;
+    int v[n+1];
+    for (int i=1;i<=n;i++)
+        cin >> v[i];
+    cin >> c;
+    for (int i=1;i<=n;i++)
+        if (v[i]==c)
+            ok=1;
+    if (ok==1)
+        cout << "apartine" << endl;
+    else cout << "nu apartine" << endl;
+
+    return 0;
+}
+\end{minted}
+\subsection*{Reuninunea}
+\label{sec:org4fdbce5}
+\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
+#include<iostream>
+using namespace std;
+
+int main() {
+    int a[20], b[20], c[50], i, j, m, n, k, gasit;
+    cin>>n;
+    for (i=0; i< n; i++) {
+        cin>>a[i]; 
+    }
+    cin>>m;
+
+    for(i=0; i<=m-1; i++) {
+        cin>>b[i];
+    }
+
+    k=0;
+    for(i=0; i<=n-1; i++) {
+        gasit=0;
+        for(j=0; j<=m-1 && !gasit; j++)
+            if (a[i]==b[j])
+                gasit=1;
+        if(!gasit)
+            c[k++]=a[i];
+    }
+
+    for (i=0; i<=m-1; i++)
+        cout << b[i] << " ";
+    for (i=0; i<k; i++)
+        cout<<c[i]<<" ";
+
+    return 0;
+}
+\end{minted}
+
 \pagebreak
 
 \section*{Laborator 2}
-\label{sec:orgf2e21dd}
-\subsection*{2. Suma cifrelor - corectitudinea}
-\label{sec:org8f3ca1d}
+\label{sec:orgb782ee6}
+\subsection*{2. (Inspirat de Sabina) Suma cifrelor - corectitudinea}
+\label{sec:orge347d47}
 
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
@@ -254,9 +509,9 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 
 \pagebreak
 \section*{Laborator 3}
-\label{sec:org20158fb}
-\subsection*{2. Descrieți un algoritm pentru calculul produsului scalar a doi vectori din \(\mathbb{R}^n\)\ldots{}}
-\label{sec:org6c27aa0}
+\label{sec:org4fecee6}
+\subsection*{2. (Inspirat de Sabina) Descrieți un algoritm pentru calculul produsului scalar a doi vectori din \(\mathbb{R}^n\)\ldots{}}
+\label{sec:org4f89105}
 
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
@@ -277,7 +532,7 @@ int main() {
     for (int i = 0; i < n; ++i) // ż+1
         ps = ps + x[i] * y[i];  // ż+2
 
-    // și endl e oribil
+    // nici 'endl' nu e cea mai grozava chestie:
     cout << ps << endl;
     return 0;
 }
@@ -294,9 +549,9 @@ operația & cost & nr repetari & cost total\\
 
 \pagebreak
 \section*{Laborator 4}
-\label{sec:org0dba77a}
-\subsection*{4. Cele mai mici 2 elemente dintr-o secvența}
-\label{sec:org452142c}
+\label{sec:orga192196}
+\subsection*{4. (Inspirat de Sabina) Cele mai mici 2 elemente dintr-o secvența}
+\label{sec:org94a6ba9}
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
 using namespace std;
@@ -342,9 +597,9 @@ Mereu \(T(n) \in \Theta(n)\).
 \pagebreak
 
 \section*{Laborator 5}
-\label{sec:org5f72b82}
+\label{sec:orgee9a64e}
 \subsection*{1. La o stație meteo \ldots{}.}
-\label{sec:orgdd0cd8a}
+\label{sec:org2fe8db7}
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
 using namespace std;
@@ -381,9 +636,9 @@ int main() {
 \pagebreak
 
 \section*{Laborator 6}
-\label{sec:org7d7ac84}
+\label{sec:orgac7055f}
 \subsection*{5. Ackermann}
-\label{sec:orged757dc}
+\label{sec:org6365d13}
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 int A(int m, int n) {
     if (m == 0) {
@@ -397,7 +652,7 @@ int A(int m, int n) {
 \end{minted}
 
 \subsection*{8. Baza 2}
-\label{sec:org048a635}
+\label{sec:org0a4380a}
 
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
@@ -429,9 +684,9 @@ int main() {
 \pagebreak
 
 \section*{Laborator 7}
-\label{sec:orge29d6a0}
+\label{sec:org7827a26}
 \subsection*{2. Fibonacci}
-\label{sec:org86624a6}
+\label{sec:org509a009}
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
 #include <cmath>
@@ -466,9 +721,9 @@ int main() {
 
 \pagebreak
 \section*{Laborator 8}
-\label{sec:org9ba5cd7}
+\label{sec:org6633bbe}
 \subsection*{6. Problema aia lunga cu integrala definita}
-\label{sec:orgd408ebc}
+\label{sec:org68c43a1}
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 // puteți sa nu scrieți liniile astea 2 si functia main
 #include <iostream>
@@ -512,9 +767,9 @@ int main() {
 \pagebreak
 
 \section*{Laborator 9}
-\label{sec:org896f13c}
+\label{sec:org04e1a5f}
 \subsection*{5. numere de 4 cifre cu suma cifrelor 11}
-\label{sec:orgf8accc4}
+\label{sec:org802e318}
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
 using namespace std;
@@ -580,9 +835,9 @@ int main() {
 
 \pagebreak
 \section*{Laborator 10-11}
-\label{sec:org0eaf11e}
+\label{sec:org2cce63c}
 \subsection*{5. Gidul turistic și drumețiile sale}
-\label{sec:org86313fa}
+\label{sec:orgf53fff2}
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
 using namespace std;
@@ -652,7 +907,7 @@ int main() {
 \end{minted}
 
 \subsection*{9. interclasarea sirurilor (nu scrieti)}
-\label{sec:orgdabcad7}
+\label{sec:org8dbb666}
 \begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{cpp}
 #include <iostream>
 #include <vector>
@@ -682,7 +937,7 @@ vector<unsigned> sleep_sort(const vector<vector<unsigned>>& x) {
     for (auto& t : threads)
          t.join();
     return res;
-}
+    }
 
 using Clock = high_resolution_clock;
 int main() {
