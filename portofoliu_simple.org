@@ -55,7 +55,7 @@
         - Vă invit sa mai scrieți și problemele voastre (da, știu);\\
         - Nu garantez că problemele puse de alții sunt corecte (să citiți și cerințele);\\
         - Dacă găsiți ceva greșit spuneți-mi;\\
-        - Nu scrieți comentariile, sunt mai mult pentru amuzamentul meu;\\
+        - O parte din comentarii sunt pentru amuzamentul meu, iar în restul incerc să explic ce face (și de ce face) programul; \\
         - Voi mai actualiza acest pdf cand mai primim fișe de laboratoare sau cand mai primesc exercitii rezolvate de la cineva. Deci intrați din nou pe acelasi link (\href{https://github.com/azbyn/fundamentele/blob/master/portofoliu_simple.pdf}{aici}).
     
     \begin{center}
@@ -74,6 +74,7 @@
 
 #+BEGIN_SRC cpp -n :results output :exports code
 #include <iostream>
+//includem cmath pentru ca avem nevoie de 'pow'
 #include <cmath>
 
 // 'using namespace std;' nu e cea mai bună practică, 
@@ -99,23 +100,32 @@
 // Dar pentru ce facem noi la info, să zicem că e ok să scriem asta:
 using namespace std;
 
+// E (foarte) posibil ca aceste comentarii sa fie foarte evidente dar
+// nu știu altceva ce sa scriu.
 int main() {
+    // x0 ar fi $x_{n-1}$ si x1, $x_{n} $
     double eps, x0 = 0, x1 = 0;
+    // delta e diferența intre termenii consecutivi
+    // o initializam cu un numar mare care sigur e mai mare decat eps
     double delta = 10000;
     cin << eps;
 
     int n = 1;
+    // daca ne simțeam aventuroși puteam scrie
+    // for (int n = 1; delta > eps; n++) {
     while (delta > eps) {
+        // am incrementat n, deci $x_{n-1}$ devine $x_{n}$
         x0 = x1;
+        // implementam definitia care ni se da
         x1 = pow(1 + 1.0 / n, n);
         n++;
+        // actualiazm delta 
         delta = x1 - x0;
     }
     cout << x1 << endl;
 
     return 0;
 }
-
 #+END_SRC
 
 ** 1. (Carla) BMI
@@ -123,6 +133,7 @@ int main() {
 #include <iostream>
 using namespace std;
 
+// Pąblo: good luck
 int main() {
     unsigned kg, m;
     float ma = 0;
@@ -364,6 +375,10 @@ int main() {
 using namespace std;
 
 int main() {
+    // sper ca intelegeți ce face codul asta,
+    // daca nu incercati sa dati un exemplu pe o foaie 
+    // și efectuati pas cu pas etapele algoritmului
+    // (puteti citi și ce scrie mai jos, deși nu cred că ajută)
     int n, s = 0;
     cin << n;
     int i = 0;
@@ -488,13 +503,17 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 * Laborator 3
 ** 2. (Inspirat de Sabina) Descrieți un algoritm pentru calculul produsului scalar a doi vectori din $\mathbb{R}^n$...
 
+(1) $ps = \left<x, y\right> = \sum\limits_{i=1}^n x_i y_i$
 #+BEGIN_SRC cpp -n :results output :exports code
 #include <iostream>
 using namespace std;
+
 // e important sa numerotați liniile aici
 int main() {
     int n, x[100], y[100];
+    // citim marimea vectorului
     cin >> n;
+    // citim vectorul, chestie destul de standard
     cout << "x = ";
     for (int i = 0; i < n; ++i)
         cin >> x[i];
@@ -502,7 +521,9 @@ int main() {
     for (int i = 0; i < n; ++i)
         cin >> y[i];
     
+    // in variabila asta memoram produsul scalar
     int ps = 0;
+    // (vezi formula de sus)
     // sa spunem ca linia asta e ż (15, sau cat e ea)
     for (int i = 0; i < n; ++i) // ż+1
         ps = ps + x[i] * y[i];  // ż+2
@@ -528,32 +549,60 @@ using namespace std;
 int main() {
     int n, x[100];
     cin >> n;
+    //
     for (int i = 0; i < n; ++i)
         cin >> x[i];
 
     // nu mai este 1989, putem declara variabile si la mijlocul functiei
     int m1, m2;
     // presupunem ca utilizatorul e rezonabil (nu e) si spunem ca n >= 2
+
+    // in m1 memoram cel mai mic element si in m2 al 2-lea cel mai mic,
+    // deci: m1 $\le$ m2
+
+    // initializam cel m1, m2 cu primele 2 elemente din secvența 
     m1 = x[0];
     m2 = x[1];
+    
 
-    // m1 < m2
+    // ne asiguram ca m1 si m2 sunt in ordinea asteapata
+    // (adica m1 $\le$ m2), iar daca nu le interschimbăm
     if (m2 < m1) {
         int t = m1;
         m1 = m2;
         m2 = t; //in loc de t putem folosi x[0]
     }
     for (int i = 2; i < n; i++) {
-        if (m1 >= x[i]) { // linia ż
+        // daca x[i] e mai mic decat m1, atunci sigur e mai mic si decat
+        // m2, asadar curentul m1 e al doilea cel mai mic nr din secvența
+        // (pana acum), deci il punem in m2
+        // deoarece x[i] este cel mai mic, il punem in m1
+
+        if (x[i] <= m1) { // linia ż
             m2 = m1;
             m1 = x[i];
         }
-        else if (m2 > x[i]) { // linia $\lambda$
+        // aici am pus '<' si mai sus '<=' deoarece e posibil sa avem
+        // de doua ori cea mai mica valoare, si atunci m1 = m2 = min{x}
+        // daca ajungem sa comparam x[i] cu m2, inseamna ca x[i] > m1 
+        else if (x[i] < m2) { // linia $\lambda$
+              // daca ajungem aici, x[i] este al doilea cel mai mic
+              // element din secventa, si il punem in m2
               m2 = x[i];
         }
     }
-
+    // afisam ce trebuie (primele 2 elemente)
     cout << m1 << " " << m2 << endl;
+
+    // o alta metoda de rezolvare a problemei ar fi sa sortam secvența
+    // pana la al 2-lea element si sa afisam primele 2 elemente:
+    // (tot $\Theta(n)$)
+    //for (int i = 0; i < 2; i++)
+    //    for (int j = 0; j < n; j++) 
+    //        if (x[j] < x[i]) {
+    //            int t = x[i]; x[i]= x[j]; x[i] =t;
+    //        }
+    // cout << x[0] << " " << x[1];
         
     return 0;
 }
@@ -567,6 +616,13 @@ Mereu $T(n) \in \Theta(n)$.
 
 * Laborator 5
 ** 1. La o stație meteo ....
+#+begin_import latex
+Notam cu $p_i$ presiunea din ziua $i$ si cu $t_i$ temperatura din ziua $i$, $i \in \overline{1,n}$.\\
+Notam $i \preceq j$ daca ziua $i$ ar trebui sa apara inaitea zilei $j$:
+
+$i \preceq j \iff (t_i < t_j) \vee ((t_i = t_j) \wedge (p_i > p_j))$
+
+#+end_import
 #+BEGIN_SRC cpp -n :results output :exports code 
 #include <iostream>
 using namespace std;
@@ -577,15 +633,22 @@ struct Zi {
 
 int main() {
     int n;
+    Zi x[100];
+
+
     cin >> n;
 
-    Zi x[100];
+    //citim elementele tabloului
     for (int i = 0; i < n; ++i)
         cin >> x[i].temp >> x[i].presiune;
 
     // daca vreți alt algoritm de sortare inlocuiți aici:
     for (int i = 0; i < n; ++i) {
         for (int j = i+1; j < n; ++j) {
+            // sortam cu relatia de ordine $\preceq$ de mai sus
+            // (practic sortam cum spune cerința: mai intai crescator
+            // dupa temperatura, iar daca temperaturile sunt egale, 
+            // descrescator dupa presiune)
             if (x[i].temp > x[j].temp || (x[i].temp == x[j].temp &&
                 x[i].presiune < x[j].presiune)) {
                Zi t = x[i];
@@ -594,6 +657,7 @@ int main() {
             }
         }
     }
+    // afisam vectorul dupa ce l-am sortat
     for (int i = 0; i < n; ++i)
        cout << "t:" << x[i].temp << ", p: "<< x[i].presiune << endl;
 
@@ -605,6 +669,7 @@ int main() {
 * Laborator 6
 ** 5. Ackermann
 #+BEGIN_SRC cpp -n :results output :exports code
+// Asta scrie in definitie, asta am scris.
 int A(int m, int n) {
     if (m == 0) {
         return n + 1;
@@ -623,12 +688,19 @@ int A(int m, int n) {
 #+BEGIN_SRC cpp -n :results output :exports code
 #include <iostream>
 using namespace std;
-
 // 47.145518,27.6036255  bdm tss
+
+// in tabloul s stocam caracterele corespunzatoare cifrelor lui n in
+// baza 2 in ordine inversa, daca n are z cifre in baza 2 atunci,
+// s[0] = a (z-1)-a cifră, s[1] = a (z-2)-a cifră... s[z-1] - prima
+// cifra, daca citim de la dreapta la stanga
+
+// functia returneaza cate cifre are n in baza 2 (z de mai sus), si
+// implicit, pana unde am modificat vectorul s
 int baza2(int n, char s[], int i) {
     if (n == 0) return i;
     // se poate si mai scurt ( s[i] = '0' + n%2;)
-    if (n %2 == 0)
+    if (n % 2 == 0)
         s[i] = '0';
     else s[i] = '1';
     return baza2(n/2, s, i+1);
@@ -636,11 +708,12 @@ int baza2(int n, char s[], int i) {
 
 int main() {
     char s[100];
-    int n = 10;
-    //cin >> n;
+    int n;
+    cin >> n;
 
     int len = baza2(n, s, 0);
-    for (int i = len -1; i >= 0; i--)
+    // afisam cifrele in ordinea corecta
+    for (int i = len - 1; i >= 0; i--)
         cout << s[i];
     cout << endl;
     return 0;
@@ -656,6 +729,8 @@ int main() {
 #include <cmath>
 using namespace std;
 
+
+// pe scurt: "asta zîce în curs"
 double putere(double x, int n) {
     if (n == 1) return x;
     double r = putere(x, n / 2);
@@ -663,6 +738,7 @@ double putere(double x, int n) {
     if (n % 2 == 1) r = r * x;
     return r;
 }
+// implementam formula data in cerinta
 int fib(int n) {
     // daca vreti sa mearga și fib(0) 
     // (momentan pt pow(x, 0), se blocheaza până dă stack oveflow),
@@ -691,6 +767,8 @@ int main() {
 #include <iostream>
 using namespace std;
 
+
+//aici definim functia ce va fi integrata
 double f(double x) {//f(x) = x^2
      // mai schimbati si voi putin expresia asta, cum ar fi 
      // return x; return 1; return sin(x); ....
@@ -704,6 +782,8 @@ double f(double x) {//f(x) = x^2
 //double integrate(double (*f)(double), double a, ...
 
 // daca vreti sa va simtiti mai romani puteti scrie "integreaza"
+
+// asta e formula data in cerinta
 double integrate(double a, double b, double eps) {
     double delta = b - a;
     if (delta < eps) {
@@ -738,13 +818,14 @@ using namespace std;
 
 // blasfemie, x ar trebui sa fie parametru pt functii,
 // dar asa ne spune in curs...
-int x[4], n=4;
+int x[4], n4;
 
 // am putea declara si asa:
 //constexpr int n = 4;
 //int x[n];
 // dar nici asta n-ar trebui sa stim, si tot blasfemie e
 
+// "asa spune si in curs"
 void afiseaza() {
     for (int i = 0; i < n; i++)
        cout << x[i];
@@ -757,6 +838,7 @@ bool valid() {
     return s == 11;
 }
 
+// "asa spune in curs"
 void btr(int k) {
     //int i = 0;
     //if (k == 0) i = 1;
@@ -805,6 +887,8 @@ using namespace std;
 struct Drumetie {
     int nr, s;
 };
+// "asa ne spune in curs", dar f = s+n
+// (final = start + nr de zile per calatorie)
 
 // am putea pune codul de aici in 'planificare', dar banuiesc ca
 // asa ați face majoritatea. (ceea ce nu e așa de rău)
@@ -868,6 +952,8 @@ int main() {
 
 ** 9. interclasarea sirurilor (nu scrieti)
 #+BEGIN_SRC cpp -n :results output :exports code :libs -pthread
+
+//nu scrieti
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -927,4 +1013,3 @@ int main() {
 O rezolvare mai serioasă ar fi concatenarea subșirurilor și sortarea cu radix sort (sau alt algoritm care nu compară elementele între ele). Asta face rezolvarea noastră mai bună decât rezolvarea vrută de autoarea problemei (metoda greedy), care trebuie sa compare cel puțin două elemente între ele.
 
 \vfill
-Și pentru a răspunde la posibila întrebare a Ionelei: da, m-am distrat.
