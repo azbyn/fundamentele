@@ -1,4 +1,4 @@
-% Created 2019-05-11 Sat 19:02
+% Created 2019-05-19 Sun 16:55
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -81,11 +81,11 @@
 \end{titlepage}
 
 \section*{Laborator 1}
-\label{sec:org23880cf}
+\label{sec:org21d4d07}
 \subsection*{15. O colecție de \(n\) monede sunt identice, cu excepția uneia, falsă, care are greutatea mai mică decât a celorlalte. Propuneți o strategie pentru a identifica moneda falsă folosind o balanță simplă și cât mai puține cântăriri.}
-\label{sec:org638f636}
+\label{sec:org7cfcab3}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 import random, math
 
 # The values aren't important, what matters is that fake < real
@@ -151,9 +151,9 @@ Took 3 steps to find the fake coin, expected 3
 \end{verbatim}
 
 \subsection*{16. Bucătarul unui restaurant a pregătit clătite și le-a stivuit pe o farfurie. Fiind începător, clătitele nu au ieșit la fel, având diametre diferite, iar farfuria arată destul de rău. Bucătarul șef a vrut să-i dea o lecție și i-a dat sarcina de a rearanja (cea cu diametrul cel mai mare să fie prima pe farfurie, apoi cea cu diametrul imediat următor ca mărime ș.a.m.d.) folosind doar o spatulă. Ce strategie să adopte?}
-\label{sec:org1e582fe}
+\label{sec:orgf63ba97}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 print("Please insert a space separated list of pancake diameters:\n(",
      end="")
 strs = input().split(' ')
@@ -233,10 +233,10 @@ Done in 4 flips
 \pagebreak
 
 \section*{Laborator 2}
-\label{sec:org7f62b00}
+\label{sec:org08fee83}
 \subsection*{10. Demonstrați corectitudinea algoritmului de determinare a valorii obținute prin inversarea ordinii cifrelor unui număr natural.}
-\label{sec:orga650f52}
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\label{sec:org6c4e057}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 n = int(input("Please insert n: "))
 
 res = 0
@@ -376,11 +376,11 @@ $t(i) = 0 \iff i = k + 1 \iff n = \sum\limits_{j=0}^{-1}c_{k+1+j}10^{j} = 0\iff$
 \pagebreak
 
 \section*{Laborator 3}
-\label{sec:orgae2f2b8}
+\label{sec:org60040c6}
 \subsection*{10. Considerăm o secvență \(x = (x_{0},..., x_{n-1})\) de \(n\) numere întregi, cu măcar un element pozitiv. O subsecvență a șirului este de forma \((x_{i}, x_{i+1},\ ...,\ x_{j})\), cu \(0 \le i \le j \le n - 1\), iar suma subsecvenței este suma elementelor componentelor sale. Descrieți un algoritm pentru a determina subsecvența de sumă maximă. Estimați timpul de execuție al algoritmului, precizând operația dominantă.}
-\label{sec:org6ecb3b1}
+\label{sec:org1f33276}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 print("Please insert the sequence: ", end="")
 strs = input().split(' ')
 v = [int(num) for num in strs if num != ""]
@@ -439,11 +439,11 @@ $T(n) = \frac{n(n-1)}{2} + n = \frac{n(n+1)}{2}$
 \pagebreak
 
 \section*{Laborator 4}
-\label{sec:orgb64e7b0}
+\label{sec:org43ee7b4}
 \subsection*{8. Considerăm o secvența \(x = (x_0, ..., x_{n-1})\) de \(n\) numere întregi. Generați tabloul \(f = (f_0, ..., f_{n-1})\), cu \(f_i = \sum\limits_{j=0}^{i}x_j\), printr-un algoritm de complexitate liniară.}
-\label{sec:org85bf7a0}
+\label{sec:org9e1ef36}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 strs = input("Please insert the sequence: ").split(' ')
 x = [int(num) for num in strs if num != ""]
 n = len(x)
@@ -464,9 +464,9 @@ Please insert the sequence: 1 2 3 0 -1 5
 \end{verbatim}
 
 \subsection*{9. Considerăm un tablou de valori întregi \(x = (x_0, ..., x_{n-1})\) și o valoare dată, s. Să se verifice daca există cel puțin doi indici \(i\) și \(j\) (nu neapărat distincți) cu proprietatea că \(x_i = x_j = s\). Analizați complexitatea algoritmului propus.}
-\label{sec:orgbe538f7}
+\label{sec:org5178284}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 strs = input("Please insert the sequence: ").split(' ')
 x = [int(num) for num in strs if str != ""]
 s = int(input("Please insert s: "))
@@ -498,11 +498,11 @@ Found 2 + 5 = 7
 
 \pagebreak
 \section*{Laborator 5}
-\label{sec:org032c0cf}
+\label{sec:org5b21128}
 \subsection*{4. (\textit{Shaker sort}) modificând algoritmul de sortare prin interschimbarea elementelor vecine, sortați elementele unui tablou, astfel încât, la fiecare pas, să se plaseze pe pozițiile finale câte două elemente: minimul, respectiv maximul din subtabloul parcurs la pasul respectiv.}
-\label{sec:org40eb63b}
+\label{sec:org0fa6c32}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 print("Please insert the array: ", end="")
 strs = input().split(' ')
 v = [int(num) for num in strs if num != ""]
@@ -550,7 +550,7 @@ Please insert the array: 40 3 43 95 9 2 4 0
 \end{verbatim}
 
 \subsection*{5. (\textit{Counting sort} - sortare prin numărare) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente din mulțimea \(\{0, 1, 2,...,m\}\). Pentru sortarea unui astfel de tablou poate fi descris un algoritm de sortare de complexitate liniară, dacă \(m\) nu este semnificativ mai mare ca \(n\). Pașii algoritmul sunt:}
-\label{sec:org2e6df21}
+\label{sec:orgb4def34}
 \begin{enumerate}
 \item [(a)] se construiește tabloul $f[0..m]$ al frecvențelor de apariție a elementelor tabloului $x$ ($f_i$ reprezintă de câte ori apare valoarea $i$ în tabloul $x$, $i = 0,...,m$);
 
@@ -561,7 +561,7 @@ Please insert the array: 40 3 43 95 9 2 4 0
 Descrieți algoritmul de sortare prin numărare. Care este complexitatea acestuia?
 
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 print("Please insert the array: ", end="")
 x = [int(num) for num in (input().split()) if num != ""]
 n = len(x)
@@ -613,9 +613,9 @@ $T(n, m) = 3n + m - 1$.
 $T \in O(n+m)$.
 
 \subsection*{6. (\textit{Radix sort} - sortare pe baza cifrelor) Considerăm un tablou \(x\) de dimensiune \(n\), cu elemente numere naturale de cel mult k cifre. Algoritmul de sortare este bazat pe următoarea idee: folosind counting sort, se ordonează tabloul în raport cu cifra cea mai puțin semnificativă a fiecărui număr, apoi se sortează în raport cu cifra de rang imediat superior ș.a.m.d., până de ajunge la cifra cea mai semnificativă. \(\\\) Descrieți algoritmul radix sort. Care este complexitatea acestuia?}
-\label{sec:org9d37ec6}
+\label{sec:orgdaf2dde}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 strs = input("Please insert the array: ").split()
 x = [int(num) for num in strs if num != ""]
 n = len(x)
@@ -676,9 +676,9 @@ $T(n, k) = 3kn + 19k$.
 $T \in O(kn)$.
 
 \section*{Laborator 6}
-\label{sec:orgdedd097}
+\label{sec:orga7b8922}
 \subsection*{6. Se poate demonstra că plecând de la numărul 4, se poate obține orice număr natural diferit de zero, printr-o succesiune de operații de tipul:}
-\label{sec:orgfd39e53}
+\label{sec:org1b7aab3}
 
 \begin{itemize}
 
@@ -693,7 +693,7 @@ sau pentru $n = 5$,\\
 $4 \to 2 \to 1 \to 10 \to 5$\\
 \textit{Indicație.} Drumul până la numarul $n$ se poate determina prin construirea drumului invers de la $n$ la numărul 4, folosind operațiile inverse.
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 def from4(n):
     assert(n > 0)
 
@@ -733,7 +733,7 @@ Please insert a number (> 0): 178
 \pagebreak
 
 \subsection*{11. Considerăm o scară cu \(n \in \mathbb{N}^*\) trepte. Determinați numărul de moduri în care poate fi urcată scara efectuând pași de una, două sau trei trepte. Descrieți algoritmul corespunzător.}
-\label{sec:org7d13327}
+\label{sec:orgc004d93}
 
 
 \hspace{\parindent}Numarul de moduri în care poate fi urcată scara este dat de următoarea relație de recurență:
@@ -761,7 +761,7 @@ f(n - 1) = \mathrm{round} \left(
 \text{unde } a_{\pm} = \sqrt[3]{19 \pm 3 \sqrt{33}},\ b = \sqrt[3]{586+102\sqrt{3}}.
 \]
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 from math import pow, sqrt
 
 t = (pow(19 - 3*sqrt(33), 1/3) + pow(19 + 3*sqrt(33), 1/3) + 1) / 3
@@ -804,11 +804,11 @@ Please insert a number (>= 0): 55
 
 \pagebreak
 \section*{Laborator 7}
-\label{sec:org976380e}
+\label{sec:org5a7bfae}
 \subsection*{6. Un vector ordonat crescător are componentele în progresie aritmetică. Un singur element lipsește din progresie (sigur acesta nu este nici primul și nici ultimul). Folosind tehnica reducerii, identificați elementul lipsă.}
-\label{sec:org83ad089}
+\label{sec:orga7f3339}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 def find_missing(v):
     size = len(v)
 
@@ -858,7 +858,7 @@ Nothing is missing
 \end{verbatim}
 
 \subsection*{9. (\textit{Generarea permutărior folosind algoritmul lui Heap}) Utilizați următorul algoritm pentru a genera toate permutările de ordin \(n\) ale mulțimii \(\{1, 2, ...,n\}\), \(n \in \mathbb{N}^*\): fiecare permutare este generată pornind de la precedenta, interschimbând o singură pereche de valori, celelalte \(n - 2\) valori ramânând pe loc. Pornind cu un \(i = 0\), pașii algoritmul se repetă până când \(i\) devine egal cu \(n\):}
-\label{sec:org44722c2}
+\label{sec:org1b0a150}
 
 \begin{itemize}
 \item se generează cele $(n - 1)!$ permutări ale primelor $n-1$ elemente, alăturând ultimului element fiecărei dintre acestea. Asfel se generează toate permutările cu $n$ pe ultima poziție.
@@ -866,7 +866,7 @@ Nothing is missing
 \item după fiecare iterație, algoritmul produce toate permutările care se termină cu elementul care tocmai a fost mutat pe ultima poziție.
 \end{enumerate}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 def permutations(v):
     def impl(v, n):
         if n == 1: 
@@ -907,11 +907,11 @@ Please insert n: 4
 \pagebreak
 
 \section*{Laborator 8}
-\label{sec:orgef101a5}
+\label{sec:org604f90a}
 \subsection*{5. Propuneți un algoritm de complexitate \(O(n)\) care transformă (pe loc) un tablou cu valori întregi astfel încât toate valorile negative să fie înaintea celor pozitive (partiționare cu pivot \(= 0\)).}
-\label{sec:org672edce}
+\label{sec:org7ad646d}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 def partition(v):
     size = len(v)
     i = -1
@@ -956,7 +956,7 @@ Please insert the vector: 1 2 3
 \pagebreak
 
 \subsection*{6. (\textit{Aproximarea numerică a unei integrale folosind formula trapezului}) Considerăm o funcție reală \(f\) continuă pe intervalul \([a,b]\). (\ldots{}) valoarea integralei definite a lui \(f\) între limitele \([a,b]\) se aproximează prin aria trapezului cu vârfurile \((a, 0), (b, 0), (a, f(a)), (b, f(b))\). Deci:}
-\label{sec:org02b68a8}
+\label{sec:org4b441da}
 
 \[
 \int_a^b f(x)\,\mathrm{d}x = 
@@ -966,7 +966,7 @@ Please insert the vector: 1 2 3
 \end{cases}
 \]
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 def exp(x, iterations=20):
     factorial = 1
     pow = 1
@@ -1013,12 +1013,12 @@ cos: 1.9999999984680359
 \pagebreak
 
 \section*{Laborator 9}
-\label{sec:orgdbbfadf}
+\label{sec:org176d86a}
 
 \(9\). a) Avem la dispoziție 6 culori: alb, negru, galben, verde, roșu și albastru. Afișați toate modalitățile de realizare a unui drapel tricolor folosind aceste trei culori astfel încât cele 3 culori ale drapelului să fie distincte și culoarea din mijloc este ori galben, ori verde.\\
 b) Avem la dispoziție, în plus, șase steme de aceleași șase culori. Fiecare steag poate să aibă sau nu o stemă, dar dacă are, atunci aceasta trebuie să aibă o culoare diferită de cele trei culori deja existente în steag. Afișați toate modalitățile de realizare a steagului.
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 #galben, verde, negru, alb, rosu, albastru, algbastru, -
 colors = ['g','v','n','a','r', 'b', '-']
 index = 0
@@ -1064,9 +1064,9 @@ rvg rvn rva rvb rng rnv rna rnb bgv bgn bga bgr bvg bvn bva bvr bng bnv bna bnr
 \end{verbatim}
 
 \subsection*{11. Determinați toate submulțimile mulțimii \(A = \{a_1, a_2, ..., a_n\}, n \in \mathbb{N}^*\), cu proprietatea că suma elementelor unei submulțimi este \(s\).}
-\label{sec:org2254625}
+\label{sec:orgd2b5bed}
 
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 strs = input("Please insert the set: ").split(' ')
 A = [int(num) for num in strs if num != ""]
 s = int(input("Please insert s: "))
@@ -1121,65 +1121,66 @@ No subset can do that.
 
 \pagebreak
 
+
+
 \section*{Laborator 10-11}
-\label{sec:org49432b2}
+\label{sec:orgedc6649}
 \subsection*{6. Se citește o secvența de \(n\) numere întregi. Afișați cea mai lungă subsecvență \((x_1, x_2,..., x_m)\), \(m \le n\), care se poate construi din numerele citite, astfel încât \(x_1 \le x_2 \ge x_3 \le x_4 \ge ... \le x_{m-1} \ge x_m\).}
-\label{sec:org138afdd}
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
-def get_sequence_len(s):
-    i = 1
-    for i in range(1, len(s)):
-        if i % 2 == 1:
-            if s[i-1] > s[i]: return i
-        else:
-            if s[i-1] < s[i]: return i
-    return i + 1
+\label{sec:org61197de}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
+best = []
+def find_seq(v, i, res= []):
+    global best
+    n = len(v)
+    if len(res) > len(best):
+        best = res
+    delta = len(best) - len(res)
+    for j in range(i+1, n):
+        if v[i] <= v[j]:
+            if n - j < delta+1: continue
+            for k in range(j+1, n):
+                if v[j] >= v[k]:
+                    if n - k < delta+2: continue
+                    find_seq(v, k, res +[v[j],v[k]])
 
-print("Please insert the set: ", end="")
-strs = input().split(' ')
-s = [int(str) for str in strs if str != ""]
-max_i = 0
-max_l = 1
-i = 0
-n = len(s)
-while i < n:
-    l = get_sequence_len(s[i:])
-    if l > max_l:
-        max_l = l
-        max_i = i
-    i += l
 
-print("m:", s[max_i:max_i+max_l])
+strs = input("Please insert the set: ").split(' ')
+v = [int(str) for str in strs if str != ""]
+for i in range(len(v)):
+    if len(v) - i <= len(best): continue
+    find_seq(v, i, [v[i]])
 
+if len(best) >= 3: print("Result:", best)
+else: print("No such sequence found")
 \end{minted}
 \begin{verbatim}
 $ python3 src.py
-Please insert the set: 1 2 3 4 5 6
-m: [1, 2]
+Please insert the set: 9 1 2 3 2 5 4 6 7 2
+Result: [1, 2, 2, 5, 4, 6, 2]
 
 $ python3 src.py
 Please insert the set: 1 0 1 0 1 3 0 2 0 3 0 4 5
-m: [0, 2, 0, 3, 0, 4]
+Result: [1, 1, 0, 1, 0, 2, 0, 3, 0]
 
 $ python3 src.py
-Please insert the set: 1 2 1 3 2 4 3 5
-m: [1, 2, 1, 3, 2, 4, 3, 5]
+Please insert the set: 0 0 0 0 0
+Result: [0, 0, 0, 0, 0]
 
 $ python3 src.py
-Please insert the set: 1 0 1 1 1 0 1 0 1
-m: [0, 1, 1, 1, 0, 1, 0, 1]
+Please insert the set: 1 2 3 4 5
+No such sequence found
 \end{verbatim}
 
 \pagebreak
 \subsection*{8. Se consideră \(n\) intervale \([a_i,b_i]\), \(a_i, b_i \in \mathbb{Z}\), \(i \in \overline{1,n}\)}
-\label{sec:orge9a51b0}
+\label{sec:orgfecabc3}
 \begin{enumerate}
 \item[a)] Calculați suma lungimilor tuturor intervalelor (intervale care se suprapun se vor lua în considerare o singură dată).
 \item[b)] Determinați reuniunea acestora.
 \item[c)] Un interval poate fi eliminat dacă este inclus în alt interval din șir. Afișați numărul maxim de intervale care pot fi eliminate.
 \item[d)] Să se determine o mulțime $X$ cu un număr minim de elemente așa încât pentru orice interval din șir să existe un element $x \in X$ care să aparțină intervalului.
 \end{enumerate}
-\begin{minted}[linenos,firstnumber=1,frame=single,escapeinside=||,mathescape=true]{python}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
 class Interval:
     def __init__(self, a, b):
         self.a = a
@@ -1271,5 +1272,58 @@ a) 5
 b) [1, 6] 
 c) 0
 d) X = { 1 }
+\end{verbatim}
+
+\section*{Laborator 12}
+\label{sec:org9d21c2c}
+\subsection*{6. Fiind date două șiruri de caractere \(s_1\) și \(s_2\), determinați lungimea celui mai mic subșir al lui \(s_1\) care nu este subșir al lui \(s_2\) (de exemplu, dacă \(s_1\) = "abab" și \(s_2\) = "babb", atunci subșirul "aa" de lungime 2 este în \(s_1\) și nu este în \(s_2\)).}
+\label{sec:org849f528}
+\begin{minted}[linenos,firstnumber=1,frame=single,mathescape=true]{python}
+s1 = input("Please insert s1: ")
+s2 = input("Please insert s2: ")
+#a dictionary of type { subsequences : is_in_s2},
+cache = {}
+
+def contains_seq(seq):
+    def impl():
+        for i in range(len(s2) - len(seq)+1):
+            for j in range(len(seq)):
+                if s2[i+j] != seq[j]: break
+            else: # this gets called if the for didn't break
+                return True
+        return False
+
+    if seq not in cache: cache[seq] = impl()
+    return cache[seq]
+
+best_ss = None
+def check_subsequences(str_, res="", i=0):
+    global best_ss
+    if i >= len(str_): return
+    check_subsequences(str_, res, i+1)
+
+    for j in range(i, len(str_)):
+        ss = res + str_[j]
+        if not contains_seq(ss):
+            if best_ss is None or len(ss) < len(best_ss):
+                best_ss = ss
+        check_subsequences(str_, ss, j+1)
+
+check_subsequences(s1)
+if best_ss is not None:
+    print("Best sequence: '%s'" % best_ss)
+else: print("No such sequence found")
+\end{minted}
+
+\begin{verbatim}
+$ python3 src.py
+Please insert s1: abab
+Please insert s2: babb
+Best sequence: 'aa'
+
+$ python3 src.py
+Please insert s1: bab
+Please insert s2: bbab
+No such sequence found
 \end{verbatim}
 \end{document}

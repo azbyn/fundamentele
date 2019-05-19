@@ -1013,3 +1013,84 @@ int main() {
 O rezolvare mai serioasă ar fi concatenarea subșirurilor și sortarea cu radix sort (sau alt algoritm care nu compară elementele între ele). Asta face rezolvarea noastră mai bună decât rezolvarea vrută de autoarea problemei (metoda greedy), care trebuie sa compare cel puțin două elemente între ele.
 
 \vfill
+* Laborator 12
+** 1. Fibonacci
+#+BEGIN_SRC cpp -n :results output :exports code
+#include <iostream>
+using namespace std;
+
+int v[100];
+//varianta descendenta
+int F(int n) {
+    if (n == 0 || n == 1) return n;
+    if (v[n] == 0)
+        v[n] = F(n-1)+F(n-2);
+    return v[n];
+}
+//varianta ascendenta
+int F(int n) {
+    // am putea pastra, doar ultimele 2 elemente ale sirului,
+    // nu tot sirul
+    v[0] = 0;
+    v[1] = 1;
+    for (int i = 2; i <= n; i++) {
+         v[i] = v[i-1]+v[i-2];
+    }
+    return v[n];
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << F(n) << endl;
+    return 0;
+}
+#+END_SRC
+** 2. Functia magica
+#+BEGIN_SRC cpp -n :results output :exports code
+#include <iostream>
+using namespace std;
+
+double v[100];
+// a) varianta descendenta
+double P(int n, double x) {
+    if (n == 0) return 1;
+    if (n == 1) return x;
+    if (v[n] == 0)
+        v[n] = ((2.0*n-1)/n) * x * P(n-1, x) + ((n-1.0)/n) * P(n-2, x);
+    return v[n];
+}
+
+// b) varianta iterativa
+double P(int n, double x) {
+    if (n == 0) return 1;
+    if (n == 1) return x;
+    double p1 = 1, p2 = x;
+    for (int i = 2; i <= n; i++) {
+        double p = ((2.0*i-1) / i) * x * p2 + ((i-1.0) /i) * p1;
+        p1 = p2;
+        p2 = p;
+    } 
+    return p2;
+}
+
+int main() {
+    int n;
+    double x;
+    // presupunem ca functia nu ar returna niciodata 0
+    // (desi ea poate) pentru ca simplifica putin lucrurile:
+    // ar trebui sa initializam vectorul v cu NAN (not a number)
+    // si sa verificam in P cu isnan in loc de 0
+
+    cin >> n >> x;
+    cout << P(n, x) << endl;
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: 475.375
+: 475.375
+
+\pagebreak
+

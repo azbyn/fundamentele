@@ -1246,62 +1246,61 @@ No subset can do that.
 
 \pagebreak
 
-
-
 * Laborator 10-11
 ** 6. Se citește o secvența de $n$ numere întregi. Afișați cea mai lungă subsecvență $(x_1, x_2,..., x_m)$, $m \le n$, care se poate construi din numerele citite, astfel încât $x_1 \le x_2 \ge x_3 \le x_4 \ge ... \le x_{m-1} \ge x_m$.
 #+BEGIN_SRC python -n :results output :exports code
-best = []
-def find_seq(v, i, res= []):
-    global best
-    n = len(v)
-    if len(res) > len(best):
-        best = res
-    delta = len(best) - len(res)
-    for j in range(i+1, n):
-        if v[i] <= v[j]:
-            if n - j < delta+1: continue
-            for k in range(j+1, n):
-                if v[j] >= v[k]:
-                    if n - k < delta+2: continue
-                    find_seq(v, k, res +[v[j],v[k]])
+def get_sequence_len(s):
+    i = 1
+    for i in range(1, len(s)):
+        if i % 2 == 1:
+            if s[i-1] > s[i]: return i
+        else:
+            if s[i-1] < s[i]: return i
+    return i + 1
 
+print("Please insert the set: ", end="")
+strs = input().split(' ')
+s = [int(str) for str in strs if str != ""]
+max_i = 0
+max_l = 1
+i = 0
+n = len(s)
+while i < n:
+    l = get_sequence_len(s[i:])
+    if l > max_l:
+        max_l = l
+        max_i = i
+    i += l
 
-strs = input("Please insert the set: ").split(' ')
-v = [int(str) for str in strs if str != ""]
-for i in range(len(v)):
-    if len(v) - i <= len(best): continue
-    find_seq(v, i, [v[i]])
+print("m:", s[max_i:max_i+max_l])
 
-if len(best) >= 3: print("Result:", best)
-else: print("No such sequence found")
 #+END_SRC
 #+BEGIN_SRC sh :results output :exports none
-python3 src/l10_6.py "9 1 2 3 2 5 4 6 7 2"
+python3 src/l10_6.py "1 2 3 4 5 6"
 echo ""
 python3 src/l10_6.py "1 0 1 0 1 3 0 2 0 3 0 4 5"
 echo ""
-python3 src/l10_6.py "0 0 0 0 0"
+python3 src/l10_6.py "1 2 1 3 2 4 3 5"
 echo ""
-python3 src/l10_6.py "1 2 3 4 5"
+python3 src/l10_6.py "1 0 1 1 1 0 1 0 1"
 #+END_SRC
 
 \begin{verbatim}
 $ python3 src.py
-Please insert the set: 9 1 2 3 2 5 4 6 7 2
-Result: [1, 2, 2, 5, 4, 6, 2]
+Please insert the set: 1 2 3 4 5 6
+m: [1, 2]
 
 $ python3 src.py
 Please insert the set: 1 0 1 0 1 3 0 2 0 3 0 4 5
-Result: [1, 1, 0, 1, 0, 2, 0, 3, 0]
+m: [0, 2, 0, 3, 0, 4]
 
 $ python3 src.py
-Please insert the set: 0 0 0 0 0
-Result: [0, 0, 0, 0, 0]
+Please insert the set: 1 2 1 3 2 4 3 5
+m: [1, 2, 1, 3, 2, 4, 3, 5]
 
 $ python3 src.py
-Please insert the set: 1 2 3 4 5
-No such sequence found
+Please insert the set: 1 0 1 1 1 0 1 0 1
+m: [0, 1, 1, 1, 0, 1, 0, 1]
 \end{verbatim}
 
 \pagebreak
@@ -1414,64 +1413,3 @@ b) [1, 6]
 c) 0
 d) X = { 1 }
 \end{verbatim}
-
-* Laborator 12
-** 6. Fiind date două șiruri de caractere $s_1$ și $s_2$, determinați lungimea celui mai mic subșir al lui $s_1$ care nu este subșir al lui $s_2$ (de exemplu, dacă $s_1$ = "abab" și $s_2$ = "babb", atunci subșirul "aa" de lungime 2 este în $s_1$ și nu este în $s_2$).
-#+BEGIN_SRC python -n :results output :exports code
-s1 = input("Please insert s1: ")
-s2 = input("Please insert s2: ")
-#a dictionary of type { subsequences : is_in_s2},
-cache = {}
-
-def contains_seq(seq):
-    def impl():
-        for i in range(len(s2) - len(seq)+1):
-            for j in range(len(seq)):
-                if s2[i+j] != seq[j]: break
-            else: # this gets called if the for didn't break
-                return True
-        return False
-
-    if seq not in cache: cache[seq] = impl()
-    return cache[seq]
-
-best_ss = None
-def check_subsequences(str_, res="", i=0):
-    global best_ss
-    if i >= len(str_): return
-    check_subsequences(str_, res, i+1)
-
-    for j in range(i, len(str_)):
-        ss = res + str_[j]
-        if not contains_seq(ss):
-            if best_ss is None or len(ss) < len(best_ss):
-                best_ss = ss
-        check_subsequences(str_, ss, j+1)
-
-check_subsequences(s1)
-if best_ss is not None:
-    print("Best sequence: '%s'" % best_ss)
-else: print("No such sequence found")
-#+END_SRC
-
-#+BEGIN_SRC sh :results output :exports none
-python3 src/l12_7.py "abab" "babb"
-echo ""
-python3 src/l12_7.py "bab" "bbab"
-echo ""
-python3 src/l12_7.py "abc" "def"
-#+END_SRC
-
-\begin{verbatim}
-$ python3 src.py
-Please insert s1: abab
-Please insert s2: babb
-Best sequence: 'aa'
-
-$ python3 src.py
-Please insert s1: bab
-Please insert s2: bbab
-No such sequence found
-\end{verbatim}
-
-
