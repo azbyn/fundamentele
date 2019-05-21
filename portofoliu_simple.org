@@ -758,8 +758,41 @@ int main() {
     return 0;
 }
 #+END_SRC
-
 \pagebreak
+** 5. (inspirat de Carla) exista v[x] == x
+#+BEGIN_SRC cpp -n :results output :exports code
+#include <iostream>
+using namespace std;
+
+int cauta(int v[], int stanga, int dreapta) {
+    if (stanga == dreapta) {
+        if (v[stanga] == stanga) return stanga;
+        // am putea omite else-ul
+        else return -1;
+    }
+    int mijloc = (stanga+dreapta)/2;
+    if (v[mijloc] == mijloc) 
+        return mijloc;
+    if (v[mijloc] < mijloc) 
+        return cauta(v, mijloc, stanga);
+    else return cauta(v, dreapta, mijloc);
+
+}
+int main() {
+    int n, v[100];
+    cin << n;
+    for (int i = 0; i < n; i++)
+        cin << v[i];
+    cout << cauta(v, 0, n) << endl;
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: -1
+\pagebreak
+
+
 * Laborator 8
 ** 6. Problema aia lunga cu integrala definita
 #+BEGIN_SRC cpp -n :results output :exports code
