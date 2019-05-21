@@ -918,16 +918,16 @@ int main() {
 
 ** 10. (inspirat de Carla) $n$ ca suma de numere
 #+BEGIN_SRC cpp -n :results output :exports code
-#include<iostream>
+#include <iostream>
 using namespace std;
-int n, nr_sol, sol[20];
+int n, nr_sol, sol[20]; //urgh
 
 void afis(int l){
     nr_sol++;
-    cout<<"Solutia nr. "<< nr_sol<<" : ";
+    cout << "Solutia nr. " << nr_sol << " : ";
     for(int i = 0; i < l; i++)
-        cout<<sol[i]<<" ";
-    cout<<endl;
+        cout << sol[i] << " ";
+    cout << endl;
 }
 
 void back(int i, int n) {
@@ -936,16 +936,16 @@ void back(int i, int n) {
         return;
     }
     for(int j = 1; j<= n; j++) {
-        sol[i]=j;
+        sol[i] = j;
         back(i+1, n-j);
     }
 }
 
 int main(){
-    cin>>n;
-    nr_sol=0;
-    back(0,n);
-    cout<<nr_sol<<" solutii"<< endl;
+    cin >> n;
+    nr_sol = 0;
+    back(0, n);
+    cout << nr_sol << " solutii" << endl;
     return 0;
 }
 #+END_SRC
