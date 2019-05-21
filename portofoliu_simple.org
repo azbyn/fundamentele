@@ -916,7 +916,7 @@ int main() {
 }
 #+END_SRC
 
-** 10. suma numerelor  = n
+** 10. (inspirat de Carla) $n$ ca suma de numere
 #+BEGIN_SRC cpp -n :results output :exports code
 #include<iostream>
 using namespace std;
