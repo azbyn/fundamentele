@@ -1,21 +1,31 @@
-#include <iostream>
-#include <vector>
-#include <chrono>
-#include <thread>
-
-#include <unistd.h>
-
+#include<iostream>
 using namespace std;
+int n, nr_sol, sol[20];
 
-int main()
-{
-    //cout << "This is line 1";
-    //sleep(2);
-    //cout << "2" << endl;
-    //sleep(2);
+void afis(int l){
+    nr_sol++;
+    cout<<"Solutia nr. "<< nr_sol<<" : ";
+    for(int i = 0; i < l; i++)
+        cout<<sol[i]<<" ";
+    cout<<endl;
+}
 
-    cout << "This is line 2\n";
-    sleep(4);
-    cout << "j" << endl;
+void back(int i, int n) {
+    if (n == 0) {
+        afis(i);
+        return;
+    }
+    for(int j = 1; j<= n; j++) {
+        sol[i]=j;
+        back(i+1, n-j);
+    }
+}
+
+int main(){
+    cin>>n;
+    nr_sol=0;
+    back(0,n);
+    cout<<nr_sol<<" solutii";
     return 0;
 }
+

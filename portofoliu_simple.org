@@ -763,7 +763,13 @@ int main() {
 #+BEGIN_SRC cpp -n :results output :exports code
 #include <iostream>
 using namespace std;
-
+/* m = mijloc
+pe scurt: ne utitam la mijloc si daca v[m] = mi, gata, returnam mjlocul
+daca v[m] < m ne uitam in stanga, iar daca v[m] > m ne uitam in dreapta
+cazul trivial: daca avem doar un element (stanga == dreapta)
+verificam daca v[stanga] == stanga iar daca nu e, atunci returnam -1,
+valoare imposibila ca index (care ar trebui sa fie mai mare de 0)
+*/
 int cauta(int v[], int stanga, int dreapta) {
     if (stanga == dreapta) {
         if (v[stanga] == stanga) return stanga;
@@ -910,7 +916,42 @@ int main() {
 }
 #+END_SRC
 
+** 10. suma numerelor  = n
+#+BEGIN_SRC cpp -n :results output :exports code
+#include<iostream>
+using namespace std;
+int n, nr_sol, sol[20];
+
+void afis(int l){
+    nr_sol++;
+    cout<<"Solutia nr. "<< nr_sol<<" : ";
+    for(int i = 0; i < l; i++)
+        cout<<sol[i]<<" ";
+    cout<<endl;
+}
+
+void back(int i, int n) {
+    if (n == 0) {
+        afis(i);
+        return;
+    }
+    for(int j = 1; j<= n; j++) {
+        sol[i]=j;
+        back(i+1, n-j);
+    }
+}
+
+int main(){
+    cin>>n;
+    nr_sol=0;
+    back(0,n);
+    cout<<nr_sol<<" solutii"<< endl;
+    return 0;
+}
+#+END_SRC
 \pagebreak
+
+
 * Laborator 10-11
 ** 5. Gidul turistic și drumețiile sale
 #+BEGIN_SRC cpp -n :results output :exports code :libs -pthread
